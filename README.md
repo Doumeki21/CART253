@@ -1,2 +1,5 @@
-# CART253
-Olenka's course work for cart253.
+# CART253 - Creative Computation I
+
+Olenka's course work for CART253~!
+
+A new language, a new world!
