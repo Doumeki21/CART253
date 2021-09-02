@@ -1,5 +1,7 @@
 # CART253 - Creative Computation I
 
-Olenka's course work for CART253~!
+Olenka's course work for CART253~
 
-A new language, a new world!
+There's a thrill in programming!
+
+[Check out my homepage] (https://doumeki21.github.io/CART253)
