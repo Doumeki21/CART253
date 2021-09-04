@@ -26,3 +26,7 @@ table{
 td{
   text-align: center;
 }
+a{
+  padding: 30px;
+  background-color: pink;
+}
