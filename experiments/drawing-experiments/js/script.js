@@ -23,14 +23,22 @@ Description of setup
 function setup() {
 createCanvas(500, 200);
 
-background(253, 138, 200);
+background(255, 125, 0);
 
-point(250, 0);
+ellipseMode(CORNER);
+noStroke(0, 125, 125);
 
-rectMode(CENTER);
-rect(250, 100, 100, 100);
+fill(200, 0 , 125, 100);
+ellipse(250, 100, 100, 100);
 
-ellipse(250, 100, 50, 50);
+fill(200, 0 , 125, 100);
+ellipse(250, 100, 80, 80);
+
+fill(200, 0 , 125, 100);
+ellipse(250, 100, 60, 60);
+
+fill(200, 0 , 125, 100);
+ellipse(250, 100, 40, 40);
 
 line(0, 0, 500, 200);
 
