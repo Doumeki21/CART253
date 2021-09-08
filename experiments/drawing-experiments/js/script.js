@@ -1,6 +1,6 @@
 /**
-Title of Project
-Author Name
+Drawing experiments
+Olenka Yuen
 
 This is a template. You must fill in the title,
 author, and this description to match your project!
@@ -21,7 +21,7 @@ function preload() {
 Description of setup
 */
 function setup() {
-createCanvas(500, 200);
+createCanvas(500, 500);
 
 background(255, 125, 0);
 
