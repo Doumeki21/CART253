@@ -1,3 +1,4 @@
-# Template p5 project
+# My experiments
 
-This is the README file for the entire project. For more official projects you should write information here about the nature of the project, your name, any special explanations of how the project works, etc.
+Followed through the first 2 weeks of tutorials (Hello World and Instructions) from teacher's GitHub site just to familiarize myself with the workflow of GitHub and Atom.  
+I also linked my own HTML and CSS files to practice my skills (inputting images, sound, color, etc).
