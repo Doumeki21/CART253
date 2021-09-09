@@ -1,10 +1,10 @@
 "use strict";
 
 /**************************************************
-Template p5 project
-Pippin Barr
+Activity 02: Draw An Alien
+Olenka Yuen
 
-Here is a description of this template p5 project.
+Drawing an alein using p5.js functions and color.
 **************************************************/
 
 // setup()
@@ -12,6 +12,7 @@ Here is a description of this template p5 project.
 // Description of setup() goes here.
 function setup() {
 
+createCanvas(640,480);
 }
 
 // draw()
