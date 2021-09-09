@@ -17,3 +17,8 @@ body {
   align-content: center;
   height: 100vh; /* Body is the height of the viewport */
   overflow: hidden; /* Hide anything that goes off the window size */
+
+  a{
+    padding: 30px;
+    background-color: lightGray;
+  }

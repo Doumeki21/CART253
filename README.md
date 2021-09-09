@@ -5,4 +5,4 @@ Olenka's course work for CART253~
 There's a thrill in programming!
 
 [Check out my homepage](https://doumeki21.github.io/CART253)
-[Index](experiments/drawing-experiments/index.html)
+[Week 1 work](CART253/index.html)
