@@ -1,3 +1,3 @@
-# Template p5 project
+# Activity 3: Moving pictures!
 
-This is the README file for the entire project. For more official projects you should write information here about the nature of the project, your name, any special explanations of how the project works, etc.
+Followed activity tutorial to draw moving pictures using Js objects, variables, constrains and maps.
