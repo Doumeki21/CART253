@@ -12,17 +12,20 @@ Plan:
 
 //List varibales at the top of the code for organization!
 let bgShade = 0;
+
 let circleX = 0;
 let circleY = 250;
-let circleSize = 200;
+let circleSize = 100;
 let circleSpeed = 2;
 
-//OR make special variable like this for a same unique object (like circle in this case). 
+
+//OR make special variable like this for a same unique object (like circle in this case).
 let circle = {
-  x: 0,
+  x: 250,
   y: 250,
-  size: 200,
-  speed: 2
+  size: 100,
+  speed: 2,
+  fill: 0,
 }
 
 // setup()
@@ -38,11 +41,18 @@ function setup() {
 // Draw a circle in motion.
 function draw() {
 background(bgShade);
+
+circle.speed = random(-5, 5);
 circle.x += circle.speed;
+circle.y = random(0, height);
+circle.size = random(10, 100);
+
+circle.fill = random(0, 255);
+fill(circle.fill);
 ellipse(circle.x, circle.y, circle.size);
 
+}
 //Nice to print everything in console.log so it's easier to debug and connect to the orgins of errors!
-console.log(`circle.x: ${circle.x}, circle.y: ${circle.y}`);
+//console.log(`circle.x: ${circle.x}, circle.y: ${circle.y}`);
 //alternative-
 //console.log("circleX: " + circleX);
-}
