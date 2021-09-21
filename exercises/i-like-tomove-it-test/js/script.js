@@ -41,20 +41,6 @@ let circle1 = {
 let circle2 = {
   x: 0,
   y: 250,
-  fill: 255,
-  alpha: 200,
-
-  currentSize: 200,
-  minSize: 50,
-  maxSize: 400,
-
-  sizeChange: undefined,
-  sizeGrowSpeed: 4,
-}
-
-let circle3 = {
-  x: 0,
-  y: 250,
   size: 50,
   speed: 5,
   r: 0,
@@ -64,12 +50,26 @@ let circle3 = {
   alpha: 200,
 }
 
-let rectangle = {
+let square = {
   x: 250,
-  y: .5,
+  y: -1,
+  currentFill: {
+    r:0,
+    g:0,
+    b:0,
+  },
+  startFill: {
+    r: 176,
+    g: 48,
+    b: 255,
+  },
+  endFill:{
+    r: 245,
+    g: 179,
+    b: 66,
+  },
   size: 50,
-  speed: 1.1,
-
+  speed: 5,
   changeY: undefined,
 }
 
@@ -115,81 +115,55 @@ else if (circle1.currentSize <= circle1.minSize){
   circle1.sizeChange = circle1.sizeGrowSpeed;
 }
 
-//Circle's auto size.
+//Circle's growth speed.
 circle1.currentSize += circle1.sizeChange;
 
-//Draw circle
-circle1.x = constrain(circle1.x, 0, width);
+//Draw circle.
 circle1.x = mouseX;
 circle1.y = mouseY;
+circle1.x = constrain(circle1.x, 0, width);
 ellipse(circle1.x, circle1.y, circle1.currentSize);
 
 
-// (Cursor echo) CIRCLE2**
-//circle color.
-//circle2.fill = map(circle2.maxSize, 0, width, 0, 255);
-circle2.fill = 255;
-fill(circle2.fill, circle2.alpha);
-
-//At circle's max size-
-if (circle2.currentSize >= circle2.maxSize){
-  //Restart!!
-  circle2.currentSize = circle2.minSize
-
-}
-//At circle's min size-
-else if (circle2.currentSize <= circle2.minSize){
-  //Grow!!
-  circle2.sizeChange = circle2.sizeGrowSpeed;
-}
-
-//Circle's auto size.
-circle2.currentSize += circle2.sizeChange;
-
-//Draw circle
+//CENTER CIRCLE 2**
+// Center circle motion.
 circle2.x = circle2.x + circle2.speed;
-circle2.x = constrain(circle2.x, 0, width);
-circle2.x = map(mouseX, 0, width, 0, width);
-circle2.y = map(mouseY, 0, width, 0, width);
-ellipse(circle2.x, circle2.y, circle2.currentSize);
 
+// Center circle repeat motion.
+if (circle2.x === width){
+  circle2.x = 0;
+}
+else if (circle2.x === 0){
+  circle2.x = width;
+}
 
-
-//(random horizontal) CIRCLE 3**
+//Draw center circle.
 //Circle color.
-circle3.r = map(circle3.x, 100, width, 0, 176);
-circle3.g = map(circle3.x, 0, width, 0, 48);
-circle3.b = map(circle3.x, 0, width, 0, 255);
+circle2.r = map(circle2.x, 100, width, 0, 0);
+circle2.g = map(circle2.x, 0, width, 0, 115);
+circle2.b = map(circle2.x, 0, width, 0, 255);
+fill(circle2.r, circle2.g, circle2.b);
+ellipse(circle2.x, circle2.y, circle2.size);
 
-//Circle bounce.
-//circle3.x = random(mouseY, 0, width);
-
-//Draw circle.
-circle3.x = circle3.x + circle3.speed;
-ellipse(circle3.x, circle3.y, circle3.size);
-
-//Rectangle!!
-
-// UGH HOW DO I MOVE THIS-
-if (circle3.x === width){
-  circle3.x = 0;
-}
-else if (circle3.x === 0){
-  circle3.x = width;
-}
-
-rectangle.y *= rectangle.speed;
-rectMode(CENTER);
-fill(176, 48, 255);
-rect(rectangle.x, rectangle.y, rectangle.size);
-
-if (rectangle.y >= height){
+//SQUARE.
+//Square action.
+if (square.y >= height){
   //Go up!
-  rectangle.changeY = -2;
+  square.changeY = -square.speed;
+}//Go down!
+else if (square.y <= 0){
+  square.changeY = square.speed;
 }
-else if (rectangle.y <= 0){
-  //Go down!
-  rectangle.y = height;
-}
+//Square motion.
+square.y += square.changeY;
+
+//Draw square.
+rectMode(CENTER);
+square.currentFill.r = map(square.y, 0, height, square.startFill.r, square.endFill.r);
+square.currentFill.g = map(square.y, 0, height, square.startFill.g, square.endFill.g);
+square.currentFill.b = map(square.y, 0, height, square.startFill.b, square.endFill.b);
+
+fill(square.currentFill.r, square.currentFill.g, square.currentFill.b);
+rect(square.x, square.y, square.size);
 
 }

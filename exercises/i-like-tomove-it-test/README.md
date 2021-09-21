@@ -1,3 +1,3 @@
-# Activity 3: Moving pictures!
+# Exercise: I Like to Move it!
 
-Followed activity tutorial to draw moving pictures using Js objects, variables, constrains and maps.
+Experiment with the movement of shapes, varying colors as well as some mouse movement. 
