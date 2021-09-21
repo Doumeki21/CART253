@@ -26,8 +26,6 @@ let bg = {
 let circle1 = {
   x: 0,
   y: 250,
-  size: 200,
-  speed: 1,
   fill: 255,
   alpha: 200,
 
@@ -43,13 +41,11 @@ let circle1 = {
 let circle2 = {
   x: 0,
   y: 250,
-  size: 200,
-  speed: 4,
   fill: 255,
   alpha: 200,
 
   currentSize: 200,
-  minSize: 200,
+  minSize: 50,
   maxSize: 400,
 
   sizeChange: undefined,
@@ -68,6 +64,14 @@ let circle3 = {
   alpha: 200,
 }
 
+let rectangle = {
+  x: 250,
+  y: .5,
+  size: 50,
+  speed: 1.1,
+
+  changeY: undefined,
+}
 
 
 
@@ -115,22 +119,23 @@ else if (circle1.currentSize <= circle1.minSize){
 circle1.currentSize += circle1.sizeChange;
 
 //Draw circle
-circle1.x = circle1.x + circle1.speed;
 circle1.x = constrain(circle1.x, 0, width);
-circle1.x = map(mouseX, 0, width, 0, width);
-circle1.y = map(mouseY, 0, width, 0, width);
+circle1.x = mouseX;
+circle1.y = mouseY;
 ellipse(circle1.x, circle1.y, circle1.currentSize);
 
 
 // (Cursor echo) CIRCLE2**
 //circle color.
-circle2.fill = map(circle2.maxSize, 0, width, 0, 255);
+//circle2.fill = map(circle2.maxSize, 0, width, 0, 255);
+circle2.fill = 255;
 fill(circle2.fill, circle2.alpha);
 
 //At circle's max size-
 if (circle2.currentSize >= circle2.maxSize){
-  //Shrink!!
-  circle2.sizeChange = circle2.shrinkSpeed;
+  //Restart!!
+  circle2.currentSize = circle2.minSize
+
 }
 //At circle's min size-
 else if (circle2.currentSize <= circle2.minSize){
@@ -173,9 +178,18 @@ else if (circle3.x === 0){
   circle3.x = width;
 }
 
-
-rect(CENTER);
+rectangle.y *= rectangle.speed;
+rectMode(CENTER);
 fill(176, 48, 255);
-rect(0, height/2, 50, 50);
+rect(rectangle.x, rectangle.y, rectangle.size);
+
+if (rectangle.y >= height){
+  //Go up!
+  rectangle.changeY = -2;
+}
+else if (rectangle.y <= 0){
+  //Go down!
+  rectangle.y = height;
+}
 
 }
