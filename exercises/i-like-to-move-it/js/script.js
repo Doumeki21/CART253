@@ -21,7 +21,7 @@ let bg = {
   r: 0,
   g: 0,
   b: 0,
-}
+};
 
 let circle1 = {
   x: 0,
@@ -36,7 +36,7 @@ let circle1 = {
   sizeChange: undefined,
   sizeGrowSpeed: 4,
   sizeShrinkSpeed: -2,
-}
+};
 
 let circle2 = {
   x: 0,
@@ -48,7 +48,7 @@ let circle2 = {
   b: 0,
   fill: undefined,
   alpha: 200,
-}
+};
 
 let square = {
   x: 250,
@@ -71,7 +71,7 @@ let square = {
   size: 50,
   speed: 5,
   changeY: undefined,
-}
+};
 
 
 
@@ -82,7 +82,7 @@ function setup() {
   createCanvas(500, 500);
   noStroke();
 
-}
+};
 
 // draw()
 //
@@ -166,4 +166,4 @@ square.currentFill.b = map(square.y, 0, height, square.startFill.b, square.endFi
 fill(square.currentFill.r, square.currentFill.g, square.currentFill.b);
 rect(square.x, square.y, square.size);
 
-}
+};
