@@ -54,16 +54,16 @@ let square = {
   x: 250,
   y: -1,
   currentFill: {
-    r:0,
-    g:0,
-    b:0,
+    r: 0,
+    g: 0,
+    b: 0,
   },
   startFill: {
     r: 176,
     g: 48,
     b: 255,
   },
-  endFill:{
+  endFill: {
     r: 245,
     g: 179,
     b: 66,
@@ -99,71 +99,70 @@ function draw() {
 
 
 
-//**CIRCLE 1**
-//circle color.
-circle1.fill = map(circle1.x, 0, width, 0, 255);
-fill(circle1.fill, circle1.alpha);
+  //**CIRCLE 1**
+  //circle color.
+  circle1.fill = map(circle1.x, 0, width, 0, 255);
+  fill(circle1.fill, circle1.alpha);
 
-//At circle's max size-
-if (circle1.currentSize >= circle1.maxSize){
-  //Shrink!!
-  circle1.sizeChange = circle1.sizeShrinkSpeed;
-}
-//At circle's min size-
-else if (circle1.currentSize <= circle1.minSize){
-  //Grow!!
-  circle1.sizeChange = circle1.sizeGrowSpeed;
-}
+  //At circle's max size-
+  if (circle1.currentSize >= circle1.maxSize) {
+    //Shrink!!
+    circle1.sizeChange = circle1.sizeShrinkSpeed;
+  }
+  //At circle's min size-
+  else if (circle1.currentSize <= circle1.minSize) {
+    //Grow!!
+    circle1.sizeChange = circle1.sizeGrowSpeed;
+  }
 
-//Circle's growth speed.
-circle1.currentSize += circle1.sizeChange;
+  //Circle's growth speed.
+  circle1.currentSize += circle1.sizeChange;
 
-//Draw circle.
-circle1.x = mouseX;
-circle1.y = mouseY;
-circle1.x = constrain(circle1.x, 0, width);
-ellipse(circle1.x, circle1.y, circle1.currentSize);
+  //Draw circle.
+  circle1.x = mouseX;
+  circle1.y = mouseY;
+  circle1.x = constrain(circle1.x, 0, width);
+  ellipse(circle1.x, circle1.y, circle1.currentSize);
 
 
-//CENTER CIRCLE 2**
-// Center circle motion.
-circle2.x = circle2.x + circle2.speed;
+  //CENTER CIRCLE 2**
+  // Center circle motion.
+  circle2.x = circle2.x + circle2.speed;
 
-// Center circle repeat motion.
-if (circle2.x === width){
-  circle2.x = 0;
-}
-else if (circle2.x === 0){
-  circle2.x = width;
-}
+  // Center circle repeat motion.
+  if (circle2.x === width) {
+    circle2.x = 0;
+  } else if (circle2.x === 0) {
+    circle2.x = width;
+  }
 
-//Draw center circle.
-//Circle color.
-circle2.r = map(circle2.x, 100, width, 0, 0);
-circle2.g = map(circle2.x, 0, width, 0, 115);
-circle2.b = map(circle2.x, 0, width, 0, 255);
-fill(circle2.r, circle2.g, circle2.b);
-ellipse(circle2.x, circle2.y, circle2.size);
+  //Draw center circle.
+  //Circle color.
+  circle2.r = map(circle2.x, 100, width, 0, 0);
+  circle2.g = map(circle2.x, 0, width, 0, 115);
+  circle2.b = map(circle2.x, 0, width, 0, 255);
+  fill(circle2.r, circle2.g, circle2.b);
+  ellipse(circle2.x, circle2.y, circle2.size);
 
-//SQUARE.
-//Square action.
-if (square.y >= height){
-  //Go up!
-  square.changeY = -square.speed;
-}//Go down!
-else if (square.y <= 0){
-  square.changeY = square.speed;
-}
-//Square motion.
-square.y += square.changeY;
+  //SQUARE.
+  //Square action.
+  if (square.y >= height) {
+    //Go up!
+    square.changeY = -square.speed;
+  } //Go down!
+  else if (square.y <= 0) {
+    square.changeY = square.speed;
+  }
+  //Square motion.
+  square.y += square.changeY;
 
-//Draw square.
-rectMode(CENTER);
-square.currentFill.r = map(square.y, 0, height, square.startFill.r, square.endFill.r);
-square.currentFill.g = map(square.y, 0, height, square.startFill.g, square.endFill.g);
-square.currentFill.b = map(square.y, 0, height, square.startFill.b, square.endFill.b);
+  //Draw square.
+  rectMode(CENTER);
+  square.currentFill.r = map(square.y, 0, height, square.startFill.r, square.endFill.r);
+  square.currentFill.g = map(square.y, 0, height, square.startFill.g, square.endFill.g);
+  square.currentFill.b = map(square.y, 0, height, square.startFill.b, square.endFill.b);
 
-fill(square.currentFill.r, square.currentFill.g, square.currentFill.b);
-rect(square.x, square.y, square.size);
+  fill(square.currentFill.r, square.currentFill.g, square.currentFill.b);
+  rect(square.x, square.y, square.size);
 
 };
