@@ -72,7 +72,7 @@ function setup() {
     circle.x = random(0, width);
     circle.y = random(0, height);
 
-    d = dist(circle.x, circle.y, dangerZone.x, dangerZone,y);
+    d = dist(circle.x, circle.y, dangerZone.x, dangerZone.y);
   }
 }
 
