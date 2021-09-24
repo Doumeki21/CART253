@@ -37,7 +37,7 @@ let covid19 = {
 Canvas setup.
 */
 function setup() {
-  createCanvas(windowWidth, windoHeight);
+  createCanvas(windowWidth, windowHeight);
 
   covid19.y = random(0, height);
   covid19.vx = covid19.speed;
@@ -49,5 +49,16 @@ function setup() {
 Description of draw()
 */
 function draw() {
+background(0);
+
+//Standard movement code.
+covid19.x += covid19.vx;
+covid19.y += covid19.vy;
+
+//Draw Covid 19.
+fill(covid19.fill.r, covid19.fill.g, covid19.fill.b);
+noStroke();
+ellipse(covid19.x, covid19.y, covid19.size);
+
 
 }
