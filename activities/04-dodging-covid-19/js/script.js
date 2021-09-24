@@ -34,13 +34,22 @@ let covid19 = {
 
 let user = {
   size: 100,
-  startFill: 255,
+  currentFill: {
+    r: 0,
+    g: 0,
+    b: 0,
+  },
+  startFill: {
+    r: 255,
+    g: 255,
+    b: 255,
+  },
   endFill: {
     r: 55,
     g: 252,
-    b:0,
+    b: 0,
   },
-}
+};
 
 let numStatic = 1000;
 
@@ -85,24 +94,31 @@ if (covid19.x > width) {
 //Catching covid-19
 let d = dist(user.x, user.y, covid19.x, covid19.y);
 if (d < covid19.size/2 + user.size/2){
+  // function mouseClicked() {
+  //   draw();
+  // }
   noLoop();
 }
 
 if (d < covid19.size/2 + user.size/2){
-  user.startFill = user.endFill;
+  user.currentFill = user.endFill;
+}
+else {
+  user.currentFill = user.startFill;
 }
 
 //User movement.
 user.x = mouseX;
 user.y = mouseY;
 //Draw user.
-fill(user.startFill);
+fill(user.currentFill.r, user.currentFill.g, user.currentFill.b);
 ellipse(user.x, user.y, user.size);
 
 //Draw Covid 19.
 fill(covid19.fill.r, covid19.fill.g, covid19.fill.b);
 noStroke();
 ellipse(covid19.x, covid19.y, covid19.size);
+
 
 
 }
