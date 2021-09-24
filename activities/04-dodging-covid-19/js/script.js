@@ -1,26 +1,46 @@
 /**
-Title of Project
-Author Name
+Activity 04: Dodging Covid-19
+Olenka Yuen
 
-This is a template. You must fill in the title,
-author, and this description to match your project!
+A Covid-19 simulation!
+
+PLAN:
+.A COVID circle moves across the screen, starting at random y.
+.The COVID circle moves back to the left once it touches the right side.
+.User circle at mouse location.
+. If the 2 circles overlap, program stops.
+."Display random static in the background for a visual flourish."
+."Hide the mouse cursor."
 */
 
 "use strict";
 
 
+let covid19 = {
+  x: 0,
+  y: 250,
+  size: 100,
+
+  vx: 0,
+  vy: 0,
+  speed: 5,
+
+  fill: {
+    r: 255,
+    g: 0,
+    b: 0,
+  }
+};
+
+
 /**
-Description of preload
-*/
-function preload() {
-
-}
-
-
-/**
-Description of setup
+Canvas setup.
 */
 function setup() {
+  createCanvas(windowWidth, windoHeight);
+
+  covid19.y = random(0, height);
+  covid19.vx = covid19.speed;
 
 }
 
