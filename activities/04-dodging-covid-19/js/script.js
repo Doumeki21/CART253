@@ -32,6 +32,13 @@ let covid19 = {
   }
 };
 
+let user = {
+  size: 100,
+  fill: 255,
+}
+
+let numStatic = 1000;
+
 
 /**
 Canvas setup.
@@ -42,6 +49,7 @@ function setup() {
   covid19.y = random(0, height);
   covid19.vx = covid19.speed;
 
+  noCursor();
 }
 
 
@@ -51,9 +59,36 @@ Description of draw()
 function draw() {
 background(0);
 
-//Standard movement code.
+//Display static.
+for (let i = 0; i < numStatic; i++) {
+  let x = random(0, width);
+  let y = random(0, height);
+  stroke(255);
+  point(x, y);
+}
+
+//Standard movement code (covid19).
 covid19.x += covid19.vx;
 covid19.y += covid19.vy;
+
+//Reset covid-19.
+if (covid19.x > width) {
+  covid19.x = 0;
+  covid19.y = random(0, height);
+}
+
+//Catching covid-19
+let d = dist(user.x, user.y, covid19.x, covid19.y);
+if (d < covid19.size/2 + user.size/2){
+  noLoop();
+}
+
+//User movement.
+user.x = mouseX;
+user.y = mouseY;
+//Draw user.
+fill( user.fill);
+ellipse(user.x, user.y, user.size);
 
 //Draw Covid 19.
 fill(covid19.fill.r, covid19.fill.g, covid19.fill.b);
