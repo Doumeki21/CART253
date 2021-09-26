@@ -6,9 +6,9 @@ Use the mouse to dodge the objects on screen!
 
 PLAN:
 .Mouse controls mint circle. (with velocity and acceleration.)
-*Mouse drag (scroll) = colors.
-."make the COVID-19 circle grow if it is close to the user and shrink (back to a minimum size) when it is further away"
-.Change the way the simulation looks.
+.If/ else statement// "make the enemy grow if it is close to the user and shrink (back to a minimum size) when it is further away"
+* on mouseIsPressed, user displayCircle = false. (another way to dodge/ hide from enemy.) >> watch video 4.3 Booleans
+.Change the way the simulation looks???
 .Use at least 1 image.
 */
 
