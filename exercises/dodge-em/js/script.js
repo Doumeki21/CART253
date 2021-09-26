@@ -5,7 +5,7 @@ Olenka Yuen
 Use the mouse to dodge the objects on screen!
 
 PLAN:
-.Mouse controls mint circle. (with velocity and acceleration.)
+.Mouse controls (mint) circle. With velocity and acceleration.
 .If/ else statement// "make the enemy grow if it is close to the user and shrink (back to a minimum size) when it is further away"
 * on mouseIsPressed, user displayCircle = false. (another way to dodge/ hide from enemy.) >> watch video 4.3 Booleans
 .Change the way the simulation looks???
@@ -25,14 +25,18 @@ let user = {
   ax: 0,
   ay: 0,
   accelerate: 0.8,
-  maxSpeed: 8,
+  maxSpeed: 15,
 
 };
 
 let enemy = {
   x: 0,
   y: 250,
-  size: 100,
+
+  currentSize: 100,
+  minSize: 100,
+  maxSize: 150,
+  growthSpeed: 5,
 
   vx: 0,
   vy: 0,
@@ -45,9 +49,18 @@ let enemy = {
   },
 };
 
+let gameState = {
+  minSate: 0,
+  maxState: 80,
+}
 
+let gameOverImage;
+
+function preload() {
+  gameOverImage = loadImage("assets/images/game-over.png");
+}
 /**
-Description of setup
+Setup game screen!
 */
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -58,7 +71,7 @@ function setup() {
 
 
 /**
-Description of draw()
+Draw interactive characters!
 */
 function draw() {
     background(0);
@@ -75,12 +88,25 @@ if (enemy.x > width) {
   enemy.y = random(0, height);
 }
 
-//User-enemy contact.
+//User-enemy contact. (Game over screen.)
 let d = dist(user.x, user.y, enemy.x, enemy.y);
 if (d < enemy.size/2 + user.size/2) {
+  imageMode(CENTER);
+  image(gameOverImage, windowWidth/2, windowHeight/2);
   noLoop();
 }
 
+//Growth state??
+// if (d < gameState.maxState) {
+//   if (enemy.currentSize > enemy.maxSize){
+//   enemy.currentSize += enemy.growthSpeed;
+// }
+// }
+// else {
+//   if (enemy.currentSize > enemy.minSize){
+//     enemy.currentSize -= enemy.growthSpeed;
+//   }
+// }
 
 //USER.
 //User control.
@@ -123,6 +149,7 @@ ellipse(user.x, user.y, user.size);
 // //Draw enemy.
 fill(enemy.fill.r, enemy.fill.g, enemy.fill.b);
 noStroke();
-ellipse(enemy.x, enemy.y, enemy.size);
+ellipse(enemy.x, enemy.y, enemy.currentSize);
+
 
 }
