@@ -15,7 +15,7 @@ PLAN:
 "use strict";
 
 let user = {
-  x: 0,
+  x: 250,
   y: 250,
   size: 100,
   fill: 0,
@@ -24,8 +24,8 @@ let user = {
   vy: 0,
   ax: 0,
   ay: 0,
-  accelerate: 0.5,
-  maxSpeed: 5,
+  accelerate: 0.8,
+  maxSpeed: 8,
 
 };
 
@@ -81,10 +81,11 @@ if (d < enemy.size/2 + user.size/2) {
   noLoop();
 }
 
+
 //USER.
 //User control.
-user.x = mouseX;
-user.y = mouseY;
+// user.x = mouseX;
+// user.y = mouseY;
 
 // //User acceleration.
 //X direction.
@@ -111,15 +112,15 @@ user.vy = user.vy + user.ay;
 user.vy = constrain(user.vy, -user.maxSpeed, user.maxSpeed);
 
 //Add user velocity to position.
-user.x = user.vx + user.vx;
-user.y = user.vy + user.vy;
+user.x = user.x + user.vx;
+user.y = user.y + user.vy;
 
 //Draw user.
 fill(user.fill);
 stroke(255);
 ellipse(user.x, user.y, user.size);
 
-//Draw enemy.
+// //Draw enemy.
 fill(enemy.fill.r, enemy.fill.g, enemy.fill.b);
 noStroke();
 ellipse(enemy.x, enemy.y, enemy.size);
