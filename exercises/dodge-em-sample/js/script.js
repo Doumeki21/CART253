@@ -49,16 +49,8 @@ let enemy = {
   },
 };
 
-let gameState = {
-  minSate: 0,
-  maxState: 80,
-}
 
-let gameOverImage;
 
-function preload() {
-  gameOverImage = loadImage("assets/images/game-over.png");
-}
 /**
 Setup game screen!
 */
@@ -91,8 +83,6 @@ if (enemy.x > width) {
 //User-enemy contact. (Game over screen.)
 let d = dist(user.x, user.y, enemy.x, enemy.y);
 if (d < enemy.size/2 + user.size/2) {
-  imageMode(CENTER);
-  image(gameOverImage, windowWidth/2, windowHeight/2);
   noLoop();
 }
 

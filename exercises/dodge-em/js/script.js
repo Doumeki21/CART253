@@ -90,23 +90,23 @@ if (enemy.x > width) {
 
 //User-enemy contact. (Game over screen.)
 let d = dist(user.x, user.y, enemy.x, enemy.y);
-if (d < enemy.size/2 + user.size/2) {
+if (d < enemy.currentSize/2 + user.size/2) {
   imageMode(CENTER);
   image(gameOverImage, windowWidth/2, windowHeight/2);
   noLoop();
 }
 
 //Growth state??
-// if (d < gameState.maxState) {
-//   if (enemy.currentSize > enemy.maxSize){
-//   enemy.currentSize += enemy.growthSpeed;
-// }
-// }
-// else {
-//   if (enemy.currentSize > enemy.minSize){
-//     enemy.currentSize -= enemy.growthSpeed;
-//   }
-// }
+if (d < gameState.maxState) {
+  if (enemy.currentSize > enemy.maxSize){
+  enemy.currentSize += enemy.growthSpeed;
+}
+}
+else {
+  if (enemy.currentSize > enemy.minSize){
+    enemy.currentSize -= enemy.growthSpeed;
+  }
+}
 
 //USER.
 //User control.
