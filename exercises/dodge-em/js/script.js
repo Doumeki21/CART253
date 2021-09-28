@@ -50,8 +50,8 @@ let enemy = {
 };
 
 let gameState = {
-  minSate: 0,
-  maxState: 80,
+  minState: 0,
+  maxState: 200,
 }
 
 let gameOverImage;
