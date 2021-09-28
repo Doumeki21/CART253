@@ -26,7 +26,6 @@ let user = {
   ay: 0,
   accelerate: 0.8,
   maxSpeed: 15,
-
 };
 
 let enemy = {
@@ -36,7 +35,7 @@ let enemy = {
   currentSize: 100,
   minSize: 100,
   maxSize: 150,
-  growthSpeed: 5,
+  growthSpeed: 10,
 
   vx: 0,
   vy: 0,
@@ -51,8 +50,8 @@ let enemy = {
 
 let gameState = {
   minState: 0,
-  maxState: 200,
-}
+  maxState: 300,
+};
 
 let gameOverImage;
 
@@ -98,7 +97,7 @@ if (d < enemy.currentSize/2 + user.size/2) {
 
 //Growth state??
 if (d < gameState.maxState) {
-  if (enemy.currentSize > enemy.maxSize){
+  if (enemy.currentSize < enemy.maxSize){
   enemy.currentSize += enemy.growthSpeed;
 }
 }
@@ -148,7 +147,7 @@ ellipse(user.x, user.y, user.size);
 
 // //Draw enemy.
 fill(enemy.fill.r, enemy.fill.g, enemy.fill.b);
-noStroke();
+stroke(255, 0, 0);
 ellipse(enemy.x, enemy.y, enemy.currentSize);
 
 
