@@ -5,11 +5,11 @@ Olenka Yuen
 Use the mouse to dodge the objects on screen!
 
 PLAN:
-.Mouse controls (mint) circle. With velocity and acceleration.
-.If/ else statement// "make the enemy grow if it is close to the user and shrink (back to a minimum size) when it is further away"
-* on mouseIsPressed, user displayCircle = false. (another way to dodge/ hide from enemy.) >> watch video 4.3 Booleans
-.Change the way the simulation looks???
-.Use at least 1 image.
+*Mouse controls black circle. With velocity and acceleration.
+*If/ else statement// "make the enemy grow if it is close to the user and shrink (back to a minimum size) when it is further away"
+*On mouseIsPressed, user displayCircle = false. (another way to dodge/ hide from enemy.) >> watch video 4.3 Booleans
+*Change the way the simulation looks???
+*Use at least 1 image.
 */
 
 "use strict";
@@ -62,8 +62,8 @@ let enemy2 = {
   speed: 8,
 
   fill: {
-    r: 255,
-    g: 0,
+    r: 0,
+    g: 255,
     b: 0,
   },
 };
@@ -83,12 +83,14 @@ Setup game screen!
 */
 function setup() {
   createCanvas(windowWidth, windowHeight);
-//enemy1
+  //enemy1
   enemy1.y = random(0, height);
   enemy1.vx = enemy1.speed;
-//enemy2
+  //enemy2
   enemy2.y = random(0, height);
   enemy2.vx = enemy2.speed;
+
+  background(0);
 }
 
 
@@ -96,118 +98,114 @@ function setup() {
 Draw interactive characters!
 */
 function draw() {
-    background(0);
 
-//ENEMY.
-//Enemy1 movement.
-enemy1.x += enemy1.vx;
-enemy1.y += enemy1.vy
 
-//Reset enemy1.
-if (enemy1.x > width) {
-  enemy1.x = 0;
-  //enemy1.accelerate ++
-  enemy1.y = random(0, height);
-}
+  //ENEMY.
+  //Enemy1 movement.
+  enemy1.x += enemy1.vx;
+  enemy1.y += enemy1.vy
 
-//User-enemy1 contact. (Game over screen.)
-let d1 = dist(user.x, user.y, enemy1.x, enemy1.y);
-if (d1 < enemy1.currentSize/2 + user.size/2) {
-  imageMode(CENTER);
-  image(gameOverImage, windowWidth/2, windowHeight/2);
-  noLoop();
-}
-
-//Enemy1 Growth state.
-if (d1 < gameState.maxState) {
-  if (enemy1.currentSize < enemy1.maxSize){
-  enemy1.currentSize += enemy1.growthSpeed;
-}
-}
-else {
-  if (enemy1.currentSize > enemy1.minSize){
-    enemy1.currentSize -= enemy1.growthSpeed;
+  //Reset enemy1.
+  if (enemy1.x > width) {
+    enemy1.x = 0;
+    //enemy1.accelerate ++
+    enemy1.y = random(0, height);
   }
-}
 
-//Enemy2 movement.
-enemy2.x += enemy2.vx;
-enemy2.y += enemy2.vy
-
-//Reset enemy2.
-if (enemy2.x > width) {
-  enemy2.x = 0;
-  //enemy2.accelerate ++
-  enemy2.y = random(0, height);
-}
-
-//User-enemy2 contact. (Game over screen.)
-let d2 = dist(user.x, user.y, enemy2.x, enemy2.y);
-if (d2 < enemy2.currentSize/2 + user.size/2) {
-  imageMode(CENTER);
-  image(gameOverImage, windowWidth/2, windowHeight/2);
-  noLoop();
-}
-
-//enemy2 Growth state.
-if (d2 < gameState.maxState) {
-  if (enemy2.currentSize < enemy2.maxSize){
-  enemy2.currentSize += enemy2.growthSpeed;
-}
-}
-else {
-  if (enemy2.currentSize > enemy2.minSize){
-    enemy2.currentSize -= enemy2.growthSpeed;
+  //User-enemy1 contact. (Game over screen.)
+  let d1 = dist(user.x, user.y, enemy1.x, enemy1.y);
+  if (d1 < enemy1.currentSize / 2 + user.size / 2) {
+    imageMode(CENTER);
+    image(gameOverImage, windowWidth / 2, windowHeight / 2);
+    noLoop();
   }
-}
 
+  //Enemy1 Growth state.
+  if (d1 < gameState.maxState) {
+    if (enemy1.currentSize < enemy1.maxSize) {
+      enemy1.currentSize += enemy1.growthSpeed;
+    }
+  } else {
+    if (enemy1.currentSize > enemy1.minSize) {
+      enemy1.currentSize -= enemy1.growthSpeed;
+    }
+  }
 
-//USER.
-//User control.
-// user.x = mouseX;
-// user.y = mouseY;
+  //Enemy2 movement.
+  enemy2.x += enemy2.vx;
+  enemy2.y += enemy2.vy
 
-// //User acceleration.
-//X direction.
-if (mouseX < user.x) {
-  user.ax = -user.accelerate;
-}
-else {
-  user.ax = user.accelerate;
-}
+  //Reset enemy2.
+  if (enemy2.x > width) {
+    enemy2.x = 0;
+    //enemy2.accelerate ++
+    enemy2.y = random(0, height);
+  }
 
-//Y direction.
-if (mouseY < user.y) {
-  user.ay = -user.accelerate;
-}
-else {
-  user.ay = user.accelerate;
-}
+  //User-enemy2 contact. (Game over screen.)
+  if (mouseIsPressed === false) {
+    let d2 = dist(user.x, user.y, enemy2.x, enemy2.y);
+    if (d2 < enemy2.currentSize / 2 + user.size / 2) {
+      imageMode(CENTER);
+      image(gameOverImage, windowWidth / 2, windowHeight / 2);
+      noLoop();
+    }
 
-//User velocity.
-//Add acceleration to velocity!! + constrain velocity speed!!
-user.vx = user.vx + user.ax;
-user.vx = constrain(user.vx, -user.maxSpeed, user.maxSpeed);
-user.vy = user.vy + user.ay;
-user.vy = constrain(user.vy, -user.maxSpeed, user.maxSpeed);
+    //enemy2 Growth state.
+    if (d2 < gameState.maxState) {
+      if (enemy2.currentSize < enemy2.maxSize) {
+        enemy2.currentSize += enemy2.growthSpeed;
+      }
+    } else {
+      if (enemy2.currentSize > enemy2.minSize) {
+        enemy2.currentSize -= enemy2.growthSpeed;
+      }
+    }
+  }
 
-//Add user velocity to position.
-user.x = user.x + user.vx;
-user.y = user.y + user.vy;
+  //USER.
+  //User control.
+  // user.x = mouseX;
+  // user.y = mouseY;
 
-//Draw user.
-fill(user.fill);
-stroke(255);
-ellipse(user.x, user.y, user.size);
+  // //User acceleration.
+  //X direction.
+  if (mouseX < user.x) {
+    user.ax = -user.accelerate;
+  } else {
+    user.ax = user.accelerate;
+  }
+  //Y direction.
+  if (mouseY < user.y) {
+    user.ay = -user.accelerate;
+  } else {
+    user.ay = user.accelerate;
+  }
 
-// //Draw enemy1.
-fill(enemy1.fill.r, enemy1.fill.g, enemy1.fill.b);
-stroke(255, 0, 0);
-ellipse(enemy1.x, enemy1.y, enemy1.currentSize);
+  //User velocity.
+  //Add acceleration to velocity!! + constrain velocity speed!!
+  user.vx = user.vx + user.ax;
+  user.vx = constrain(user.vx, -user.maxSpeed, user.maxSpeed);
+  user.vy = user.vy + user.ay;
+  user.vy = constrain(user.vy, -user.maxSpeed, user.maxSpeed);
+  //Add user velocity to position.
+  user.x = user.x + user.vx;
+  user.y = user.y + user.vy;
 
-// //Draw enemy2.
-fill(enemy2.fill.r, enemy2.fill.g, enemy2.fill.b);
-stroke(255, 0, 0);
-ellipse(enemy2.x, enemy2.y, enemy2.currentSize);
+  //Draw user.
+  if (mouseIsPressed === false) {
+    fill(user.fill);
+    stroke(255);
+    ellipse(user.x, user.y, user.size);
+  }
 
+  // //Draw enemy1.
+  fill(enemy1.fill.r, enemy1.fill.g, enemy1.fill.b);
+  stroke(255);
+  ellipse(enemy1.x, enemy1.y, enemy1.currentSize);
+
+  // //Draw enemy2.
+  fill(enemy2.fill.r, enemy2.fill.g, enemy2.fill.b);
+  stroke(255);
+  ellipse(enemy2.x, enemy2.y, enemy2.currentSize);
 }

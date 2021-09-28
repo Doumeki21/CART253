@@ -1,3 +1,3 @@
 # Dodge-em exercise!
 
-Move the mouse to control the green circle. Scroll the mouse to change the right color. 
+Move the mouse to control the black circle. Press on the mouse to hide from the green enemy. The red circles are unavoidable!
