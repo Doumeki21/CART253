@@ -10,33 +10,23 @@ PLAN:
 *push(), pop().
 */
 
-let goodFace = undefined;
-let badFace = undefined;
-let normalFace = undefined;
 
-let face = {
-  x: 250,
-  y: 250,
-  terrorthreshold:200,
-  image: undefined,
-}
+let numCircle = 0;
+
 
 /**
 Description of preload
 */
 function preload() {
-  goodFace = loadImage('assets/images/chibi-yuji.png');
-  badFace = loadImage('assets/images/chibi-suk.png');
-  normalFace = loadImage('assets/images/clown.png');
-}
 
+}
 
 /**
 Description of setup
 */
 function setup() {
   createCanvas(500, 500);
-
+  frameRate(10);
 }
 
 
@@ -44,16 +34,24 @@ function setup() {
 Description of draw()
 */
 function draw() {
-background(0);
+  background(0);
 
-let x = 20;
-let y = height/2;
-let size = 40;
-//Count from 0 to 10
-for (let i=0; i < 10; i++){
-  noFill();
-  stroke(255);
-  ellipse(x + i*size, y, size);
+  push();
+  rectMode(CENTER);
+  fill(255, 0, 0);
+  stroke(0, 255, 0);
+  rect(width/3, height/2, 100, 100);
+  pop(); //doesn't apply to the next drawn image!!
+
+  push();
+  rectMode(CENTER);
+  fill(255);
+  rect(2 * width/3, height/2, 100, 100);
+  pop();
+
+
+function keyPressed() {
+  numCircles += 1;
 }
 
 }
