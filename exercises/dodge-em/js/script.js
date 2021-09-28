@@ -2,7 +2,7 @@
 Exercise: Dodge-em!
 Olenka Yuen
 
-Use the mouse to dodge the objects on screen!
+Use the mouse to dodge the objects on the screen!
 
 PLAN:
 *Mouse controls black circle. With velocity and acceleration.
@@ -62,9 +62,9 @@ let enemy2 = {
   speed: 8,
 
   fill: {
-    r: 0,
-    g: 255,
-    b: 0,
+    r: 165,
+    g: 38,
+    b: 255,
   },
 };
 
