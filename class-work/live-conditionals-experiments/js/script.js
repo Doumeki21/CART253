@@ -1,9 +1,9 @@
 /**
-Title of Project
-Author Name
-
-This is a template. You must fill in the title,
-author, and this description to match your project!
+PLAN:
+* Multiple images (happy/ scared face)
+*FOR-LOOPS (discomfor-with, why are they instant?)
+*delaying code
+*push(), pop().
 */
 
 "use strict";
