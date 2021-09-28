@@ -28,7 +28,7 @@ let user = {
   maxSpeed: 15,
 };
 
-let enemy = {
+let enemy1 = {
   x: 0,
   y: 250,
 
@@ -40,6 +40,26 @@ let enemy = {
   vx: 0,
   vy: 0,
   speed: 5,
+
+  fill: {
+    r: 255,
+    g: 0,
+    b: 0,
+  },
+};
+
+let enemy2 = {
+  x: 0,
+  y: 250,
+
+  currentSize: 50,
+  minSize: 50,
+  maxSize: 100,
+  growthSpeed: 10,
+
+  vx: 0,
+  vy: 0,
+  speed: 8,
 
   fill: {
     r: 255,
@@ -63,9 +83,12 @@ Setup game screen!
 */
 function setup() {
   createCanvas(windowWidth, windowHeight);
-
-  enemy.y = random(0, height);
-  enemy.vx = enemy.speed;
+//enemy1
+  enemy1.y = random(0, height);
+  enemy1.vx = enemy1.speed;
+//enemy2
+  enemy2.y = random(0, height);
+  enemy2.vx = enemy2.speed;
 }
 
 
@@ -76,36 +99,68 @@ function draw() {
     background(0);
 
 //ENEMY.
-//Enemy movement.
-enemy.x += enemy.vx;
-enemy.y += enemy.vy
+//Enemy1 movement.
+enemy1.x += enemy1.vx;
+enemy1.y += enemy1.vy
 
-//Reset enemy.
-if (enemy.x > width) {
-  enemy.x = 0;
-  //enemy.accelerate ++
-  enemy.y = random(0, height);
+//Reset enemy1.
+if (enemy1.x > width) {
+  enemy1.x = 0;
+  //enemy1.accelerate ++
+  enemy1.y = random(0, height);
 }
 
-//User-enemy contact. (Game over screen.)
-let d = dist(user.x, user.y, enemy.x, enemy.y);
-if (d < enemy.currentSize/2 + user.size/2) {
+//User-enemy1 contact. (Game over screen.)
+let d1 = dist(user.x, user.y, enemy1.x, enemy1.y);
+if (d1 < enemy1.currentSize/2 + user.size/2) {
   imageMode(CENTER);
   image(gameOverImage, windowWidth/2, windowHeight/2);
   noLoop();
 }
 
-//Growth state??
-if (d < gameState.maxState) {
-  if (enemy.currentSize < enemy.maxSize){
-  enemy.currentSize += enemy.growthSpeed;
+//Enemy1 Growth state.
+if (d1 < gameState.maxState) {
+  if (enemy1.currentSize < enemy1.maxSize){
+  enemy1.currentSize += enemy1.growthSpeed;
 }
 }
 else {
-  if (enemy.currentSize > enemy.minSize){
-    enemy.currentSize -= enemy.growthSpeed;
+  if (enemy1.currentSize > enemy1.minSize){
+    enemy1.currentSize -= enemy1.growthSpeed;
   }
 }
+
+//Enemy2 movement.
+enemy2.x += enemy2.vx;
+enemy2.y += enemy2.vy
+
+//Reset enemy2.
+if (enemy2.x > width) {
+  enemy2.x = 0;
+  //enemy2.accelerate ++
+  enemy2.y = random(0, height);
+}
+
+//User-enemy2 contact. (Game over screen.)
+let d2 = dist(user.x, user.y, enemy2.x, enemy2.y);
+if (d2 < enemy2.currentSize/2 + user.size/2) {
+  imageMode(CENTER);
+  image(gameOverImage, windowWidth/2, windowHeight/2);
+  noLoop();
+}
+
+//enemy2 Growth state.
+if (d2 < gameState.maxState) {
+  if (enemy2.currentSize < enemy2.maxSize){
+  enemy2.currentSize += enemy2.growthSpeed;
+}
+}
+else {
+  if (enemy2.currentSize > enemy2.minSize){
+    enemy2.currentSize -= enemy2.growthSpeed;
+  }
+}
+
 
 //USER.
 //User control.
@@ -145,10 +200,14 @@ fill(user.fill);
 stroke(255);
 ellipse(user.x, user.y, user.size);
 
-// //Draw enemy.
-fill(enemy.fill.r, enemy.fill.g, enemy.fill.b);
+// //Draw enemy1.
+fill(enemy1.fill.r, enemy1.fill.g, enemy1.fill.b);
 stroke(255, 0, 0);
-ellipse(enemy.x, enemy.y, enemy.currentSize);
+ellipse(enemy1.x, enemy1.y, enemy1.currentSize);
 
+// //Draw enemy2.
+fill(enemy2.fill.r, enemy2.fill.g, enemy2.fill.b);
+stroke(255, 0, 0);
+ellipse(enemy2.x, enemy2.y, enemy2.currentSize);
 
 }
