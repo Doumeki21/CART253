@@ -3,7 +3,8 @@ Functions
 Olenka Yuen
 
 Vid 5.1 FUNCTIONS
-vid 5.2 parameters
+vid 5.2 w parameters
+vid 5.3 w return values
 */
 
 "use strict";
@@ -14,6 +15,12 @@ Description of setup
 */
 function setup() {
   createCanvas(500, 500);
+
+  let hotCelsius = toCelsius(100);
+  console.log(`100 degrees Fahrenheit is ${hotCelsius} degrees Celsius.`);
+
+  let coldCelsius = toCelsius(10);
+  console.log(`10 degrees Fahrenheit is ${coldCelsius} degrees Celsius.`);
 }
 
 
@@ -23,19 +30,9 @@ Description of draw()
 function draw() {
   background(0);
 
-  parallels(100, 100, 5, 1, 100, 1);
-  parallels(50,50, 10, 2, 20, 10);
-  parallels(200, 200, 15, 7, 3, 20);
-  parallels(315, 315, 20, 0.5, 300, 2);
-
 }
 
-function parallels(x, y, numLines, lineWidth, lineHeight, lineSpace) {
-  for (let i = 0; i < numLines; i++) {
-    noStroke();
-    fill(255);
-    rectMode(CENTER);
-    rect(x,y,lineWidth,lineHeight);
-    x += lineSpace;
-  }
+function toCelsius(fahrenheit) {
+  let celsius = (fahrenheit - 32) * 5/9;
+  return celsius;
 }
