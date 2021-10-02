@@ -52,6 +52,10 @@ function setupCircles() {
 function draw() {
   background(0);
 
+  simulation();
+}
+
+function simulation() {
   move();
   checkOffScreen();
   checkOverlap();
