@@ -2,43 +2,71 @@
 Functions
 Olenka Yuen
 
-Vid 5.1 FUNCTIONS
-vid 5.2 w parameters
-vid 5.3 w return values
-vid 5.4 text
+Vid 5.5 states.
 */
 
 "use strict";
 
-let hello = {
-  string: `Hello, world!`,
-  x: 250,
-  y: 0,
-  vx: 1,
-  vy: 4,
-  size: 40,
+let circle = {
+  x: 0,
+  y: 250,
+  size: 100,
+  vx: 0,
+  vy: 0,
+  speed: 2,
 };
+
+let state = `title`; //Possible sates are: title, animation, ending.
+
 
 function setup() {
   createCanvas(500, 500);
-
+  circle.vx = circle.speed;
+  textSize(32);
+  textAlign(CENTER, CENTER);
 }
 
 function draw() {
   background(0);
 
-  //hello.x += hello.vx;
-  hello.y += hello.vy
+  if (state === `title`) {
+    title();
+  }
+  else if (state === `animation`) {
+    animation();
+  }
+  else if (state === `ending`) {
+    ending();
+  }
+}
 
-  hello.size ++;
 
-  textAlign(CENTER,CENTER);
-  textStyle(BOLD);
-  textSize(hello.size);
+function title() {
+  //Title.
+  fill(255);
+  text(`Life`, width/2, height/2);
+}
 
-  fill(200, 50, 50);
-  stroke(255);
-  strokeWeight(4);
+function animation() {
+  //Animation.
+  circle.x += circle.vx;
+  circle.y += circle.vy;
 
-  text(hello.string, hello.x, hello.y);
+  if (circle.x > width) {
+    state = `ending`;
+  }
+
+    ellipse(circle.x, circle.y, circle.size);
+}
+
+function ending() {
+  //Ending.
+  fill(127);
+  text(`It's all over.`, width/2, height/2);
+}
+
+function keyPressed() {
+  if (state === `title`){
+    state = `animation`;
+  }
 }
