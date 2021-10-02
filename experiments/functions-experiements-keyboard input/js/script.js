@@ -2,71 +2,53 @@
 Functions
 Olenka Yuen
 
-Vid 5.5 states.
+Vid 5.6: keyboard input
+vid 5.7: automated movement
 */
 
-"use strict";
 
 let circle = {
-  x: 0,
+  x: 250,
   y: 250,
   size: 100,
   vx: 0,
   vy: 0,
-  speed: 2,
-};
-
-let state = `title`; //Possible states are: title, animation, ending.
-
+  speed: 5
+}
 
 function setup() {
   createCanvas(500, 500);
-  circle.vx = circle.speed;
-  textSize(32);
-  textAlign(CENTER, CENTER);
+
 }
 
 function draw() {
   background(0);
 
-  if (state === `title`) {
-    title();
-  }
-  else if (state === `animation`) {
-    animation();
-  }
-  else if (state === `ending`) {
-    ending();
-  }
+let dx = circle.x - mouseX;
+let dy = circle.y - mouseY;
+
+if (dx < 0) {
+  circle.vx = circle.speed;
+}
+else if(dx > 0) {
+  circle.vx = -circle.speed;
+}
+else {
+  circle.vx = 0;
 }
 
-
-function title() {
-  //Title.
-  fill(255);
-  text(`Life`, width/2, height/2);
+if (dy < 0) {
+  circle.vy = circle.speed;
+}
+else if(dy > 0) {
+  circle.vy = -circle.speed;
+}
+else {
+  circle.vy = 0;
 }
 
-function animation() {
-  //Animation.
-  circle.x += circle.vx;
-  circle.y += circle.vy;
+circle.x += circle.vx;
+circle.y += circle.vy;
 
-  if (circle.x > width) {
-    state = `ending`;
-  }
-
-    ellipse(circle.x, circle.y, circle.size);
-}
-
-function ending() {
-  //Ending.
-  fill(127);
-  text(`It's all over.`, width/2, height/2);
-}
-
-function keyPressed() {
-  if (state === `title`){
-    state = `animation`;
-  }
+ellipse(circle.x, circle.y, circle.size);
 }
