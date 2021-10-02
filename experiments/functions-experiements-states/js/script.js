@@ -16,7 +16,7 @@ let circle = {
   speed: 2,
 };
 
-let state = `title`; //Possible sates are: title, animation, ending.
+let state = `title`; //Possible states are: title, animation, ending.
 
 
 function setup() {
