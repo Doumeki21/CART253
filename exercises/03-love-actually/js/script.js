@@ -8,7 +8,7 @@ PLAN:
 *title screen. (Parellel Worlds: The fate that brings us together.)
 .2 lost circles.
 .Search for the lost one using the keyboard arrows!
-*Once the circles touch- new random position for each cirlce.
+*Once the circles touch- new random position for each circle.
 *Add a score count?
 
 REQUIREMENTS:
