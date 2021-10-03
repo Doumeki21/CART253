@@ -13,7 +13,7 @@ victory. if one runs off the edge, bad end.
 "use strict";
 
 let lover1 = {
-  x: 150,
+  x: undefined,
   y: 250,
   size:100,
   vx: 0,
@@ -22,7 +22,7 @@ let lover1 = {
 }
 
 let lover2 = {
-  x: 350,
+  x: undefined,
   y: 250,
   size: 100,
   vx: 0,
@@ -30,6 +30,7 @@ let lover2 = {
   speed: 3,
 }
 
+let state = `title`; // title, simulation, love, sadness.
 
 function setup() {
   createCanvas(500, 500);
@@ -40,7 +41,7 @@ function setup() {
 function setupCircles() {
   //Circle position sperated from one another.
     lover1.x = width/3;
-    lover2.x = 2*width/3;
+    lover2.x = 2 * width/3;
 
     //Circles start moving in random directions
     lover1.vx = random(-lover1.speed, lover1.speed);
@@ -52,7 +53,27 @@ function setupCircles() {
 function draw() {
   background(0);
 
-  simulation();
+  if (state === `title`) {
+    title();
+  }
+  else if (state === `simulation`) {
+    simulation();
+  }
+  else if (state === `love`) {
+    love();
+  }
+  else if (state === `sadness`) {
+    sadness();
+  }
+}
+
+function title() {
+  push();
+  textSize(64);
+  fill(200, 100, 100);
+  textAlign(CENTER, CENTER);
+  text(`LOVE?`, width/2, height/2);
+  pop();
 }
 
 function simulation() {
@@ -60,6 +81,24 @@ function simulation() {
   checkOffScreen();
   checkOverlap();
   display();
+}
+
+function love() {
+  push();
+  textSize(64);
+  fill(255, 150, 150);
+  textAlign(CENTER, CENTER);
+  text(`LOVE!`, width/2, height/2);
+  pop();
+}
+
+function sadness() {
+  push();
+  textSize(64);
+  fill(150, 150, 255);
+  textAlign(CENTER, CENTER);
+  text(`:(`, width/2, height/2);
+  pop();
 }
 
 function move() {
@@ -80,9 +119,10 @@ function checkOffScreen() {
 
 function checkOverlap() {
   //check if circles overlap.
-  let d = dist(lover1.x, lover1.y, lover2.y, lover2.y)
+  let d = dist(lover1.x, lover1.y, lover2.x, lover2.y)
   if (d < lover1.size/2 + lover2.size/2) {
     //LOVE ENDING.
+    state = `love`;
   }
 }
 
@@ -90,4 +130,10 @@ function display() {
   //Display circles.
   ellipse(lover1.x, lover1.y, lover1.size);
   ellipse(lover2.x, lover2.y, lover2.size);
+}
+
+function mousePressed() {
+  if (state === `title`) {
+    state = `simulation`;
+  }
 }
