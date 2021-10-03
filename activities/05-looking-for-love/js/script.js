@@ -97,7 +97,7 @@ function sadness() {
   textSize(64);
   fill(150, 150, 255);
   textAlign(CENTER, CENTER);
-  text(`:(`, width/2, height/2);
+  text(`(╥︣﹏᷅╥᷅)`, width/2, height/2);
   pop();
 }
 
@@ -112,10 +112,28 @@ function move() {
 
 function checkOffScreen() {
   //Have the circles gone off screen?
+  //*METHID 1:
   if (lover1.x < 0 || lover1.x > width || lover1.y < 0 || lover1.y > height || lover2.x < 0 || lover2.x > width || lover2.y < 0 || lover2.y > height) {
-    // sad ending.
+    state = `sadness`;
   }
 }
+
+  /*METHOD 2
+  if (isOffScreen(lover1) || isOffScreen(lover2)){
+    // sad ending.
+
+*/
+
+/*Only use for shapes!!
+function isOffScreen(circle) {
+  if (lover.x < 0 || lover.x > width || lover.y < 0 || lover.y > height) {
+    return true;
+  }
+  else {
+    return false;
+  }
+}
+*/
 
 function checkOverlap() {
   //check if circles overlap.
@@ -135,5 +153,8 @@ function display() {
 function mousePressed() {
   if (state === `title`) {
     state = `simulation`;
+  }
+  else if (state === `sadness`) {
+    state = `title`;
   }
 }
