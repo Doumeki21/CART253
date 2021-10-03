@@ -154,7 +154,10 @@ function mousePressed() {
   if (state === `title`) {
     state = `simulation`;
   }
-  else if (state === `sadness`) {
+ if (state === `sadness`) {
+    state = `title`;
+  }
+ if (state === `love`) {
     state = `title`;
   }
 }
