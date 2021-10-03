@@ -13,7 +13,7 @@ victory. if one runs off the edge, bad end.
 "use strict";
 
 let lover1 = {
-  x: undefined,
+  x: 250,
   y: 250,
   size:100,
   vx: 0,
@@ -22,7 +22,7 @@ let lover1 = {
 }
 
 let lover2 = {
-  x: undefined,
+  x: 250,
   y: 250,
   size: 100,
   vx: 0,
