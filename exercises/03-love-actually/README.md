@@ -1,3 +1,3 @@
-# Dodge-em exercise!
+# Template p5 project
 
-Move the mouse to control the black circle. Press on the mouse to hide from the purple enemy. The red circles are unavoidable!
+This is the README file for the entire project. For more official projects you should write information here about the nature of the project, your name, any special explanations of how the project works, etc.
