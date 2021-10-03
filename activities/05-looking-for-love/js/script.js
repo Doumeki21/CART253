@@ -61,9 +61,11 @@ function draw() {
   }
   else if (state === `love`) {
     love();
+    setupCircles();
   }
   else if (state === `sadness`) {
     sadness();
+    setupCircles();
   }
 }
 
@@ -121,9 +123,7 @@ function checkOffScreen() {
   /*METHOD 2
   if (isOffScreen(lover1) || isOffScreen(lover2)){
     // sad ending.
-
 */
-
 /*Only use for shapes!!
 function isOffScreen(circle) {
   if (lover.x < 0 || lover.x > width || lover.y < 0 || lover.y > height) {
