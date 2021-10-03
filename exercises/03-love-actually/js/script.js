@@ -6,10 +6,18 @@ GOAL: bring the 2 circles together!
 
 PLAN:
 *title screen. (Parellel Worlds: The fate that brings us together.)
-*2 lost circles.
-*Search for the lost one using the keyboard arrows!
+.2 lost circles.
+.Search for the lost one using the keyboard arrows!
 *Once the circles touch- new random position for each cirlce.
 *Add a score count?
+
+REQUIREMENTS:
+*Own if statemetnts
+*working with loops for drawing.
+-User control circle.
+-Non-user circle move differently.
+*extra function
+*extra ending.
 */
 
 "use strict";
