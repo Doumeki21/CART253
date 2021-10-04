@@ -40,7 +40,7 @@ let lover = {
   speed: 6,
 };
 
-let state = `title`;
+let state = `simulation`;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);

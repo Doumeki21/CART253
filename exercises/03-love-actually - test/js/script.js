@@ -5,17 +5,17 @@ Olenka Yuen
 GOAL: bring the 2 circles together!
 
 PLAN:
-*title screen. (Parellel Worlds: The fate that brings us together.)
-.2 lost circles.
-.Search for the lost one using the keyboard arrows!
+.title screen.
+.2 circles.
+.Reach the child using the keyboard arrows!
 *Once the circles touch- new random position for each circle.
 *Add a score count?
 
 REQUIREMENTS:
 *Own if statemetnts
 *working with loops for drawing.
--User control circle.
--Non-user circle move differently.
+.User control circle.
+.Non-user circle move differently.
 *extra function
 *extra ending.
 */
@@ -30,7 +30,7 @@ let user = {
   },
   x: 250,
   y: 250,
-  size: 80,
+  size: 40,
   vx: 0,
   vy: 0,
   speed: 5,
@@ -44,11 +44,18 @@ let child = {
   },
   x: 250,
   y: 250,
-  size: 80,
+  size: 20,
   vx: 0,
   vy: 0,
   speed: 20,
 };
+
+let dangerZone = {
+  fill: 255,
+  x: 250,
+  y: 250,
+  size: 20,
+}
 
 let state = `title`;
 
@@ -64,6 +71,9 @@ function setupCircles() {
     child.y = 0;
     user.x = width/2;
     user.y = height;
+
+    dangerZone.x = random (0, width);
+    dangerZone.y = random (0, height);
 }
 
 function draw() {
@@ -77,6 +87,9 @@ function draw() {
   }
   else if (state === `checkmate`) {
     checkmate();
+  }
+  else if (state === `ouch`) {
+    ouch();
   }
 }
 
@@ -100,6 +113,7 @@ function simulation() {
   handleInput();
   move();
   checkOverlap();
+  checkDangerZone();
   display();
 }
 
@@ -112,6 +126,21 @@ function checkmate() {
   pop();
 }
 
+function ouch() {
+  push();
+  textSize(64);
+  fill(200, 100, 100);
+  textAlign(CENTER, CENTER);
+  text(`OUCH!`, width/2, height/2);
+  pop();
+
+  push();
+  textSize(20);
+  fill(200, 100, 100);
+  textAlign(CENTER, CENTER);
+  text(`YOU TRIPPED OVER BOOKS AND BROKE YOUR ANKLE.`, width/2, height/2 +100);
+  pop();
+}
 
 //Move user.
 function handleInput() {
@@ -159,8 +188,17 @@ function checkOverlap() {
 //Check if circles overlap.
 let d = dist(user.x, user.y, child.x, child.y)
 if (d < user.size/2 + child.size/2) {
-  //LOVE ENDING.
+  //GOOD ENDING.
   state = `checkmate`;
+  }
+}
+
+function checkDangerZone() {
+//Check if user and danger zone overlap.
+let d = dist(user.x, user.y, dangerZone.x, dangerZone.y)
+if (d < user.size/2 + dangerZone.size/2) {
+  //BAD ENDING.
+  state = `ouch`;
   }
 }
 
