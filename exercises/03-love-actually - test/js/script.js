@@ -40,6 +40,7 @@ let lover = {
   speed: 6,
 };
 
+let state = `title`;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -48,59 +49,74 @@ function setup() {
 function draw() {
   background(0);
 
-    simulation();
+  //Checkmate function
+  push();
+  textSize(64);
+  fill(255, 150, 150);
+  textAlign(CENTER, CENTER);
+  text(`LOVE!`, width/2, height/2);
+  pop();
+
+  //Move user.
+  //function handleInput() {
+    //User control horizontol axis.
+    if (keyIsDown(LEFT_ARROW)) {
+      user.vx = -user.speed;
+    }
+    else if (keyIsDown(RIGHT_ARROW)) {
+      user.vx = user.speed;
+    }
+    else {
+      user.vx = 0;
+    }
+    //User control vertical axis.
+    if (keyIsDown(UP_ARROW)) {
+      user.vy = -user.speed;
+    }
+    else if (keyIsDown(DOWN_ARROW)) {
+      user.vy = user.speed;
+    }
+    else {
+      user.vy = 0;
+    }
+
+  //function move() {
+    //User movement.
+    user.x += user.vx;
+    user.y += user.vy;
+
+    //Lover movement.
+    lover.x += lover.vx;
+    lover.x = constrain(lover.x, 0, width);
+    lover.y += lover.vy;
+    lover.y = constrain(lover.y, 0, height);
+    //Lover jitter
+    let change = random();
+    if (change < 0.1) {
+      lover.vx = random(-lover.speed, lover.speed);
+      lover.vy = random(-lover.speed, lover.speed);
+    }
+  //}
+
+  //Check if circles overlap.
+  let d = dist(user.x, user.y, lover.x, lover.y)
+  if (d < user.size/2 + lover.size/2) {
+    //LOVE ENDING.
+    state = `checkmate`;
+  }
+
+
+  //function display() {
+    //Display circles.
+    ellipse(user.x, user.y, user.size);
+    ellipse(lover.x, lover.y, lover.size);
+  //}
+
+
 }
 
-function simulation() {
-  handleInput();
-  move();
-  display();
-}
-
-//Move user.
-function handleInput() {
-  //User control horizontol axis.
-  if (keyIsDown(LEFT_ARROW)) {
-    user.vx = -user.speed;
+function mousePressed() {
+  if (state === `title`) {
+    state = `simulation`;
   }
-  else if (keyIsDown(RIGHT_ARROW)) {
-    user.vx = user.speed;
-  }
-  else {
-    user.vx = 0;
-  }
-  //User control vertical axis.
-  if (keyIsDown(UP_ARROW)) {
-    user.vy = -user.speed;
-  }
-  else if (keyIsDown(DOWN_ARROW)) {
-    user.vy = user.speed;
-  }
-  else {
-    user.vy = 0;
-  }
-}
-
-function move() {
-  //User movement.
-  user.x += user.vx;
-  user.y += user.vy;
-
-  //Lover movement.
-  lover.x += lover.vx;
-  lover.x = constrain(lover.x, 0, width);
-  lover.y += lover.vy;
-  lover.y = constrain(lover.y, 0, height);
-  //Lover jitter
-  let change = random();
-  if (change < 0.1) {
-    lover.vx = random(-lover.speed, lover.speed);
-    lover.vy = random(-lover.speed, lover.speed);
-  }
-}
-
-function display() {
-  //Display circles.
-  ellipse(user.x, user.y, user.size);
-  ellipse(lover.x, lover.y, lover.size);
 }
