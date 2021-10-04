@@ -57,6 +57,9 @@ let dangerZone = {
   size: 100,
 }
 
+//Animated circles as a timer.
+let numCircles = 3;
+
 let state = `title`;
 
 function setup() {
@@ -78,6 +81,13 @@ function setupCircles() {
 
 function draw() {
   background(0);
+
+  for (let i = 0; i < numCircles; i++) {
+    fill(255);
+    ellipse(i + 10, height + 30);
+  }
+
+  numCircles -= 0.1;
 
   if (state === `title`) {
     title();
