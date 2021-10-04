@@ -40,7 +40,6 @@ let lover = {
   speed: 6,
 };
 
-let state = `title`;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -49,18 +48,12 @@ function setup() {
 function draw() {
   background(0);
 
-    if (state === `simulation`) {
-      simulation();
-    }
-    else if (state === `checkmate`) {
-      checkmate();
-    }
+    simulation();
 }
 
 function simulation() {
   handleInput();
   move();
-  checkOverlap();
   display();
 }
 
@@ -103,15 +96,6 @@ function move() {
   if (change < 0.1) {
     lover.vx = random(-lover.speed, lover.speed);
     lover.vy = random(-lover.speed, lover.speed);
-  }
-}
-
-function checkOverlap() {
-  //check if circles overlap.
-  let d = dist(user.x, user.y, lover.x, lover.y)
-  if (d < user.size/2 + lover.size/2) {
-    //LOVE ENDING.
-    state = `checkmate`;
   }
 }
 
