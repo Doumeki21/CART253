@@ -17,7 +17,7 @@ REQUIREMENTS:
 .User control circle.
 .Non-user circle move differently.
 *extra function
-*extra ending.
+.extra ending.
 */
 
 "use strict";
@@ -87,6 +87,9 @@ function draw() {
   }
   else if (state === `checkmate`) {
     checkmate();
+  }
+  else if (state === `ouch`) {
+    ouch();
   }
 }
 
@@ -202,14 +205,24 @@ if (d < user.size/2 + dangerZone.size/2) {
 
 function display() {
   //Display circles.
+  //Display user.
   fill(user.fill.r, user.fill.r, user.fill.b);
   ellipse(user.x, user.y, user.size);
+  //Display child.
   fill(child.fill.r, child.fill.g, child.fill.b);
   ellipse(child.x, child.y, child.size);
+  //Display danger zone.
+  ellipse(dangerZone.x, dangerZone.y, dangerZone.size);
 }
 
 function mousePressed() {
   if (state === `title`) {
     state = `simulation`;
+  }
+  else if (state === `checkmate`) {
+    state = `title`;
+  }
+  else if (state === `ouch`) {
+    state = `title`;
   }
 }
