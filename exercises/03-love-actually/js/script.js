@@ -23,6 +23,11 @@ REQUIREMENTS:
 "use strict";
 
 let user = {
+  fill: {
+    r: 201,
+    g: 189,
+    b: 255,
+  },
   x: 250,
   y: 250,
   size: 40,
@@ -32,6 +37,11 @@ let user = {
 };
 
 let child = {
+  fill: {
+    r: 69,
+    g: 238,
+    b: 255,
+  },
   x: 250,
   y: 250,
   size: 20,
@@ -54,6 +64,7 @@ function setupCircles() {
     child.y = 0;
     user.x = width/2;
     user.y = height;
+
 }
 
 function draw() {
@@ -101,6 +112,7 @@ function checkmate() {
   text(`YOU SAVED THE DAY!`, width/2, height/2);
   pop();
 }
+
 
 //Move user.
 function handleInput() {
@@ -153,9 +165,13 @@ if (d < user.size/2 + child.size/2) {
   }
 }
 
+
+
 function display() {
   //Display circles.
+  fill(user.fill.r, user.fill.r, user.fill.b);
   ellipse(user.x, user.y, user.size);
+  fill(child.fill.r, child.fill.g, child.fill.b);
   ellipse(child.x, child.y, child.size);
 }
 
