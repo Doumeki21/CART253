@@ -12,11 +12,11 @@ PLAN:
 *Add a score count?
 
 REQUIREMENTS:
-*Own if statemetnts
+.Own if statemetnts
 *working with loops for drawing.
 .User control circle.
 .Non-user circle move differently.
-*extra function
+.extra function
 .extra ending.
 */
 
@@ -103,7 +103,7 @@ function title() {
 
   push();
   textSize(20);
-  fill(200, 100, 100);
+  fill(212, 212, 212);
   textAlign(CENTER, CENTER);
   text(`USE ARROW KEYS TO REACH THE BABY.`, width/2, height/2 +100);
   pop();
@@ -129,14 +129,14 @@ function checkmate() {
 function ouch() {
   push();
   textSize(64);
-  fill(200, 100, 100);
+  fill(255, 0, 0);
   textAlign(CENTER, CENTER);
   text(`OUCH!`, width/2, height/2);
   pop();
 
   push();
   textSize(20);
-  fill(200, 100, 100);
+  fill(212, 212, 212);
   textAlign(CENTER, CENTER);
   text(`YOU TRIPPED OVER BOOKS AND BROKE YOUR ANKLE.`, width/2, height/2 +100);
   pop();
