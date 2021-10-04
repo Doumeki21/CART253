@@ -22,28 +22,41 @@ REQUIREMENTS:
 
 "use strict";
 
-// How many circles in a line to draw?
-// Start with 0 because we'll increase over time
-// for an animation!
-let numCircles = 5;
+
+let timer = {
+  x: 100,
+  y: 150,
+  size: 20,
+
+  alpha: 0,
+  fadeAmount: 0.5,
+}
+
 
 function setup() {
-  createCanvas(400, 400);
+  createCanvas(500, 500);
+
 }
 
 function draw() {
-  background(220);
+  background(0);
+  noStroke();
+  fill(255, timer.alpha);
 
-  // Use a for loop to draw out circles up to the number of
-  // circles currently set in numCircles
-  for (let i = 0; i < numCircles; i--) {
-    // Draw a circle, use i to control where on the canvas
-    // we draw it so that we can draw them in a row
-    ellipse(i * 20, height/2, 20);
+
+
+  let x = timer.x;
+  let numCircles = 5;
+  let circlesDrawn = 0;
+
+  for (let i = numCircles; i >= 0; i--) {
+    if (timer.alpha < 0) timer.fadeAmount = 1;
+    if (timer.alpha > 255) timer.fadeAmount = -1;
+
+    timer.alpha += timer.fadeAmount;
+
+    ellipse(x, timer.y, timer.size);
+    circlesDrawn += 1;
+    x += 40;
   }
-
-  // Increase the number of circles to draw next time
-  // By using a fractional number we can change the animation
-  // speed a bit (one circle every ten frames in this case)
-  numCircles -= 0.01;
 }
