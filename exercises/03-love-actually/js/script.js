@@ -5,17 +5,17 @@ Olenka Yuen
 GOAL: bring the 2 circles together!
 
 PLAN:
-*title screen. (Parellel Worlds: The fate that brings us together.)
-.2 lost circles.
-.Search for the lost one using the keyboard arrows!
+.title screen.
+.2 circles.
+.Reach the child using the keyboard arrows!
 *Once the circles touch- new random position for each circle.
 *Add a score count?
 
 REQUIREMENTS:
 *Own if statemetnts
 *working with loops for drawing.
--User control circle.
--Non-user circle move differently.
+.User control circle.
+.Non-user circle move differently.
 *extra function
 *extra ending.
 */
@@ -25,36 +25,65 @@ REQUIREMENTS:
 let user = {
   x: 250,
   y: 250,
-  size: 80,
+  size: 40,
   vx: 0,
   vy: 0,
   speed: 5,
 };
 
-let lover = {
+let child = {
   x: 250,
   y: 250,
-  size: 80,
+  size: 20,
   vx: 0,
   vy: 0,
-  speed: 6,
+  speed: 20,
 };
 
-let state = `simulation`;
+let state = `title`;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+
+  setupCircles();
+}
+
+function setupCircles() {
+  //Circle position sperated from one another.
+    child.x = width/2;
+    child.y = 0;
+    user.x = width/2;
+    user.y = height;
 }
 
 function draw() {
   background(0);
 
-    if (state === `simulation`) {
-      simulation();
-    }
-    else if (state === `checkmate`) {
-      checkmate();
-    }
+  if (state === `title`) {
+    title();
+  }
+  else if (state === `simulation`) {
+    simulation();
+  }
+  else if (state === `checkmate`) {
+    checkmate();
+  }
+}
+
+function title() {
+  push();
+  textSize(64);
+  fill(200, 100, 100);
+  textAlign(CENTER, CENTER);
+  text(`TANTRUM`, width/2, height/2);
+  pop();
+
+  push();
+  textSize(20);
+  fill(200, 100, 100);
+  textAlign(CENTER, CENTER);
+  text(`USE ARROW KEYS TO REACH THE BABY.`, width/2, height/2 +100);
+  pop();
 }
 
 function simulation() {
@@ -62,6 +91,15 @@ function simulation() {
   move();
   checkOverlap();
   display();
+}
+
+function checkmate() {
+  push();
+  textSize(64);
+  fill(255, 150, 150);
+  textAlign(CENTER, CENTER);
+  text(`YOU SAVED THE DAY!`, width/2, height/2);
+  pop();
 }
 
 //Move user.
@@ -93,30 +131,36 @@ function move() {
   user.x += user.vx;
   user.y += user.vy;
 
-  //Lover movement.
-  lover.x += lover.vx;
-  lover.x = constrain(lover.x, 0, width);
-  lover.y += lover.vy;
-  lover.y = constrain(lover.y, 0, height);
-  //Lover jitter
+  //child movement.
+  child.x += child.vx;
+  child.x = constrain(child.x, 0, width);
+  child.y += child.vy;
+  child.y = constrain(child.y, 0, height);
+  //child jitter
   let change = random();
   if (change < 0.1) {
-    lover.vx = random(-lover.speed, lover.speed);
-    lover.vy = random(-lover.speed, lover.speed);
+    child.vx = random(-child.speed, child.speed);
+    child.vy = random(-child.speed, child.speed);
   }
 }
 
 function checkOverlap() {
-  //check if circles overlap.
-  let d = dist(user.x, user.y, lover.x, lover.y)
-  if (d < user.size/2 + lover.size/2) {
-    //LOVE ENDING.
-    state = `checkmate`;
+//Check if circles overlap.
+let d = dist(user.x, user.y, child.x, child.y)
+if (d < user.size/2 + child.size/2) {
+  //GOOD ENDING.
+  state = `checkmate`;
   }
 }
 
 function display() {
   //Display circles.
   ellipse(user.x, user.y, user.size);
-  ellipse(lover.x, lover.y, lover.size);
+  ellipse(child.x, child.y, child.size);
+}
+
+function mousePressed() {
+  if (state === `title`) {
+    state = `simulation`;
+  }
 }
