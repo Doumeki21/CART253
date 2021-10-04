@@ -50,6 +50,13 @@ let child = {
   speed: 20,
 };
 
+let dangerZone = {
+  fill: 255,
+  x: 250,
+  y: 250,
+  size: 20,
+}
+
 let state = `title`;
 
 function setup() {
@@ -65,6 +72,8 @@ function setupCircles() {
     user.x = width/2;
     user.y = height;
 
+    dangerZone.x = random (0, width);
+    dangerZone.y = random (0, height);
 }
 
 function draw() {
@@ -101,6 +110,7 @@ function simulation() {
   handleInput();
   move();
   checkOverlap();
+  checkDangerZone();
   display();
 }
 
@@ -110,6 +120,22 @@ function checkmate() {
   fill(255, 150, 150);
   textAlign(CENTER, CENTER);
   text(`YOU SAVED THE DAY!`, width/2, height/2);
+  pop();
+}
+
+function ouch() {
+  push();
+  textSize(64);
+  fill(200, 100, 100);
+  textAlign(CENTER, CENTER);
+  text(`OUCH!`, width/2, height/2);
+  pop();
+
+  push();
+  textSize(20);
+  fill(200, 100, 100);
+  textAlign(CENTER, CENTER);
+  text(`YOU TRIPPED OVER BOOKS AND BROKE YOUR ANKLE.`, width/2, height/2 +100);
   pop();
 }
 
@@ -165,7 +191,14 @@ if (d < user.size/2 + child.size/2) {
   }
 }
 
-
+function checkDangerZone() {
+//Check if user and danger zone overlap.
+let d = dist(user.x, user.y, dangerZone.x, dangerZone.y)
+if (d < user.size/2 + dangerZone.size/2) {
+  //BAD ENDING.
+  state = `ouch`;
+  }
+}
 
 function display() {
   //Display circles.
