@@ -23,6 +23,11 @@ REQUIREMENTS:
 "use strict";
 
 let user = {
+  fill: {
+    r: 201,
+    g: 189,
+    b: 255,
+  },
   x: 250,
   y: 250,
   size: 80,
@@ -31,88 +36,140 @@ let user = {
   speed: 5,
 };
 
-let lover = {
+let child = {
+  fill: {
+    r: 69,
+    g: 238,
+    b: 255,
+  },
   x: 250,
   y: 250,
   size: 80,
   vx: 0,
   vy: 0,
-  speed: 6,
+  speed: 20,
 };
 
 let state = `title`;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+
+  setupCircles();
+}
+
+function setupCircles() {
+  //Circle position sperated from one another.
+    child.x = width/2;
+    child.y = 0;
+    user.x = width/2;
+    user.y = height;
 }
 
 function draw() {
   background(0);
 
-  //Checkmate function
+  if (state === `title`) {
+    title();
+  }
+  else if (state === `simulation`) {
+    simulation();
+  }
+  else if (state === `checkmate`) {
+    checkmate();
+  }
+}
+
+function title() {
+  push();
+  textSize(64);
+  fill(200, 100, 100);
+  textAlign(CENTER, CENTER);
+  text(`TANTRUM`, width/2, height/2);
+  pop();
+
+  push();
+  textSize(20);
+  fill(200, 100, 100);
+  textAlign(CENTER, CENTER);
+  text(`USE ARROW KEYS TO REACH THE BABY.`, width/2, height/2 +100);
+  pop();
+}
+
+function simulation() {
+  handleInput();
+  move();
+  checkOverlap();
+  display();
+}
+
+function checkmate() {
   push();
   textSize(64);
   fill(255, 150, 150);
   textAlign(CENTER, CENTER);
-  text(`LOVE!`, width/2, height/2);
+  text(`YOU SAVED THE DAY!`, width/2, height/2);
   pop();
+}
 
-  //Move user.
-  //function handleInput() {
-    //User control horizontol axis.
-    if (keyIsDown(LEFT_ARROW)) {
-      user.vx = -user.speed;
-    }
-    else if (keyIsDown(RIGHT_ARROW)) {
-      user.vx = user.speed;
-    }
-    else {
-      user.vx = 0;
-    }
-    //User control vertical axis.
-    if (keyIsDown(UP_ARROW)) {
-      user.vy = -user.speed;
-    }
-    else if (keyIsDown(DOWN_ARROW)) {
-      user.vy = user.speed;
-    }
-    else {
-      user.vy = 0;
-    }
 
-  //function move() {
-    //User movement.
-    user.x += user.vx;
-    user.y += user.vy;
-
-    //Lover movement.
-    lover.x += lover.vx;
-    lover.x = constrain(lover.x, 0, width);
-    lover.y += lover.vy;
-    lover.y = constrain(lover.y, 0, height);
-    //Lover jitter
-    let change = random();
-    if (change < 0.1) {
-      lover.vx = random(-lover.speed, lover.speed);
-      lover.vy = random(-lover.speed, lover.speed);
-    }
-  //}
-
-  //Check if circles overlap.
-  let d = dist(user.x, user.y, lover.x, lover.y)
-  if (d < user.size/2 + lover.size/2) {
-    //LOVE ENDING.
-    state = `checkmate`;
+//Move user.
+function handleInput() {
+  //User control horizontol axis.
+  if (keyIsDown(LEFT_ARROW)) {
+    user.vx = -user.speed;
   }
+  else if (keyIsDown(RIGHT_ARROW)) {
+    user.vx = user.speed;
+  }
+  else {
+    user.vx = 0;
+  }
+  //User control vertical axis.
+  if (keyIsDown(UP_ARROW)) {
+    user.vy = -user.speed;
+  }
+  else if (keyIsDown(DOWN_ARROW)) {
+    user.vy = user.speed;
+  }
+  else {
+    user.vy = 0;
+  }
+}
 
+function move() {
+  //User movement.
+  user.x += user.vx;
+  user.y += user.vy;
 
-  //function display() {
-    //Display circles.
-    ellipse(user.x, user.y, user.size);
-    ellipse(lover.x, lover.y, lover.size);
-  //}
+  //child movement.
+  child.x += child.vx;
+  child.x = constrain(child.x, 0, width);
+  child.y += child.vy;
+  child.y = constrain(child.y, 0, height);
+  //child jitter
+  let change = random();
+  if (change < 0.1) {
+    child.vx = random(-child.speed, child.speed);
+    child.vy = random(-child.speed, child.speed);
+  }
+}
 
+function checkOverlap() {
+//Check if circles overlap.
+let d = dist(user.x, user.y, child.x, child.y)
+if (d < user.size/2 + child.size/2) {
+  //LOVE ENDING.
+  state = `checkmate`;
+  }
+}
 
+function display() {
+  //Display circles.
+  fill(user.fill.r, user.fill.r, user.fill.b);
+  ellipse(user.x, user.y, user.size);
+  fill(child.fill.r, child.fill.g, child.fill.b);
+  ellipse(child.x, child.y, child.size);
 }
 
 function mousePressed() {
