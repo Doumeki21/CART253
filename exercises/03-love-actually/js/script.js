@@ -44,17 +44,17 @@ let child = {
   },
   x: 250,
   y: 250,
-  size: 20,
+  size: 30,
   vx: 0,
   vy: 0,
   speed: 20,
 };
 
 let dangerZone = {
-  fill: 255,
+  fill: 0,
   x: 250,
   y: 250,
-  size: 20,
+  size: 100,
 }
 
 let state = `title`;
@@ -87,9 +87,11 @@ function draw() {
   }
   else if (state === `checkmate`) {
     checkmate();
+    setupCircles();
   }
   else if (state === `ouch`) {
     ouch();
+    setupCircles();
   }
 }
 
@@ -105,7 +107,21 @@ function title() {
   textSize(20);
   fill(212, 212, 212);
   textAlign(CENTER, CENTER);
-  text(`USE ARROW KEYS TO REACH THE BABY.`, width/2, height/2 +100);
+  text(`USE ARROW KEYS TO REACH THE BABY.`, width/2, height/2 + 100);
+  pop();
+
+  push();
+  textSize(15);
+  fill(255, 0, 0);
+  textAlign(CENTER, CENTER);
+  text(`BEWARE OF DANGER ZONES!`, width/2, height/2 + 120);
+  pop();
+
+  push();
+  textSize(15);
+  fill(212, 212, 212);
+  textAlign(CENTER, CENTER);
+  text(`CLICK TO CONTINUE`, width/2, height/2 + 160);
   pop();
 }
 
@@ -120,7 +136,7 @@ function simulation() {
 function checkmate() {
   push();
   textSize(64);
-  fill(255, 150, 150);
+  fill(147, 214, 219);
   textAlign(CENTER, CENTER);
   text(`YOU SAVED THE DAY!`, width/2, height/2);
   pop();
@@ -206,12 +222,15 @@ if (d < user.size/2 + dangerZone.size/2) {
 function display() {
   //Display circles.
   //Display user.
+  push();
   fill(user.fill.r, user.fill.r, user.fill.b);
   ellipse(user.x, user.y, user.size);
   //Display child.
   fill(child.fill.r, child.fill.g, child.fill.b);
   ellipse(child.x, child.y, child.size);
+  pop();
   //Display danger zone.
+  fill(dangerZone.fill);
   ellipse(dangerZone.x, dangerZone.y, dangerZone.size);
 }
 
