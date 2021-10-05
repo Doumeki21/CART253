@@ -57,7 +57,17 @@ let dangerZone = {
   size: 100,
 }
 
-//Animated circles as a timer.
+let timer = {
+  x: 100,
+  y: 150,
+  size: 20,
+  fill: 255,
+
+  //start at full alpha.
+  alpha: 255,
+  fadeAmount: 20,
+}
+//changes over time.
 let numCircles = 5;
 
 let state = `title`;
@@ -65,10 +75,10 @@ let state = `title`;
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
-  setupCircles();
+  reset();
 }
 
-function setupCircles() {
+function reset() {
   //Circle position sperated from one another.
     child.x = width/2;
     child.y = 0;
@@ -77,16 +87,13 @@ function setupCircles() {
 
     dangerZone.x = random (0, width);
     dangerZone.y = random (0, height);
+
+    numCircles = 5;
+    timer.alpha = 255;
 }
 
 function draw() {
   background(0);
-
-  for (let i = numCircles; i >= 0; i--) {
-    ellipse(i + 10, height + 30);
-  }
-
-  numCircles -= 0.1;
 
   if (state === `title`) {
     title();
@@ -96,11 +103,11 @@ function draw() {
   }
   else if (state === `checkmate`) {
     checkmate();
-    setupCircles();
+    reset();
   }
   else if (state === `ouch`) {
     ouch();
-    setupCircles();
+    reset();
   }
 }
 
@@ -139,6 +146,7 @@ function simulation() {
   move();
   checkOverlap();
   checkDangerZone();
+  countDown();
   display();
 }
 
@@ -228,6 +236,43 @@ if (d < user.size/2 + dangerZone.size/2) {
   }
 }
 
+function countDown() {
+  noStroke();
+
+let x = timer.x;
+for (let i = numCircles; i >= 0; i--) {
+  //Alpha will be calculated separatley. Fading alpha used for last circle.
+
+  //Default is full.
+  let alpha = 255;
+  //If current circle is the last one--
+  if (i === 0) {
+    //then use timer.alpha (which is reducing to 0.)
+    alpha = timer.alpha;
+  }
+
+  push();
+  fill(255, alpha);
+  ellipse(x, timer.y, timer.size);
+  pop();
+  x += 40;
+}
+
+  //outisde the forloop since it's only fading one circle (at a time).
+  timer.alpha -= timer.fadeAmount;
+  //subtract alpha to fade out
+  //if current alpha reaches 0-
+  if (timer.alpha <= 0) {
+    //then remove a circle completely.
+    numCircles--;
+    //and reset alpha to 255 so next one fades.
+    timer.alpha = 255;
+  }
+  if (numCircles === 0) {
+    state = `ouch`;
+  }
+}
+
 function display() {
   //Display circles.
   //Display user.
@@ -243,14 +288,17 @@ function display() {
   ellipse(dangerZone.x, dangerZone.y, dangerZone.size);
 }
 
-function mousePressed() {
-  if (state === `title`) {
-    state = `simulation`;
+function keyPressed() {
+  if (keyCode === 32) {
+    if (state === `title`) {
+      state = `simulation`;
+    }
+    else if (state === `checkmate`) {
+      state = `title`;
+    }
+    else if (state === `ouch`) {
+      state = `title`;
+    }
   }
-  else if (state === `checkmate`) {
-    state = `title`;
-  }
-  else if (state === `ouch`) {
-    state = `title`;
-  }
+
 }
