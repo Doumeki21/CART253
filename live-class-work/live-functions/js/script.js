@@ -1,57 +1,53 @@
-
 "use strict";
 
+let shape = {
+  x: undefined,
+  y: undefined,
+  size: 200,
 
-/**
-PLAN:
-* Multiple images (happy/ scared face)
-*FOR-LOOPS (discomfor-with, why are they instant?)
-*delaying code
-*push(), pop().
-*/
+};
 
+let x = 10;
 
-let numCircle = 0;
-
-
-/**
-Description of preload
-*/
-function preload() {
-
-}
-
-/**
-Description of setup
-*/
 function setup() {
-  createCanvas(500, 500);
-  frameRate(10);
+  createCanvas(700, 300);
+  shape.x = width / 4;
+  shape.y = height / 2;
 }
 
-
-/**
-Description of draw()
-*/
 function draw() {
   background(0);
 
-  push();
-  rectMode(CENTER);
-  fill(255, 0, 0);
-  stroke(0, 255, 0);
-  rect(width/3, height/2, 100, 100);
-  pop(); //doesn't apply to the next drawn image!!
 
-  push();
-  rectMode(CENTER);
-  fill(255);
-  rect(2 * width/3, height/2, 100, 100);
-  pop();
+   drawShpae();
 
-
-function keyPressed() {
-  numCircles += 1;
 }
 
+
+function drawShpae() {
+  push();
+  // Select the fill based on mouseover
+  if (isMouseInside()) {
+    fill(255, 0, 0);
+  } else {
+    fill(255, 255, 0);
+  }
+  ellipse(shape.x, shape.y, shape.size);
+  pop();
+}
+
+function isMouseInside() {
+  let d = dist(mouseX, mouseY, shape.x, shape.y);
+  if (d < shape.size/2) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function drawBoundary() {
+  push();
+  stroke(255);
+  line(width/2, 0, width/2, height);
+  pop();
 }
