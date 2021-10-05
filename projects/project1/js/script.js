@@ -24,6 +24,12 @@ Advice
 
 "use strict";
 
+let rectBottom = {
+  x: 250,
+  y: 550,
+  width: 100,
+  height: 40,
+}
 
 /**
 Description of preload
@@ -37,7 +43,7 @@ function preload() {
 Description of setup
 */
 function setup() {
-
+  createCanvas (windowWidth, windowHeight);
 }
 
 
@@ -45,5 +51,10 @@ function setup() {
 Description of draw()
 */
 function draw() {
+  background(0);
 
+  rectBottom.x = mouseX;
+
+  rectMode(CENTER);
+  rect(rectBottom.x, rectBottom.y, rectBottom.width, rectBottom.height);
 }
