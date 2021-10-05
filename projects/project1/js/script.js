@@ -36,9 +36,9 @@ let ball1 = {
   y: 0,
   size: 50,
 
-  vx: 0,
-  vy: 0,
-  speed: 3,
+  vx: undefined,
+  vy: undefined,
+  speed: 5,
 }
 
 
@@ -67,6 +67,10 @@ ball1.y += ball1.vy;
 //ball1 constrain in window.
 ball1.x = constrain(ball1.x, 0, width);
 ball1.y = constrain(ball1.y, 0, height);
+//Ball to wall contact
+if (ball1.x < 0 || ball1.x > width || ball1.y < 0 || ball1.y > height) {
+  setupShapes();
+}
 //Draw ball1.
 ellipse(ball1.x, ball1.y, ball1.size);
 
