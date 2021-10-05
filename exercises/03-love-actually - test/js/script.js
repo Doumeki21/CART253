@@ -63,10 +63,16 @@ function draw() {
     ellipse(x, timer.y, timer.size);
     pop();
     x += 40;
+  }
 
     //outisde the forloop since it's only fading one circle (at a time).
     timer.alpha += timer.fadeAmount;
     //subtract alpha to fade out
-    
-  }
+    //if current alpha reaches 0-
+    if (timer.alpha <= 0) {
+      //then remove a circle completely.
+      numCircles--;
+      //and reset alpha to 255 so next one fades.
+      timer.alpha = 255;
+    }
 }
