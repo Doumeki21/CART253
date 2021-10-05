@@ -2,7 +2,7 @@
 Exercise 03: Love, actually
 Olenka Yuen
 
-GOAL: bring the 2 circles together!
+GOAL: Bring the mother to the baby! Move the purple circle using the keyboard arrow. Beware of the time and hidden danger zones!
 
 PLAN:
 .title screen.

@@ -1,3 +1,4 @@
-# Template p5 project
+# Exercise 03: Love, actually
 
-This is the README file for the entire project. For more official projects you should write information here about the nature of the project, your name, any special explanations of how the project works, etc.
+GOAL: Bring the mother to the baby!
+Move the purple circle using the keyboard arrow. Beware of the time and hidden danger zones!
