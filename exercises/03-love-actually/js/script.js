@@ -128,31 +128,31 @@ function draw() {
 //Display title of the game.
 function title() {
   push();
-  textSize(64);
+  textSize(100);
   fill(200, 100, 100);
   textAlign(CENTER, CENTER);
   text(`TANTRUM`, width / 2, height / 2);
   pop();
 
   push();
-  textSize(20);
+  textSize(64);
   fill(212, 212, 212);
   textAlign(CENTER, CENTER);
   text(`USE ARROW KEYS TO REACH THE BABY.`, width / 2, height / 2 + 100);
   pop();
 
   push();
-  textSize(15);
+  textSize(20);
   fill(255, 0, 0);
   textAlign(CENTER, CENTER);
-  text(`BEWARE OF DANGER ZONES!`, width / 2, height / 2 + 120);
+  text(`BEWARE OF DANGER ZONES!`, width / 2, height / 2 + 170);
   pop();
 
   push();
-  textSize(15);
+  textSize(20);
   fill(212, 212, 212);
   textAlign(CENTER, CENTER);
-  text(`PRESS THE SPACE BAR TO CONTINUE`, width / 2, height / 2 + 160);
+  text(`PRESS THE SPACE BAR TO CONTINUE`, width / 2, height / 2 + 200);
   pop();
 }
 
@@ -170,7 +170,7 @@ function simulation() {
 //Display win situation of the game.
 function safe() {
   push();
-  textSize(64);
+  textSize(100);
   fill(147, 214, 219);
   textAlign(CENTER, CENTER);
   text(`YOU SAVED THE DAY!`, width / 2, height / 2);
@@ -180,14 +180,14 @@ function safe() {
 //Display Game over 1: touching the hidden danger zone.
 function ouch() {
   push();
-  textSize(64);
+  textSize(100);
   fill(255, 0, 0);
   textAlign(CENTER, CENTER);
   text(`OUCH!`, width / 2, height / 2);
   pop();
 
   push();
-  textSize(20);
+  textSize(50);
   fill(212, 212, 212);
   textAlign(CENTER, CENTER);
   text(`YOU TRIPPED OVER BOOKS AND BROKE YOUR ANKLE.`, width / 2, height / 2 + 100);
@@ -197,14 +197,14 @@ function ouch() {
 //Display Game over 2: running out of time.
 function timeUp() {
   push();
-  textSize(64);
+  textSize(100);
   fill(255, 0, 0);
   textAlign(CENTER, CENTER);
   text(`TIME UP!`, width / 2, height / 2);
   pop();
 
   push();
-  textSize(20);
+  textSize(50);
   fill(212, 212, 212);
   textAlign(CENTER, CENTER);
   text(`YOUR SPOUSE CAME BACK AND SAW A MESSY HOUSE!`, width / 2, height / 2 + 100);
