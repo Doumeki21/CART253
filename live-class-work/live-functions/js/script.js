@@ -4,7 +4,7 @@ let shape = {
   x: undefined,
   y: undefined,
   size: 200,
-
+  isBeingDragged: false,
 };
 
 let x = 10;
@@ -18,11 +18,17 @@ function setup() {
 function draw() {
   background(0);
 
-
+   handleDragging();
    drawShpae();
-
+   drawBoundary();
 }
 
+function handleDragging() {
+  if (shape.isBeingDragged) {
+  shape.x = mouseX;
+  shape.y = mouseY;
+  }
+}
 
 function drawShpae() {
   push();
@@ -50,4 +56,14 @@ function drawBoundary() {
   stroke(255);
   line(width/2, 0, width/2, height);
   pop();
+}
+
+function mousePressed() {
+  if (isMouseInside()) {
+    shape.isBeingDragged = true;
+  }
+}
+
+function mouseReleased() {
+  shape.isBeingDragged = false;
 }
