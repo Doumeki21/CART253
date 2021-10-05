@@ -30,7 +30,7 @@ let timer = {
 
   //Need to start at full alpha.
   alpha: 255,
-  fadeAmount: 5,
+  fadeAmount: 3,
 }
 
 //We need to change this over time.
@@ -66,7 +66,7 @@ function draw() {
   }
 
     //outisde the forloop since it's only fading one circle (at a time).
-    timer.alpha += timer.fadeAmount;
+    timer.alpha -= timer.fadeAmount;
     //subtract alpha to fade out
     //if current alpha reaches 0-
     if (timer.alpha <= 0) {
