@@ -67,9 +67,9 @@ let timer = {
   fill: 255,
   //start at full alpha.
   alpha: 255,
-  fadeAmount: 20,
+  fadeAmount: 4,
   //changes over time.
-  numCircles: 5;
+  numCircles: 5,
 }
 
 //Any screen: title, win, or game over screens.
