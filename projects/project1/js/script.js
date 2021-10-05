@@ -38,7 +38,7 @@ let ball1 = {
 
   vx: undefined,
   vy: undefined,
-  speed: 5,
+  speed: 20,
 }
 
 
@@ -53,7 +53,7 @@ function setup() {
 
 function setupShapes() {
   ball1.vx = random(-ball1.speed, ball1.speed);
-  ball1.vy = random(-ball1.speed, ball1.speed);
+  ball1.vy = ball1.speed;
 }
 
 /**
@@ -64,13 +64,17 @@ function draw() {
 //Move ball1
 ball1.x += ball1.vx;
 ball1.y += ball1.vy;
+//Ball to wall contact (needs to be put before constrain!)
+if (ball1.x > width) {
+  // setupShapes();
+  ball1.vx = -ball1.vx;
+} else if (ball1.x < 0) {
+  ball1.vx = -ball1.vx;
+}
 //ball1 constrain in window.
 ball1.x = constrain(ball1.x, 0, width);
-ball1.y = constrain(ball1.y, 0, height);
-//Ball to wall contact
-if (ball1.x < 0 || ball1.x > width || ball1.y < 0 || ball1.y > height) {
-  setupShapes();
-}
+// ball1.y = constrain(ball1.y, 0, height);
+
 //Draw ball1.
 ellipse(ball1.x, ball1.y, ball1.size);
 
