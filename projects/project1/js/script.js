@@ -36,6 +36,7 @@ let rectTop = {
   y: 0,
   width: 200,
   height: 20,
+  speedX: 30,
 }
 
 let ball1 = {
@@ -54,11 +55,11 @@ let ball1 = {
 Description of setup
 */
 function setup() {
-  createCanvas (windowWidth, windowHeight);
+  createCanvas(windowWidth, windowHeight);
 
-  rectTop.x = width/2;
+  rectTop.x = width / 2;
   rectTop.y = 30;
-  rectBottom.x = width/2;
+  rectBottom.x = width / 2;
   rectBottom.y = height - 30;
 
   reset();
@@ -68,8 +69,8 @@ function reset() {
   ball1.vx = random(-ball1.speedX, ball1.speedX);
   ball1.vy = ball1.speedY;
 
-  ball1.x = width/2;
-  ball1.y = height/2;
+  ball1.x = width / 2;
+  ball1.y = height / 2;
 }
 
 /**
@@ -77,17 +78,22 @@ Description of draw()
 */
 function draw() {
   background(0);
-//Bottom user.
-//Bottom user control.
+  //Bottom user.
+  //Bottom user control.
   rectBottom.x = mouseX;
-//Top user control.
-//handleInput()
+  //Top user control.
+  //handleInput()
   if (keyIsDown(LEFT_ARROW)) {
     rectTop.vx = -rectTop.speedX;
   } else if (keyIsDown(RIGHT_ARROW)) {
     rectTop.vx = rectTop.speedX;
+  } else {
+    rectTop.vx = 0;
   }
-//Display bottom user.
+
+  rectTop.x += rectTop.vx;
+
+  //Display bottom user.
   fill(255);
   rectMode(CENTER);
   rect(rectBottom.x, rectBottom.y, rectBottom.width, rectBottom.height);
@@ -99,25 +105,26 @@ function draw() {
   ball1.x += ball1.vx;
   ball1.y += ball1.vy;
 
-//Ball to wall contact (needs to be put before constrain!)
-//edges();
-//Ball bounce.
-if (ball1.x > width || ball1.x < 0) {
-  ball1.vx += -1;
-//Points.
-if (ball1.y > height) {
-  reset();
-}
+  //Ball to wall contact (needs to be put before constrain!)
+  //edges();
+  //Ball bounce.
+  if (ball1.x > width || ball1.x < 0) {
+    ball1.vx *= -1;
+    //ball1 constrain in window.
+    ball1.x = constrain(ball1.x, 0, width);
+    // ball1.y = constrain(ball1.y, 0, height);
+  }
+  
+  //Points.
+  if (ball1.y > height) {
+    reset();
+  }
+  if (ball1.y < 0) {
+    reset();
+  }
 
-if (ball1.y < 0) {
-  reset();
-}
-//ball1 constrain in window.
-ball1.x = constrain(ball1.x, 0, width);
-// ball1.y = constrain(ball1.y, 0, height);
-}
-//Draw ball1.
-ellipse(ball1.x, ball1.y, ball1.size);
+  //Draw ball1.
+  ellipse(ball1.x, ball1.y, ball1.size);
 
 
 
