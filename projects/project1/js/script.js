@@ -122,13 +122,20 @@ function draw() {
   drawPaddle();
 }
 
+//Once ball hits bottom user.
 function checkCollision() {
-
+  if (ball1.x + ball1.size/2 > rectBottom.x - rectBottom.width/2 && ball1.x - ball1.size/2 < rectBottom.x + rectBottom.width/2 && ball1.y + ball1.size/2 > rectBottom.y - rectBottom.height/2 && ball1.y - ball1.size/2 < rectBottom.y + rectBottom.height/2) {
+    ball1.vx *= -1;
+    ball1.vy *= -1;
+  }
 }
 
 function drawBall() {
   //Draw ball1.
+  push();
+  noStroke();
   ellipse(ball1.x, ball1.y, ball1.size);
+  pop();
 }
 
 function drawPaddle() {
