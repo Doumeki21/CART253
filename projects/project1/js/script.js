@@ -65,6 +65,7 @@ function setup() {
   reset();
 }
 
+//Ball resets position every score.
 function reset() {
   ball1.vx = random(-ball1.speedX, ball1.speedX);
   ball1.vy = ball1.speedY;
@@ -80,7 +81,7 @@ function draw() {
   background(0);
   //Bottom user.
   //Bottom user control.
-  rectBottom.x = mouseX;
+  rectBottom.x = constrain(mouseX, 0, width);
   //Top user control.
   //handleInput()
   if (keyIsDown(LEFT_ARROW)) {
@@ -92,14 +93,7 @@ function draw() {
   }
 
   rectTop.x += rectTop.vx;
-
-  //Display bottom user.
-  fill(255);
-  rectMode(CENTER);
-  rect(rectBottom.x, rectBottom.y, rectBottom.width, rectBottom.height);
-  //Display top user.
-  rectMode(CENTER);
-  rect(rectTop.x, rectTop.y, rectTop.width, rectTop.height);
+  rectTop.x = constrain(rectTop.x, 0, width);
 
   //Move ball1
   ball1.x += ball1.vx;
@@ -114,7 +108,7 @@ function draw() {
     ball1.x = constrain(ball1.x, 0, width);
     // ball1.y = constrain(ball1.y, 0, height);
   }
-  
+
   //Points.
   if (ball1.y > height) {
     reset();
@@ -123,9 +117,26 @@ function draw() {
     reset();
   }
 
+  checkCollision();
+  drawBall();
+  drawPaddle();
+}
+
+function checkCollision() {
+
+}
+
+function drawBall() {
   //Draw ball1.
   ellipse(ball1.x, ball1.y, ball1.size);
+}
 
-
-
+function drawPaddle() {
+  //Display bottom user.
+  fill(255);
+  rectMode(CENTER);
+  rect(rectBottom.x, rectBottom.y, rectBottom.width, rectBottom.height);
+  //Display top user.
+  rectMode(CENTER);
+  rect(rectTop.x, rectTop.y, rectTop.width, rectTop.height);
 }
