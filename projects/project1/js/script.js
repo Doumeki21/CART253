@@ -1,19 +1,19 @@
 /**
-Title of Project
+P1: Indecision
 Olenka Yuen
 
 Objectives
-  *Handling different forms of user input
+  -Handling different forms of user input
   *Organizing code with functions
   *Making things interesting with conditionals and variables
   *Combining aesthetics, interaction and concept
 
 Brief
-  *(Personal) Metaphorical simulation. // Mental health??
+  -(Personal) Metaphorical simulation. // Mental health??
 
 Requirements
-  *At least two moving elements
-  *Interactivity
+  -At least two moving elements
+  -Interactivity
   *Aesthetic, conceptual, and procedural harmony (visual, sound, and user-input should work harmoniously!)
   *Beginning, middle, and end!
 
@@ -30,7 +30,8 @@ let rectBottom = {
   y: 0,
   width: 300,
   height: 20,
-}
+  scoreCount: 0,
+};
 
 //Top paddle.
 let rectTop = {
@@ -39,7 +40,7 @@ let rectTop = {
   width: 300,
   height: 20,
   speedX: 20,
-
+  scoreCount: 0,
 };
 
 //Bouncing ball.
@@ -52,11 +53,10 @@ let ball1 = {
   vy: undefined,
   speedX: 15,
   speedY: 10,
-
 };
 
-
-
+const keyA = 65;
+const keyD = 68;
 /**
 Description of setup
 */
@@ -90,6 +90,7 @@ function draw() {
   checkEdge();
   checkPoints();
   checkCollision();
+  displayScore();
   drawBall();
   drawPaddle();
 }
@@ -100,9 +101,9 @@ function movement() {
   rectBottom.x = constrain(mouseX, 0, width);
   //Top paddle control.
   //handleInput()
-  if (keyIsDown(LEFT_ARROW)) {
+  if (keyIsDown (keyA)) {
     rectTop.vx = -rectTop.speedX;
-  } else if (keyIsDown(RIGHT_ARROW)) {
+  } else if (keyIsDown (keyD)) {
     rectTop.vx = rectTop.speedX;
   } else {
     rectTop.vx = 0;
@@ -131,11 +132,13 @@ function checkPoints() {
   //If ball hits the top or bottom edge of canvas.
   if (ball1.y > height) {
     //Points for top paddle.
-    reset();
-  }
+      reset();
+      rectTop.scoreCount++;
+    }
   if (ball1.y < 0) {
     //Points for bottom paddle.
-    reset();
+      reset();
+      rectBottom.scoreCount++;
   }
 }
 
@@ -152,6 +155,12 @@ function checkCollision() {
     ball1.vy *= -1;
   }
   console.log()
+}
+
+function displayScore() {
+  fill(255);
+  //Score
+  text(`DO IT: ${rectTop.scoreCount}`, 100, 100);
 }
 
 function drawBall() {
