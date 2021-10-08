@@ -24,21 +24,25 @@ Advice
 
 "use strict";
 
+//Bottom paddle.
 let rectBottom = {
   x: 0,
   y: 0,
-  width: 200,
+  width: 300,
   height: 20,
 }
 
+//Top paddle.
 let rectTop = {
   x: 0,
   y: 0,
-  width: 200,
+  width: 300,
   height: 20,
-  speedX: 30,
-}
+  speedX: 20,
 
+};
+
+//Bouncing ball.
 let ball1 = {
   x: 250,
   y: 250,
@@ -48,14 +52,16 @@ let ball1 = {
   vy: undefined,
   speedX: 15,
   speedY: 10,
-}
+
+};
+
 
 
 /**
 Description of setup
 */
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(windowWidth/2, windowHeight);
 
   rectTop.x = width / 2;
   rectTop.y = 30;
@@ -79,10 +85,20 @@ Description of draw()
 */
 function draw() {
   background(0);
-  //Bottom user.
-  //Bottom user control.
+
+  movement();
+  checkEdge();
+  checkPoints();
+  checkCollision();
+  drawBall();
+  drawPaddle();
+}
+
+function movement() {
+  //Bottom paddle.
+  //Bottom paddle control.
   rectBottom.x = constrain(mouseX, 0, width);
-  //Top user control.
+  //Top paddle control.
   //handleInput()
   if (keyIsDown(LEFT_ARROW)) {
     rectTop.vx = -rectTop.speedX;
@@ -98,9 +114,10 @@ function draw() {
   //Move ball1
   ball1.x += ball1.vx;
   ball1.y += ball1.vy;
+}
 
+function checkEdge() {
   //Ball to wall contact (needs to be put before constrain!)
-  //edges();
   //Ball bounce.
   if (ball1.x > width || ball1.x < 0) {
     ball1.vx *= -1;
@@ -108,26 +125,33 @@ function draw() {
     ball1.x = constrain(ball1.x, 0, width);
     // ball1.y = constrain(ball1.y, 0, height);
   }
+}
 
-  //Points.
+function checkPoints() {
+  //If ball hits the top or bottom edge of canvas.
   if (ball1.y > height) {
+    //Points for top paddle.
     reset();
   }
   if (ball1.y < 0) {
+    //Points for bottom paddle.
     reset();
   }
-
-  checkCollision();
-  drawBall();
-  drawPaddle();
 }
 
 //Once ball hits bottom user.
 function checkCollision() {
+  //Bottom paddle collision.
   if (ball1.x + ball1.size/2 > rectBottom.x - rectBottom.width/2 && ball1.x - ball1.size/2 < rectBottom.x + rectBottom.width/2 && ball1.y + ball1.size/2 > rectBottom.y - rectBottom.height/2 && ball1.y - ball1.size/2 < rectBottom.y + rectBottom.height/2) {
     ball1.vx *= -1;
     ball1.vy *= -1;
   }
+  //Top paddle collision.
+  else if (ball1.x + ball1.size/2 > rectTop.x - rectTop.width/2 && ball1.x - ball1.size/2 < rectTop.x + rectTop.width/2 && ball1.y + ball1.size/2 > rectTop.y - rectTop.height/2 && ball1.y - ball1.size/2 < rectTop.y + rectTop.height/2) {
+    ball1.vx *= -1;
+    ball1.vy *= -1;
+  }
+  console.log()
 }
 
 function drawBall() {
@@ -139,11 +163,11 @@ function drawBall() {
 }
 
 function drawPaddle() {
-  //Display bottom user.
+  //Display bottom paddle.
   fill(255);
   rectMode(CENTER);
   rect(rectBottom.x, rectBottom.y, rectBottom.width, rectBottom.height);
-  //Display top user.
+  //Display top paddle.
   rectMode(CENTER);
   rect(rectTop.x, rectTop.y, rectTop.width, rectTop.height);
 }
