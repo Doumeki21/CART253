@@ -57,19 +57,26 @@ let ball1 = {
   angle: 0,
 };
 
+//Any screen: title, gameplay...
+let state = `title`;
+
+//Key controls for top paddle.
 const keyA = 65;
 const keyD = 68;
 
-function preload() {
-  sfx = loadSound('assets/sounds/hit.mp3');
-  bgMusic = loadSound('assets/sounds/Hit01-leshylabs.mp3');
-}
+//Load assets.
+// function preload() {
+//   sfx = loadSound('assets/sounds/hit.mp3');
+//   bgMusic = loadSound('assets/sounds/Hit01-leshylabs.mp3');
+// }
+
 /**
 Description of setup
 */
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
+  //Position the paddles.
   rectTop.x = width / 2;
   rectTop.y = 30;
   rectBottom.x = width / 2;
@@ -93,6 +100,35 @@ Description of draw()
 function draw() {
   background(0);
 
+  //Simulation title.
+  if (state === `title`) {
+    title();
+  }
+  //Simulation.
+  else if (state === `simulation`) {
+    simulation();
+  }
+}
+
+//Display title of the simulation.
+function title() {
+  push();
+  textSize(100);
+  fill(255);
+  textAlign(CENTER, CENTER);
+  text(`INDECISION`, width / 2, height / 2);
+  pop();
+
+  push();
+  textSize(20);
+  fill(212, 212, 212);
+  textAlign(CENTER, CENTER);
+  text(`USE 'A' AND 'D' TO CONTROL THE UPPER PADDLE.\n USE THE MOUSE TO CONTROL THE LOWER PADDLE.`, width / 2, height / 2 + 150);
+  pop();
+}
+
+//Evrything that happens in the simulation.
+function simulation() {
   movement();
   checkEdge();
   checkPoints();
@@ -197,4 +233,10 @@ function drawPaddle() {
   //Display top paddle.
   rectMode(CENTER);
   rect(rectTop.x, rectTop.y, rectTop.width, rectTop.height);
+}
+
+function mouseClicked() {
+  if (state === `title`) {
+    state = `simulation`;
+  }
 }
