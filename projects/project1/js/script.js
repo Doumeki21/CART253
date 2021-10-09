@@ -4,7 +4,7 @@ Olenka Yuen
 
 Objectives
   -Handling different forms of user input
-  *Organizing code with functions
+  -Organizing code with functions
   *Making things interesting with conditionals and variables
   *Combining aesthetics, interaction and concept
 
@@ -59,6 +59,11 @@ let ball1 = {
 
 const keyA = 65;
 const keyD = 68;
+
+function preload() {
+  sfx = loadSound('assets/sounds/hit.mp3');
+  bgMusic = loadSound('assets/sounds/Hit01-leshylabs.mp3');
+}
 /**
 Description of setup
 */
