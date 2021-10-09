@@ -48,11 +48,13 @@ let ball1 = {
   x: 250,
   y: 250,
   size: 50,
-
   vx: undefined,
   vy: undefined,
   speedX: 15,
   speedY: 10,
+  fill: 255,
+
+  angle: 0,
 };
 
 const keyA = 65;
@@ -61,7 +63,7 @@ const keyD = 68;
 Description of setup
 */
 function setup() {
-  createCanvas(windowWidth/2, windowHeight);
+  createCanvas(windowWidth, windowHeight);
 
   rectTop.x = width / 2;
   rectTop.y = 30;
@@ -154,16 +156,27 @@ function checkCollision() {
     ball1.vx *= -1;
     ball1.vy *= -1;
   }
-  console.log()
 }
 
 function displayScore() {
-  fill(255);
-  //Score
-  text(`DO IT: ${rectTop.scoreCount}`, 100, 100);
+  textSize(30);
+  push();
+  fill(66, 255, 151);
+  //Top paddle score
+  text(`DO IT: ${rectTop.scoreCount}`, 50, 80);
+  pop();
+  //Bottom paddle score.
+  push();
+  fill(255, 95, 66);
+  text(`DON'T \nDO IT: ${rectBottom.scoreCount}`, width - 150, height - 80);
 }
 
 function drawBall() {
+  if (rectTop.scoreCount > rectBottom.scoreCount) {
+    ball1.fill = fill(66, 255, 151);
+  } else {
+    ball1.fill = fill(255, 95, 66);
+  }
   //Draw ball1.
   push();
   noStroke();
