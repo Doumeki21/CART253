@@ -24,6 +24,32 @@ Advice
 
 "use strict";
 
+//16 lines of monolgue.
+let monologue = [
+  `Should I go for it?`,
+  `I might fail.`,
+  `What would they think of me?`,
+  `...`,
+  `Failure isn't an option.`,
+  `"they said it was fine!"`,
+  `but is it really?`,
+  // shrink windowHeight/2? (at line 8.)
+  `It's hard to breathe`,
+  `"Then do it already!"`,
+  `But what about the consequences?`,
+  `...`,
+  `The silence is so damn loud,`,
+  `My chest feels tight,`,
+  `and my head is throbbing.`,
+  `It's hard to breathe.`,
+  //Whole window shrinks till end (at line 16).
+  `I want this to end already.`,
+];
+
+//Timer variables for monologue.
+let currentIndex = 0;
+let timer;
+
 //Bottom paddle.
 let rectBottom = {
   x: 0,
@@ -84,6 +110,8 @@ function setup() {
   music.setVolume(0.1);
 
   sfx.setVolume(0.3);
+
+  timer = 4000;
 
   //Position the paddles.
   rectTop.x = width / 2;
@@ -149,6 +177,7 @@ function simulation() {
   checkEdge();
   checkPoints();
   checkCollision();
+  displayMonologue();
   displayScore();
   drawBall();
   drawPaddle();
@@ -225,6 +254,20 @@ function checkCollision() {
 //     sfx.noloop();
 //   }
 // }
+
+function displayMonologue() {
+  fill(255);
+  textSize(32);
+  textAlign(CENTER, CENTER);
+  text(monologue[currentIndex], width/2, height/2);
+
+  if (state === `simulation`) {
+    if (millis() > timer) {
+    timer += 4000;
+    currentIndex ++;
+    }
+  }
+}
 
 function displayScore() {
   textSize(30);
