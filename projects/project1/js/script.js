@@ -14,7 +14,7 @@ Brief
 Requirements
   -At least two moving elements
   -Interactivity
-  *Aesthetic, conceptual, and procedural harmony (visual, sound, and user-input should work harmoniously!)
+  -Aesthetic, conceptual, and procedural harmony (visual, sound, and user-input should work harmoniously!)
   *Beginning, middle, and end!
 
 Advice
@@ -64,12 +64,13 @@ let state = `title`;
 const keyA = 65;
 const keyD = 68;
 
-let sfx = 0;
+let sfx;
+let music;
 
 //Load assets.
 function preload() {
   sfx = loadSound('assets/sounds/hit.mp3');
-//   bgMusic = loadSound('assets/sounds/Hit01-leshylabs.mp3');
+  music = loadSound('assets/sounds/wind.mp3');
 }
 
 /**
@@ -77,6 +78,12 @@ Description of setup
 */
 function setup() {
   createCanvas(windowWidth, windowHeight);
+
+  music.play();
+  music.loop();
+  music.setVolume(0.1);
+
+  sfx.setVolume(0.3);
 
   //Position the paddles.
   rectTop.x = width / 2;
@@ -127,6 +134,13 @@ function title() {
   textAlign(CENTER, CENTER);
   text(`USE 'A' AND 'D' TO CONTROL THE UPPER PADDLE.\n USE THE MOUSE TO CONTROL THE LOWER PADDLE.`, width / 2, height / 2 + 150);
   pop();
+
+  push();
+  textSize(20);
+  fill(255);
+  textAlign(CENTER, CENTER);
+  text(`CLICK ANYWHERE TO CONTINUE.`, width / 2, height - 80);
+  pop();
 }
 
 //Evrything that happens in the simulation.
@@ -139,6 +153,7 @@ function simulation() {
   drawBall();
   drawPaddle();
 }
+
 
 function movement() {
   //Bottom paddle.
@@ -170,7 +185,7 @@ function checkEdge() {
     //ball1 constrain in window.
     ball1.x = constrain(ball1.x, 0, width);
     // ball1.y = constrain(ball1.y, 0, height);
-    trySfx();
+    sfx.play();
   }
 }
 
@@ -201,8 +216,6 @@ function checkCollision() {
     ball1.vx *= -1;
     ball1.vy *= -1;
     sfx.play();
-  } else {
-    sfx.stop();
   }
 }
 
