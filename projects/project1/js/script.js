@@ -129,6 +129,9 @@ function reset() {
 
   ball1.x = width / 2;
   ball1.y = height / 2;
+
+  rectTop.scoreCount = 0;
+  rectBottom.scoreCount = 0;
 }
 
 /**
@@ -145,15 +148,30 @@ function draw() {
   else if (state === `simulation`) {
     simulation();
   }
+  else if (state === `win`) {
+    win();
+    reset();
+  }
+  else if (state === `lose`) {
+    lose();
+    reset();
+  }
 }
 
 //Display title of the simulation.
 function title() {
   push();
   textSize(100);
+  fill(140, 140, 140);
+  textAlign(CENTER, CENTER);
+  text(`IN`, width / 2 - 240, height / 2);
+  pop();
+
+  push();
+  textSize(100);
   fill(255);
   textAlign(CENTER, CENTER);
-  text(`INDECISION`, width / 2, height / 2);
+  text(`DECISION`, width / 2 + 28, height / 2);
   pop();
 
   push();
@@ -183,6 +201,39 @@ function simulation() {
   drawPaddle();
 }
 
+//"DO IT" WINS.
+function win() {
+  push();
+  textSize(100);
+  fill(255);
+  textAlign(CENTER, CENTER);
+  text(`YOU DECIDED TO TAKE ACTION.`, width / 2, height / 2);
+  pop();
+
+  push();
+  textSize(64);
+  fill(212, 212, 212);
+  textAlign(CENTER, CENTER);
+  text(`LIFE IS TOO SHORT TO NOT TO.`, width / 2, height / 2);
+  pop();
+}
+
+//"DON'T DO IT" wins.
+function lose() {
+  push();
+  textSize(100);
+  fill(255);
+  textAlign(CENTER, CENTER);
+  text(`YOU DIDN'T TAKE ACTION.`, width / 2, height / 2);
+  pop();
+
+  push();
+  textSize(64);
+  fill(212, 212, 212);
+  textAlign(CENTER, CENTER);
+  text(`YOU'RE AFRAID THE CONSEQUENCES\n WILL HARM YOU IN THE LONG RUN.`, width / 2, height / 2);
+  pop();
+}
 
 function movement() {
   //Bottom paddle.
@@ -222,13 +273,17 @@ function checkPoints() {
   //If ball hits the top or bottom edge of canvas.
   if (ball1.y > height) {
     //Points for top paddle.
-      reset();
       rectTop.scoreCount++;
     }
   if (ball1.y < 0) {
     //Points for bottom paddle.
-      reset();
       rectBottom.scoreCount++;
+  }
+
+  if (rectTop.scoreCount > rectBottom.scoreCount) {
+    state = `win`;
+  } else {
+    state = `lose`;
   }
 }
 
@@ -274,7 +329,7 @@ function displayScore() {
   push();
   fill(66, 255, 151);
   //Top paddle score
-  text(`DO IT: ${rectTop.scoreCount}`, 50, 80);
+  text(`DO IT: ${rectTop.scoreCount}`, 100, 80);
   pop();
   //Bottom paddle score.
   push();
@@ -308,5 +363,9 @@ function drawPaddle() {
 function mouseClicked() {
   if (state === `title`) {
     state = `simulation`;
+  } else if (state === `win`) {
+    state = `title`;
+  } else if (state === `lose`) {
+    state = `title`;
   }
 }
