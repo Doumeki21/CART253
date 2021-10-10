@@ -45,9 +45,10 @@ function setup() {
 function draw() {
   background(100);
 
-if (millis() > timer) {
   text(monologue[currentIndex], width/2, height/2);
-  timer += 3000;
-  currentIndex += 1;
+
+if (millis() > timer) {
+  timer += timer;
+  currentIndex ++;
   }
 }
