@@ -64,11 +64,13 @@ let state = `title`;
 const keyA = 65;
 const keyD = 68;
 
+let sfx = 0;
+
 //Load assets.
-// function preload() {
-//   sfx = loadSound('assets/sounds/hit.mp3');
+function preload() {
+  sfx = loadSound('assets/sounds/hit.mp3');
 //   bgMusic = loadSound('assets/sounds/Hit01-leshylabs.mp3');
-// }
+}
 
 /**
 Description of setup
@@ -168,6 +170,7 @@ function checkEdge() {
     //ball1 constrain in window.
     ball1.x = constrain(ball1.x, 0, width);
     // ball1.y = constrain(ball1.y, 0, height);
+    trySfx();
   }
 }
 
@@ -191,13 +194,24 @@ function checkCollision() {
   if (ball1.x + ball1.size/2 > rectBottom.x - rectBottom.width/2 && ball1.x - ball1.size/2 < rectBottom.x + rectBottom.width/2 && ball1.y + ball1.size/2 > rectBottom.y - rectBottom.height/2 && ball1.y - ball1.size/2 < rectBottom.y + rectBottom.height/2) {
     ball1.vx *= -1;
     ball1.vy *= -1;
+    sfx.play();
   }
   //Top paddle collision.
   else if (ball1.x + ball1.size/2 > rectTop.x - rectTop.width/2 && ball1.x - ball1.size/2 < rectTop.x + rectTop.width/2 && ball1.y + ball1.size/2 > rectTop.y - rectTop.height/2 && ball1.y - ball1.size/2 < rectTop.y + rectTop.height/2) {
     ball1.vx *= -1;
     ball1.vy *= -1;
+    sfx.play();
+  } else {
+    sfx.stop();
   }
 }
+
+// USE THIS FUNCTION FOR BG??
+// function trySfx() {
+//   if (!sfx.isPlaying()) {
+//     sfx.noloop();
+//   }
+// }
 
 function displayScore() {
   textSize(30);

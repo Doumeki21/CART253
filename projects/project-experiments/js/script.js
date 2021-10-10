@@ -48,5 +48,6 @@ function draw() {
 if (millis() > timer) {
   text(monologue[currentIndex], width/2, height/2);
   timer += 3000;
+  currentIndex += 1;
   }
 }
