@@ -35,22 +35,22 @@ let monologue = [
   `Failure isn't an option.`,
   `"They said it was fine!"`,
   `But is it really?`,
-  // shrink windowHeight/2? (at line 8.)
+  // shrink windowHeight/2 (at line 8.)
   `It's hard to breathe`,
   `"Then do it already!"`,
   `But what about the consequences?`,
   `...`,
   `The silence is so damn loud,`,
+  //line 13 canvas translates into a small square.
   `My chest feels tight,`,
   `my head is throbbing.`,
   `It's hard to breathe.`,
-  //Whole window shrinks till end (at line 16).
   `I want this to end already.`,
 ];
 
 //Timer variables for monologue. (value = number of frames)
 let currentIndex = 0;
-let maxTime = 200;
+let maxTime = 50;
 let countTime = 0;
 
 //Bottom paddle.
@@ -96,6 +96,11 @@ const keyD = 68;
 let sfx;
 let music;
 
+let currentWindow = {
+  x: undefined,
+  y: undefined,
+};
+
 //Load assets.
 function preload() {
   sfx = loadSound('assets/sounds/hit.mp3');
@@ -107,6 +112,8 @@ Description of setup
 */
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  currentWindow.y = windowHeight;
+  currentWindow.x = windowWidth;
 
   music.play();
   music.loop();
@@ -119,6 +126,7 @@ function setup() {
 Description of draw()
 */
 function draw() {
+  canvasChange();
   background(0);
 
   //Simulation title.
@@ -134,6 +142,25 @@ function draw() {
   }
   else if (state === `lose`) {
     lose();
+  }
+}
+
+function canvasChange() {
+  if (currentIndex >= 8 && currentIndex < 13) {
+    currentWindow.y -= 1;
+    currentWindow.y = constrain(currentWindow.y, windowHeight/2, windowHeight);
+    resizeCanvas(windowWidth, currentWindow.y);
+    rectBottom.y = currentWindow.y - 30;
+  } else if (currentIndex >= 13) {
+    currentWindow.y -= 1;
+    currentWindow.x -= 1;
+    currentWindow.y = constrain(currentWindow.y, windowHeight/3, windowHeight);
+    currentWindow.x = constrain(currentWindow.x, windowWidth/3, windowWidth);
+    resizeCanvas(currentWindow.x, currentWindow.y);
+    rectBottom.y = currentWindow.y - 30;
+  }
+  else {
+    resizeCanvas(windowWidth, windowHeight);
   }
 }
 
@@ -195,10 +222,10 @@ function resetBallPosition() {
 
 function resetPaddlePosition() {
   //Position the paddles.
-  rectTop.x = width / 2;
+  rectTop.x = windowWidth / 2;
   rectTop.y = 30;
-  rectBottom.x = width / 2;
-  rectBottom.y = height - 30;
+  rectBottom.x = windowWidth / 2;
+  rectBottom.y = windowHeight - 30;
 }
 
 
@@ -216,15 +243,18 @@ function simulation() {
 
 //"DO IT" WINS.
 function win() {
+  background(0);
+  resizeCanvas(windowWidth, windowHeight);
+
   push();
-  textSize(100);
+  textSize(50);
   fill(255);
   textAlign(CENTER, CENTER);
   text(`YOU DECIDED TO TAKE ACTION.`, width / 2, height / 2 - 50);
   pop();
 
   push();
-  textSize(64);
+  textSize(30);
   fill(212, 212, 212);
   textAlign(CENTER, CENTER);
   text(`LIFE IS TOO SHORT TO NOT TO.`, width / 2, height / 2 + 100);
@@ -233,15 +263,18 @@ function win() {
 
 //"DON'T DO IT" wins.
 function lose() {
+  background(0);
+  resizeCanvas(windowWidth, windowHeight);
+
   push();
-  textSize(100);
+  textSize(50);
   fill(255);
   textAlign(CENTER, CENTER);
   text(`YOU DIDN'T TAKE ACTION.`, width / 2, height / 2 - 50);
   pop();
 
   push();
-  textSize(50);
+  textSize(30);
   fill(212, 212, 212);
   textAlign(CENTER, CENTER);
   text(`YOU'RE AFRAID THAT THE CONSEQUENCES\n WILL HARM YOU IN THE LONG RUN.`, width / 2, height / 2 + 100);
@@ -283,7 +316,6 @@ function checkEdge() {
 }
 
 function checkPoints() {
-console.log(rectTop.scoreCount, rectBottom.scoreCount);
   //If ball hits the top or bottom edge of canvas.
   if (ball1.y > height) {
     //Points for top paddle.
@@ -333,6 +365,7 @@ function displayMonologue() {
   }
 }
 
+
 function displayScore() {
   push();
   textSize(40);
@@ -346,7 +379,7 @@ function displayScore() {
   textSize(40);
   textStyle(BOLD);
   fill(255, 95, 66);
-  text(`DON'T \nDO IT: ${rectBottom.scoreCount}`, width - 150, height - 80);
+  text(`DON'T \nDO IT: ${rectBottom.scoreCount}`, currentWindow.x - 150, currentWindow.y - 80);
   pop();
 }
 
@@ -372,6 +405,7 @@ function drawPaddle() {
   rectMode(CENTER);
   rect(rectTop.x, rectTop.y, rectTop.width, rectTop.height);
 }
+
 
 function mouseClicked() {
   if (state === `title`) {
