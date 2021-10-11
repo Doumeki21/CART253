@@ -48,7 +48,8 @@ let monologue = [
 
 //Timer variables for monologue.
 let currentIndex = 0;
-let timer;
+let maxTime = 4000;
+let countTime = 0;
 
 //Bottom paddle.
 let rectBottom = {
@@ -110,28 +111,6 @@ function setup() {
   music.setVolume(0.1);
 
   sfx.setVolume(0.3);
-
-  timer = 4000;
-
-  //Position the paddles.
-  rectTop.x = width / 2;
-  rectTop.y = 30;
-  rectBottom.x = width / 2;
-  rectBottom.y = height - 30;
-
-  reset();
-}
-
-//Ball resets position every score.
-function reset() {
-  ball1.vx = random(-ball1.speedX, ball1.speedX);
-  ball1.vy = ball1.speedY;
-
-  ball1.x = width / 2;
-  ball1.y = height / 2;
-
-  rectTop.scoreCount = 0;
-  rectBottom.scoreCount = 0;
 }
 
 /**
@@ -143,6 +122,10 @@ function draw() {
   //Simulation title.
   if (state === `title`) {
     title();
+    resetPoint();
+    resetBallPosition();
+    resetPaddlePosition();
+    countTime = 0;
   }
   //Simulation.
   else if (state === `simulation`) {
@@ -150,11 +133,9 @@ function draw() {
   }
   else if (state === `win`) {
     win();
-    reset();
   }
   else if (state === `lose`) {
     lose();
-    reset();
   }
 }
 
@@ -189,6 +170,29 @@ function title() {
   pop();
 }
 
+function resetPoint() {
+  rectTop.scoreCount = 0;
+  rectBottom.scoreCount = 0;
+}
+
+//Ball resetBallPositions position every score.
+function resetBallPosition() {
+  ball1.vx = random(-ball1.speedX, ball1.speedX);
+  ball1.vy = ball1.speedY;
+
+  ball1.x = width / 2;
+  ball1.y = height / 2;
+}
+
+function resetPaddlePosition() {
+  //Position the paddles.
+  rectTop.x = width / 2;
+  rectTop.y = 30;
+  rectBottom.x = width / 2;
+  rectBottom.y = height - 30;
+}
+
+
 //Evrything that happens in the simulation.
 function simulation() {
   movement();
@@ -207,14 +211,14 @@ function win() {
   textSize(100);
   fill(255);
   textAlign(CENTER, CENTER);
-  text(`YOU DECIDED TO TAKE ACTION.`, width / 2, height / 2);
+  text(`YOU DECIDED TO TAKE ACTION.`, width / 2, height / 2 - 50);
   pop();
 
   push();
   textSize(64);
   fill(212, 212, 212);
   textAlign(CENTER, CENTER);
-  text(`LIFE IS TOO SHORT TO NOT TO.`, width / 2, height / 2);
+  text(`LIFE IS TOO SHORT TO NOT TO.`, width / 2, height / 2 + 100);
   pop();
 }
 
@@ -224,14 +228,14 @@ function lose() {
   textSize(100);
   fill(255);
   textAlign(CENTER, CENTER);
-  text(`YOU DIDN'T TAKE ACTION.`, width / 2, height / 2);
+  text(`YOU DIDN'T TAKE ACTION.`, width / 2, height / 2 - 50);
   pop();
 
   push();
   textSize(64);
   fill(212, 212, 212);
   textAlign(CENTER, CENTER);
-  text(`YOU'RE AFRAID THE CONSEQUENCES\n WILL HARM YOU IN THE LONG RUN.`, width / 2, height / 2);
+  text(`YOU'RE AFRAID THE CONSEQUENCES\n WILL HARM YOU IN THE LONG RUN.`, width / 2, height / 2 + 100);
   pop();
 }
 
@@ -270,19 +274,22 @@ function checkEdge() {
 }
 
 function checkPoints() {
+console.log(rectTop.scoreCount, rectBottom.scoreCount);
   //If ball hits the top or bottom edge of canvas.
   if (ball1.y > height) {
     //Points for top paddle.
       rectTop.scoreCount++;
+      resetBallPosition();
     }
   if (ball1.y < 0) {
     //Points for bottom paddle.
       rectBottom.scoreCount++;
+      resetBallPosition();
   }
 
-  if (rectTop.scoreCount > rectBottom.scoreCount) {
+  if (rectTop.scoreCount === 5) {
     state = `win`;
-  } else {
+  } else if (rectBottom.scoreCount === 5) {
     state = `lose`;
   }
 }
@@ -316,11 +323,11 @@ function displayMonologue() {
   textAlign(CENTER, CENTER);
   text(monologue[currentIndex], width/2, height/2);
 
-  if (state === `simulation`) {
-    if (millis() > timer) {
-    timer += 4000;
+    if (countTime >= maxTime) {
     currentIndex ++;
-    }
+    countTime = 0;
+  } else {
+    countTime ++;
   }
 }
 
