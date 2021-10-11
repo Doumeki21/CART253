@@ -50,7 +50,7 @@ let monologue = [
 
 //Timer variables for monologue. (value = number of frames)
 let currentIndex = 0;
-let maxTime = 50;
+let maxTime = 200;
 let countTime = 0;
 
 //Bottom paddle.
@@ -79,7 +79,7 @@ let ball1 = {
   size: 50,
   vx: undefined,
   vy: undefined,
-  speedX: 15,
+  speedX: 10,
   speedY: 10,
   fill: 255,
 
@@ -150,7 +150,8 @@ function canvasChange() {
     currentWindow.y = constrain(currentWindow.y, windowHeight/2, windowHeight);
     resizeCanvas(windowWidth, currentWindow.y);
     rectBottom.y = currentWindow.y - 30;
-  } else if (currentIndex >= 13) {
+  }
+  else if (currentIndex >= 13) {
     currentWindow.y -= 1;
     currentWindow.x -= 1;
     currentWindow.y = constrain(currentWindow.y, windowHeight/3, windowHeight);
@@ -340,15 +341,21 @@ function checkPoints() {
 function checkCollision() {
   //Bottom paddle collision.
   if (ball1.x + ball1.size/2 > rectBottom.x - rectBottom.width/2 && ball1.x - ball1.size/2 < rectBottom.x + rectBottom.width/2 && ball1.y + ball1.size/2 > rectBottom.y - rectBottom.height/2 && ball1.y - ball1.size/2 < rectBottom.y + rectBottom.height/2) {
-    ball1.vx *= -1;
-    ball1.vy *= -1;
     sfx.play();
+
+    let distX = ball1.x - rectBottom.x;
+
+    ball1.vx = ball1.vx + map(distX, -rectBottom.width / 2, rectBottom.width / 2, -ball1.speedX, ball1.speedX);
+    ball1.vy *= -1;
   }
   //Top paddle collision.
   else if (ball1.x + ball1.size/2 > rectTop.x - rectTop.width/2 && ball1.x - ball1.size/2 < rectTop.x + rectTop.width/2 && ball1.y + ball1.size/2 > rectTop.y - rectTop.height/2 && ball1.y - ball1.size/2 < rectTop.y + rectTop.height/2) {
-    ball1.vx *= -1;
-    ball1.vy *= -1;
     sfx.play();
+
+    let distX = ball1.x - rectTop.x;
+
+    ball1.vx = ball1.vx + map(distX, -rectTop.width / 2, rectTop.width / 2, -ball1.speedX, ball1.speedX);
+    ball1.vy *= -1;
   }
 }
 
