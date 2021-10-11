@@ -33,8 +33,8 @@ let monologue = [
   `What would they think of me?`,
   `...`,
   `Failure isn't an option.`,
-  `"they said it was fine!"`,
-  `but is it really?`,
+  `"They said it was fine!"`,
+  `But is it really?`,
   // shrink windowHeight/2? (at line 8.)
   `It's hard to breathe`,
   `"Then do it already!"`,
@@ -42,15 +42,15 @@ let monologue = [
   `...`,
   `The silence is so damn loud,`,
   `My chest feels tight,`,
-  `and my head is throbbing.`,
+  `my head is throbbing.`,
   `It's hard to breathe.`,
   //Whole window shrinks till end (at line 16).
   `I want this to end already.`,
 ];
 
-//Timer variables for monologue.
+//Timer variables for monologue. (value = number of frames)
 let currentIndex = 0;
-let maxTime = 4000;
+let maxTime = 200;
 let countTime = 0;
 
 //Bottom paddle.
@@ -321,11 +321,11 @@ function checkCollision() {
 
 function displayMonologue() {
   fill(255);
-  textSize(32);
+  textSize(50);
   textAlign(CENTER, CENTER);
   text(monologue[currentIndex], width/2, height/2);
 
-    if (countTime >= maxTime) {
+    if (countTime === maxTime) {
     currentIndex ++;
     countTime = 0;
   } else {
@@ -334,16 +334,20 @@ function displayMonologue() {
 }
 
 function displayScore() {
-  textSize(30);
   push();
+  textSize(40);
+  textStyle(BOLD);
   fill(66, 255, 151);
   //Top paddle score
   text(`DO IT: ${rectTop.scoreCount}`, 100, 80);
   pop();
   //Bottom paddle score.
   push();
+  textSize(40);
+  textStyle(BOLD);
   fill(255, 95, 66);
   text(`DON'T \nDO IT: ${rectBottom.scoreCount}`, width - 150, height - 80);
+  pop();
 }
 
 function drawBall() {
