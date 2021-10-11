@@ -2,10 +2,12 @@
 P1: Indecision
 Olenka Yuen
 
+Goal:
+
 Objectives
   -Handling different forms of user input
   -Organizing code with functions
-  *Making things interesting with conditionals and variables
+  -Making things interesting with conditionals and variables
   *Combining aesthetics, interaction and concept
 
 Brief
@@ -15,7 +17,7 @@ Requirements
   -At least two moving elements
   -Interactivity
   -Aesthetic, conceptual, and procedural harmony (visual, sound, and user-input should work harmoniously!)
-  *Beginning, middle, and end!
+  -Beginning, middle, and end!
 
 Advice
   *START SMALL
@@ -122,10 +124,6 @@ function draw() {
   //Simulation title.
   if (state === `title`) {
     title();
-    resetPoint();
-    resetBallPosition();
-    resetPaddlePosition();
-    countTime = 0;
   }
   //Simulation.
   else if (state === `simulation`) {
@@ -141,6 +139,7 @@ function draw() {
 
 //Display title of the simulation.
 function title() {
+
   push();
   textSize(100);
   fill(140, 140, 140);
@@ -168,7 +167,17 @@ function title() {
   textAlign(CENTER, CENTER);
   text(`CLICK ANYWHERE TO CONTINUE.`, width / 2, height - 80);
   pop();
+
+  resetElements();
 }
+
+function resetElements() {
+  resetPoint();
+  resetBallPosition();
+  resetPaddlePosition();
+  countTime = 0;
+}
+
 
 function resetPoint() {
   rectTop.scoreCount = 0;
@@ -232,10 +241,10 @@ function lose() {
   pop();
 
   push();
-  textSize(64);
+  textSize(50);
   fill(212, 212, 212);
   textAlign(CENTER, CENTER);
-  text(`YOU'RE AFRAID THE CONSEQUENCES\n WILL HARM YOU IN THE LONG RUN.`, width / 2, height / 2 + 100);
+  text(`YOU'RE AFRAID THAT THE CONSEQUENCES\n WILL HARM YOU IN THE LONG RUN.`, width / 2, height / 2 + 100);
   pop();
 }
 
@@ -309,13 +318,6 @@ function checkCollision() {
     sfx.play();
   }
 }
-
-// USE THIS FUNCTION FOR BG??
-// function trySfx() {
-//   if (!sfx.isPlaying()) {
-//     sfx.noloop();
-//   }
-// }
 
 function displayMonologue() {
   fill(255);
