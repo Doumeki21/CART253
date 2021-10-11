@@ -203,6 +203,8 @@ function resetElements() {
   resetBallPosition();
   resetPaddlePosition();
   countTime = 0;
+  currentWindow.y = windowHeight;
+  currentWindow.x = windowWidth;
 }
 
 
@@ -245,8 +247,7 @@ function simulation() {
 
 //"DO IT" WINS.
 function win() {
-  resizeCanvas(windowWidth, windowHeight);
-  background(0);
+  currentIndex = 0;
 
   push();
   textSize(50);
@@ -265,6 +266,7 @@ function win() {
 
 //"DON'T DO IT" wins.
 function lose() {
+  currentIndex = 0;
   resizeCanvas(windowWidth, windowHeight);
   background(0);
 
