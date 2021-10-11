@@ -126,7 +126,6 @@ function setup() {
 Description of draw()
 */
 function draw() {
-  canvasChange();
   background(0);
 
   //Simulation title.
@@ -231,6 +230,8 @@ function resetPaddlePosition() {
 
 //Evrything that happens in the simulation.
 function simulation() {
+  canvasChange();
+  background(0);
   movement();
   checkEdge();
   checkPoints();
@@ -243,8 +244,8 @@ function simulation() {
 
 //"DO IT" WINS.
 function win() {
-  background(0);
   resizeCanvas(windowWidth, windowHeight);
+  background(0);
 
   push();
   textSize(50);
@@ -263,8 +264,8 @@ function win() {
 
 //"DON'T DO IT" wins.
 function lose() {
-  background(0);
   resizeCanvas(windowWidth, windowHeight);
+  background(0);
 
   push();
   textSize(50);
