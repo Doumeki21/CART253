@@ -52,3 +52,43 @@ if (millis() > timer) {
   currentIndex ++;
   }
 }
+
+// //Canvas change sizes and dimensions at some point of the game.
+// //Canvas shrinks height from line 8 to line 13.
+// function canvasChange() {
+//   if (currentIndex >= 7 && currentIndex < 11) {
+//     //Window height decreases-
+//     currentWindow.y -= 1;
+//     //Until it reaches to half the window's original height.
+//     currentWindow.y = constrain(currentWindow.y, windowHeight / 2, windowHeight);
+//     resizeCanvas(windowWidth, currentWindow.y);
+//     //Bottom user is moved proportionally to the current window size.
+//     rectBottom.y = currentWindow.y - 30;
+//   } else if (currentIndex >= 11 && currentIndex < 13) {
+//     //Window height increases to initial height while window width decreases-
+//     currentWindow.y += 2;
+//     currentWindow.x -= 2;
+//     //Until it reaches to half the window width.
+//     currentWindow.y = constrain(currentWindow.y, windowHeight / 2, windowHeight);
+//     currentWindow.x = constrain(currentWindow.x, windowWidth / 3, windowWidth);
+//     resizeCanvas(currentWindow.x, currentWindow.y);
+//     //Bottom user is moved proportionally to the current window size.
+//     rectBottom.y = currentWindow.y - 30;
+//   }
+//   //Canvas shrinks into thirds of the screen from line 13 until the last line.
+//   else if (currentIndex >= 13) {
+//     //Diemnsions of the canvas shrinks by 1 every frame-
+//     currentWindow.y -= 1;
+//     currentWindow.x -= 1;
+//     //Until it reaches to a third of the window's original dimensions.
+//     currentWindow.y = constrain(currentWindow.y, windowHeight / 3, windowHeight);
+//     currentWindow.x = constrain(currentWindow.x, windowWidth / 3, windowWidth);
+//     resizeCanvas(currentWindow.x, currentWindow.y);
+//     //Bottom user is moved proportionally to the current window size.
+//     rectBottom.y = currentWindow.y - 30;
+//   }
+//   //Else canvas returns to the window max size.
+//   else {
+//     resizeCanvas(windowWidth, windowHeight);
+//   }
+// }
