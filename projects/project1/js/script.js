@@ -2,13 +2,13 @@
 P1: Indecision
 Olenka Yuen
 
-Goal:
+GAME: Ever had extreme anxiety? A feeling like you can't make a decision because you're too anxious? This is the perfect simulation of that! Control the upper paddle with 'A' and 'D', and control the lower paddle with the mouse. Let the game decide your fate!
 
 Objectives
   -Handling different forms of user input
   -Organizing code with functions
   -Making things interesting with conditionals and variables
-  *Combining aesthetics, interaction and concept
+  -Combining aesthetics, interaction and concept
 
 Brief
   -(Personal) Metaphorical simulation. // Mental health??

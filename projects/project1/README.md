@@ -1,3 +1,11 @@
 # Template p5 project
 
-This is the README file for the entire project. For more official projects you should write information here about the nature of the project, your name, any special explanations of how the project works, etc.
+GAME: Ever had extreme anxiety? A feeling like you can't make a decision because you're too anxious? This is the perfect simulation of that! Control the upper paddle with 'A' and 'D', and control the lower paddle with the mouse. Let the game decide your fate!
+
+CONCEPT:
+- The paddles represents the two sides of the user's MIND when trying to make a decision.
+- The manipulation of the canvas size represents both the feeling of being OUT OF CONTROL and the DEADLINE of your 'life event' coming closer.
+- The number of points for each paddle, represents how CONVINCED you are in taking a certain decision.
+- As the deadlines come closer (canvas closing in), the ball's speed has an illusion of it becoming faster-- representing the need to HURRY and make a final decision.
+- The ball is an imagery of your thoughts being tossed around inside your mind.
+- The sfx of the ball imitates the throbbing sound inside your head.
