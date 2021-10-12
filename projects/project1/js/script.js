@@ -50,7 +50,7 @@ let monologue = [
 
 //Timer variables for monologue. (value = number of frames)
 let currentIndex = 0;
-let maxTime = 400;
+let maxTime = 300;
 let countTime = 0;
 
 //Bottom paddle.
@@ -68,7 +68,7 @@ let rectTop = {
   y: 0,
   width: 300,
   height: 20,
-  speedX: 20,
+  speedX: 25,
   scoreCount: 0,
 };
 
@@ -79,8 +79,8 @@ let ball1 = {
   size: 50,
   vx: undefined,
   vy: undefined,
-  speedX: 10,
-  speedY: 10,
+  speedX: 8,
+  speedY: 8,
   fill: 255,
 };
 
@@ -258,7 +258,7 @@ function simulation() {
 
 //"DO IT" WINS.
 function win() {
-  currentIndex = 0;
+  resetCanvas();
 
   push();
   textSize(50);
@@ -277,9 +277,7 @@ function win() {
 
 //"DON'T DO IT" wins.
 function lose() {
-  currentIndex = 0;
-  resizeCanvas(windowWidth, windowHeight);
-  background(0);
+  resetCanvas();
 
   push();
   textSize(50);
@@ -294,6 +292,13 @@ function lose() {
   textAlign(CENTER, CENTER);
   text(`YOU'RE AFRAID THAT THE CONSEQUENCES\n WILL HARM YOU IN THE LONG RUN.`, width / 2, height / 2 + 100);
   pop();
+}
+
+//Canvas resets to initial size after game ends.
+function resetCanvas(){
+  currentIndex = 0;
+  resizeCanvas(windowWidth, windowHeight);
+  background(0);
 }
 
 //Movement of interactive elements.
@@ -379,8 +384,8 @@ function checkCollision() {
 //Monologue in the background.
 function displayMonologue() {
   //Display monologue.
-  fill(255);
-  textSize(50);
+  fill(255, 200);
+  textSize(80);
   textAlign(CENTER, CENTER);
   text(monologue[currentIndex], width/2, height/2);
 
