@@ -197,7 +197,7 @@ function resetBallPosition() {
   //Ball resets at random speed after every score.
   ball1.vx = random(-ball1.speedX, ball1.speedX);
   ball1.vy = ball1.speedY;
-//Ball resets position every score.
+  //Ball resets position every score.
   ball1.x = width / 2;
   ball1.y = height / 2;
 }
@@ -219,7 +219,7 @@ function canvasChange() {
     //Window height decreases-
     currentWindow.y -= 1;
     //Until it reaches to half the window's original height.
-    currentWindow.y = constrain(currentWindow.y, windowHeight/2, windowHeight);
+    currentWindow.y = constrain(currentWindow.y, windowHeight / 2, windowHeight);
     resizeCanvas(windowWidth, currentWindow.y);
     //Bottom user is moved proportionally to the current window size.
     rectBottom.y = currentWindow.y - 30;
@@ -228,8 +228,8 @@ function canvasChange() {
     currentWindow.y += 2;
     currentWindow.x -= 2;
     //Until it reaches to half the window width.
-    currentWindow.y = constrain(currentWindow.y, windowHeight/2, windowHeight);
-    currentWindow.x = constrain(currentWindow.x, windowWidth/2, windowWidth);
+    currentWindow.y = constrain(currentWindow.y, windowHeight / 2, windowHeight);
+    currentWindow.x = constrain(currentWindow.x, windowWidth / 3, windowWidth);
     resizeCanvas(currentWindow.x, currentWindow.y);
     //Bottom user is moved proportionally to the current window size.
     rectBottom.y = currentWindow.y - 30;
@@ -240,8 +240,8 @@ function canvasChange() {
     currentWindow.y -= 1;
     currentWindow.x -= 1;
     //Until it reaches to a third of the window's original dimensions.
-    currentWindow.y = constrain(currentWindow.y, windowHeight/3, windowHeight);
-    currentWindow.x = constrain(currentWindow.x, windowWidth/3, windowWidth);
+    currentWindow.y = constrain(currentWindow.y, windowHeight / 3, windowHeight);
+    currentWindow.x = constrain(currentWindow.x, windowWidth / 3, windowWidth);
     resizeCanvas(currentWindow.x, currentWindow.y);
     //Bottom user is moved proportionally to the current window size.
     rectBottom.y = currentWindow.y - 30;
@@ -319,7 +319,7 @@ function lose() {
 }
 
 //Canvas resets to initial size after game ends.
-function resetCanvas(){
+function resetCanvas() {
   currentIndex = 0;
   resizeCanvas(windowWidth, windowHeight);
   background(0);
@@ -331,10 +331,10 @@ function movement() {
   rectBottom.x = constrain(mouseX, 0, width);
 
   //Top paddle is controlled using the A and D keys.
-  if (keyIsDown (keyA)) {
+  if (keyIsDown(keyA)) {
     //Top paddle move to left.
     rectTop.vx = -rectTop.speedX;
-  } else if (keyIsDown (keyD)) {
+  } else if (keyIsDown(keyD)) {
     //Top paddle move to right.
     rectTop.vx = rectTop.speedX;
   } else {
@@ -365,14 +365,14 @@ function checkPoints() {
   //If ball hits the top edge of canvas.
   if (ball1.y > height) {
     //Points for top paddle increase by 1.
-      rectTop.scoreCount++;
-      resetBallPosition();
+    rectTop.scoreCount++;
+    resetBallPosition();
   }
   //If ball hits the bottom edge of canvas,
   if (ball1.y < 0) {
     //Points for bottom paddle increase by 1.
-      rectBottom.scoreCount++;
-      resetBallPosition();
+    rectBottom.scoreCount++;
+    resetBallPosition();
   }
   //If top paddle reaches 5 points first, they win.
   if (rectTop.scoreCount === 5) {
@@ -386,7 +386,7 @@ function checkPoints() {
 //Ball hits paddles.
 function checkCollision() {
   //Once ball hits any side of bottom paddle,
-  if (ball1.x + ball1.size/2 > rectBottom.x - rectBottom.width/2 && ball1.x - ball1.size/2 < rectBottom.x + rectBottom.width/2 && ball1.y + ball1.size/2 > rectBottom.y - rectBottom.height/2 && ball1.y - ball1.size/2 < rectBottom.y + rectBottom.height/2) {
+  if (ball1.x + ball1.size / 2 > rectBottom.x - rectBottom.width / 2 && ball1.x - ball1.size / 2 < rectBottom.x + rectBottom.width / 2 && ball1.y + ball1.size / 2 > rectBottom.y - rectBottom.height / 2 && ball1.y - ball1.size / 2 < rectBottom.y + rectBottom.height / 2) {
     //Sound effect plays.
     sfx.play();
     //Ball will bounce back and change angle and speed depending whether it hits the left or right half of paddle.
@@ -395,7 +395,7 @@ function checkCollision() {
     ball1.vy *= -1;
   }
   //Once ball hits any side of top paddle,
-  else if (ball1.x + ball1.size/2 > rectTop.x - rectTop.width/2 && ball1.x - ball1.size/2 < rectTop.x + rectTop.width/2 && ball1.y + ball1.size/2 > rectTop.y - rectTop.height/2 && ball1.y - ball1.size/2 < rectTop.y + rectTop.height/2) {
+  else if (ball1.x + ball1.size / 2 > rectTop.x - rectTop.width / 2 && ball1.x - ball1.size / 2 < rectTop.x + rectTop.width / 2 && ball1.y + ball1.size / 2 > rectTop.y - rectTop.height / 2 && ball1.y - ball1.size / 2 < rectTop.y + rectTop.height / 2) {
     //Sound effect plays.
     sfx.play();
     //Ball will bounce back and change angle and speed depending whether it hits the left or right half of paddle.
@@ -409,16 +409,16 @@ function checkCollision() {
 function displayMonologue() {
   //Display monologue.
   fill(255, 200);
-  textSize(80);
+  textSize(55);
   textAlign(CENTER, CENTER);
-  text(monologue[currentIndex], width/2, height/2);
+  text(monologue[currentIndex], width / 2, height / 2);
 
   //Monologue will proceed to the next after 400 frames.
-    if (countTime === maxTime) {
-    currentIndex ++;
+  if (countTime === maxTime) {
+    currentIndex++;
     countTime = 0;
   } else {
-    countTime ++;
+    countTime++;
   }
 }
 
@@ -474,9 +474,7 @@ function drawPaddle() {
 function mouseClicked() {
   if (state === `title`) {
     state = `simulation`;
-  } else if (state === `win`) {
-    state = `title`;
-  } else if (state === `lose`) {
+  } else if (state === `win` || state === `lose`) {
     state = `title`;
   }
 }
