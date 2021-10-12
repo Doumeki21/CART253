@@ -215,12 +215,22 @@ function resetPaddlePosition() {
 //Canvas change sizes and dimensions at some point of the game.
 //Canvas shrinks height from line 8 to line 13.
 function canvasChange() {
-  if (currentIndex >= 7 && currentIndex < 13) {
-    //Vertical window shrinks by 1 every frame-
+  if (currentIndex >= 7 && currentIndex < 11) {
+    //Window height decreases-
     currentWindow.y -= 1;
     //Until it reaches to half the window's original height.
     currentWindow.y = constrain(currentWindow.y, windowHeight/2, windowHeight);
     resizeCanvas(windowWidth, currentWindow.y);
+    //Bottom user is moved proportionally to the current window size.
+    rectBottom.y = currentWindow.y - 30;
+  } else if (currentIndex >= 11 && currentIndex < 13) {
+    //Window height increases to initial height while window width decreases-
+    currentWindow.y += 2;
+    currentWindow.x -= 2;
+    //Until it reaches to half the window width.
+    currentWindow.y = constrain(currentWindow.y, windowHeight/2, windowHeight);
+    currentWindow.x = constrain(currentWindow.x, windowWidth/2, windowWidth);
+    resizeCanvas(currentWindow.x, currentWindow.y);
     //Bottom user is moved proportionally to the current window size.
     rectBottom.y = currentWindow.y - 30;
   }
@@ -273,6 +283,13 @@ function win() {
   textAlign(CENTER, CENTER);
   text(`LIFE IS TOO SHORT TO NOT TO.`, width / 2, height / 2 + 100);
   pop();
+
+  push();
+  textSize(20);
+  fill(255);
+  textAlign(CENTER, CENTER);
+  text(`CLICK ANYWHERE TO CONTINUE.`, width / 2, height - 80);
+  pop();
 }
 
 //"DON'T DO IT" wins.
@@ -291,6 +308,13 @@ function lose() {
   fill(212, 212, 212);
   textAlign(CENTER, CENTER);
   text(`YOU'RE AFRAID THAT THE CONSEQUENCES\n WILL HARM YOU IN THE LONG RUN.`, width / 2, height / 2 + 100);
+  pop();
+
+  push();
+  textSize(20);
+  fill(255);
+  textAlign(CENTER, CENTER);
+  text(`CLICK ANYWHERE TO CONTINUE.`, width / 2, height - 80);
   pop();
 }
 
@@ -412,7 +436,7 @@ function displayScore() {
   textSize(40);
   textStyle(BOLD);
   fill(255, 95, 66);
-  text(`DON'T \nDO IT: ${rectBottom.scoreCount}`, currentWindow.x - 150, currentWindow.y - 80);
+  text(`DON'T \nDO IT: ${rectBottom.scoreCount}`, currentWindow.x - 130, currentWindow.y - 80);
   pop();
 }
 
