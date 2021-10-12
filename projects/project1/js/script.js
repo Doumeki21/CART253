@@ -114,11 +114,11 @@ function setup() {
   currentWindow.y = windowHeight;
   currentWindow.x = windowWidth;
 
-  music.play();
-  music.loop();
-  music.setVolume(0.1);
-
-  sfx.setVolume(0.3);
+  // music.play();
+  // music.loop();
+  // music.setVolume(0.1);
+  //
+  // sfx.setVolume(0.3);
 }
 
 //The screens/ states that will be shown displayed.
@@ -146,6 +146,7 @@ function draw() {
 //Display title of the simulation.
 function title() {
 
+//Main title
   push();
   textSize(100);
   fill(140, 140, 140);
@@ -160,13 +161,23 @@ function title() {
   text(`DECISION`, width / 2 + 28, height / 2);
   pop();
 
+//Subtitle
+  push();
+  textSize(20);
+  fill(255);
+  textAlign(CENTER, CENTER);
+  text(`BEATING DECISION FATIGUE.`, width / 2, height / 2 + 60);
+  pop();
+
+//Instructions
   push();
   textSize(20);
   fill(212, 212, 212);
   textAlign(CENTER, CENTER);
-  text(`USE 'A' AND 'D' TO CONTROL THE UPPER PADDLE.\n USE THE MOUSE TO CONTROL THE LOWER PADDLE.`, width / 2, height / 2 + 150);
+  text(`USE 'A' AND 'D' TO CONTROL THE UPPER PADDLE.\n USE THE MOUSE TO CONTROL THE LOWER PADDLE.`, width / 2, height / 2 + 200);
   pop();
 
+//Next action.
   push();
   textSize(20);
   fill(255);
@@ -473,8 +484,10 @@ function drawPaddle() {
 //The game will proceed to the next screen after a mouse click.
 function mouseClicked() {
   if (state === `title`) {
+    //Enter the game.
     state = `simulation`;
   } else if (state === `win` || state === `lose`) {
+    //Return to title.
     state = `title`;
   }
 }

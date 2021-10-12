@@ -1,4 +1,4 @@
-# Template p5 project
+# Project 01: Indecision
 
 GAME: Ever had extreme anxiety? A feeling like you can't make a decision because you're too anxious? This is the perfect simulation of that! Control the upper paddle with 'A' and 'D', and the lower paddle with the mouse. Let the game decide your fate!
 
