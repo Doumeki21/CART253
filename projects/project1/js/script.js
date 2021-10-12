@@ -80,8 +80,8 @@ let ball1 = {
   size: 50,
   vx: undefined,
   vy: undefined,
-  speedX: 8,
-  speedY: 8,
+  speedX: 10,
+  speedY: 15,
   fill: 255,
 };
 
@@ -94,7 +94,6 @@ const keyD = 68;
 
 //Variables for sounds.
 let sfx;
-let music;
 
 //Window variables.
 let currentWindow = {
@@ -105,7 +104,6 @@ let currentWindow = {
 //Load sounds.
 function preload() {
   sfx = loadSound('assets/sounds/hit.mp3');
-  music = loadSound('assets/sounds/wind.mp3');
 }
 
 //Initial canvas and sound settings.
@@ -113,12 +111,6 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   currentWindow.y = windowHeight;
   currentWindow.x = windowWidth;
-
-  // music.play();
-  // music.loop();
-  // music.setVolume(0.1);
-  //
-  // sfx.setVolume(0.3);
 }
 
 //The screens/ states that will be shown displayed.
@@ -224,36 +216,35 @@ function resetPaddlePosition() {
 }
 
 //Canvas change sizes and dimensions at some point of the game.
-//Canvas shrinks height from line 8 to line 13.
 function canvasChange() {
+    //Canvas' height shrinks when `DO IT` score is higher than `DON'T DO IT`.
   if (rectTop.scoreCount > rectBottom.scoreCount) {
-    //Window height decreases-
-    currentWindow.y -= 3;
-    currentWindow.x += 3;
+    currentWindow.y -= 4;
+    currentWindow.x += 4;
     //Until it reaches to half the window's original height.
-    currentWindow.y = constrain(currentWindow.y, windowHeight / 2, windowHeight);
-    currentWindow.x = constrain(currentWindow.x, windowWidth / 2, windowWidth);
+    currentWindow.y = constrain(currentWindow.y, windowHeight / 3, windowHeight);
+    currentWindow.x = constrain(currentWindow.x, windowWidth / 3, windowWidth);
     resizeCanvas(currentWindow.x, currentWindow.y);
     //Bottom user is moved proportionally to the current window size.
     rectBottom.y = currentWindow.y - 30;
   } else if (rectTop.scoreCount < rectBottom.scoreCount) {
-    //Window height increases to initial height while window width decreases-
-    currentWindow.y += 3;
-    currentWindow.x -= 3;
-    //Until it reaches to half the window width.
-    currentWindow.y = constrain(currentWindow.y, windowHeight / 2, windowHeight);
-    currentWindow.x = constrain(currentWindow.x, windowWidth / 2, windowWidth);
+    //Canvas' height increases to initial height when `DON'T DO IT` score is higher than `DO IT`.
+    currentWindow.y += 4;
+    currentWindow.x -= 4;
+    //Until it reaches to half the canvas width.
+    currentWindow.y = constrain(currentWindow.y, windowHeight / 3, windowHeight);
+    currentWindow.x = constrain(currentWindow.x, windowWidth / 3, windowWidth);
     resizeCanvas(currentWindow.x, currentWindow.y);
-    //Bottom user is moved proportionally to the current window size.
+    //Bottom user is moved proportionally to the current canvas size.
     rectBottom.y = currentWindow.y - 30;
   }
   //Else canvas returns to the window max size.
   else {
-    currentWindow.y += 3;
-    currentWindow.x += 3;
-    currentWindow.y = constrain(currentWindow.y, windowHeight / 2, windowHeight);
-    currentWindow.x = constrain(currentWindow.x, windowWidth / 2, windowWidth);
-    resizeCanvas(windowWidth, windowHeight);
+    currentWindow.y += 4;
+    currentWindow.x += 4;
+    currentWindow.y = constrain(currentWindow.y, windowHeight / 3, windowHeight);
+    currentWindow.x = constrain(currentWindow.x, windowWidth / 3, windowWidth);
+    resizeCanvas(currentWindow.x, currentWindow.y);
     rectBottom.y = currentWindow.y - 30;
   }
 }
@@ -276,6 +267,7 @@ function simulation() {
 function win() {
   resetCanvas();
 
+//Screen title
   push();
   textSize(50);
   fill(255);
@@ -283,6 +275,7 @@ function win() {
   text(`YOU DECIDED TO TAKE ACTION.`, width / 2, height / 2 - 50);
   pop();
 
+//Subtitle
   push();
   textSize(30);
   fill(212, 212, 212);
@@ -290,6 +283,7 @@ function win() {
   text(`LIFE IS TOO SHORT NOT TO.`, width / 2, height / 2 + 100);
   pop();
 
+//Action
   push();
   textSize(20);
   fill(255);
@@ -302,6 +296,7 @@ function win() {
 function lose() {
   resetCanvas();
 
+//Screen title
   push();
   textSize(50);
   fill(255);
@@ -309,6 +304,7 @@ function lose() {
   text(`YOU DIDN'T TAKE ACTION.`, width / 2, height / 2 - 50);
   pop();
 
+//Subtitle
   push();
   textSize(30);
   fill(212, 212, 212);
@@ -316,6 +312,7 @@ function lose() {
   text(`YOU'RE AFRAID THAT THE CONSEQUENCES\n WILL HARM YOU IN THE LONG RUN.`, width / 2, height / 2 + 100);
   pop();
 
+//Action
   push();
   textSize(20);
   fill(255);
@@ -415,7 +412,7 @@ function checkCollision() {
 function displayMonologue() {
   //Display monologue.
   fill(255, 200);
-  textSize(55);
+  textSize(40);
   textAlign(CENTER, CENTER);
   text(monologue[currentIndex], width / 2, height / 2);
 
