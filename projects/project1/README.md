@@ -10,5 +10,5 @@ CONCEPT:
 - The sfx of the ball imitates the throbbing sound inside your head.
 
 DROPPED IDEAS:
-x The manipulation of the canvas size represents both the feeling of being OUT OF CONTROL and the DEADLINE of your 'life event' coming closer.
-x As the deadlines come closer (aka. canvas closing in), the ball's speed has an illusion of it becoming faster-- representing the need to HURRY and make a final decision.
+- The manipulation of the canvas size represents both the feeling of being OUT OF CONTROL and the DEADLINE of your 'life event' coming closer.
+- As the deadlines come closer (aka. canvas closing in), the ball's speed has an illusion of it becoming faster-- representing the need to HURRY and make a final decision.
