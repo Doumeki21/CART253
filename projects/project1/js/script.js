@@ -143,14 +143,14 @@ function title() {
   textSize(100);
   fill(140, 140, 140);
   textAlign(CENTER, CENTER);
-  text(`IN`, width / 2 - 240, height / 2);
+  text(`IN`, width / 2 - 228, height / 2);
   pop();
 
   push();
   textSize(100);
   fill(255);
   textAlign(CENTER, CENTER);
-  text(`DECISION`, width / 2 + 28, height / 2);
+  text(`DECISION`, width / 2 + 40, height / 2);
   pop();
 
 //Subtitle
@@ -158,7 +158,7 @@ function title() {
   textSize(20);
   fill(255);
   textAlign(CENTER, CENTER);
-  text(`BEATING DECISION FATIGUE.`, width / 2, height / 2 + 60);
+  text(`BEATING DECISION FATIGUE.`, width / 2, height / 2 + 70);
   pop();
 
 //Instructions
