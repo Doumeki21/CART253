@@ -45,12 +45,14 @@ Author Name
 // }
 
 let images = [];
+let numImages = 2
 let displayImage;
 
 function preload() {
 
-  for (let i = 0; i < 2; i++) {
-    images[i] = loadImage(`assets/images/selfie-${i}.png`);
+  for (let i = 0; i < numImages; i++) {
+    let selfieImage = loadImage(`assets/images/selfie-${i}.jpg`);
+    images.push(selfieImage);
   }
 }
 
