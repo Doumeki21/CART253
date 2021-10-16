@@ -9,6 +9,9 @@ CONCEPT:
 - The ball is an imagery of your thoughts being tossed around inside your mind.
 - The sfx of the ball imitates the throbbing sound inside your head.
 
+SFX CREDITS:
+- Ball sound effects generated from leshylabs. 
+
 DROPPED IDEAS:
 - The manipulation of the canvas size represents both the feeling of being OUT OF CONTROL and the DEADLINE of your 'life event' coming closer.
 - As the deadlines come closer (aka. canvas closing in), the ball's speed has an illusion of it becoming faster-- representing the need to HURRY and make a final decision.
