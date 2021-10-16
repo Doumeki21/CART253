@@ -44,16 +44,23 @@ Author Name
 //   }
 // }
 
-
+let images = [];
+let displayImage;
 
 function preload() {
-
+  images[0] = loadImage(`assets/images/selfie-abstract.jpg`);
+  images[1] = loadImage(`assets/images/selfie-figurative.jpg`);
 }
 
 function setup() {
-  createCanvas(600, 600);
+  createCanvas(2000, 2000);
 }
 
 function draw() {
   background(0);
+
+  push();
+  imageMode(CENTER);
+  image(displayImage, width/2, height/2);
+  pop();
 }
