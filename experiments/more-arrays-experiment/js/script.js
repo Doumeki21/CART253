@@ -48,12 +48,16 @@ let images = [];
 let displayImage;
 
 function preload() {
-  images[0] = loadImage(`assets/images/selfie-abstract.jpg`);
-  images[1] = loadImage(`assets/images/selfie-figurative.jpg`);
+
+  for (let i = 0; i < 2; i++) {
+    images[i] = loadImage(`assets/images/selfie-${i}.png`);
+  }
 }
 
 function setup() {
-  createCanvas(2000, 2000);
+  createCanvas(600, 600);
+
+  displayImage = random(images);
 }
 
 function draw() {
@@ -61,6 +65,6 @@ function draw() {
 
   push();
   imageMode(CENTER);
-  image(displayImage, width/2, height/2);
+  image(displayImage, width / 2, height / 2);
   pop();
 }
