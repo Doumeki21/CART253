@@ -20,8 +20,10 @@ Brief:
 
 // The user moved with the mouse.
 let user = {
-  x: 0,
-  y: 0,
+  x: 250,
+  y: 250,
+  vx: 0,
+  vy: 0,
   size: 100,
 };
 
@@ -35,34 +37,34 @@ let sheep6;
 
 //Square sheep pen
 let pen = {
-  x: 0,
-  y: 0,
+  x: 250,
+  y: 250,
   size: 150,
 };
-
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
-  pen.x = random(0, width);
-  pen.y = random(0, heigth);
+  reset();
+}
 
+function reset() {
   sheep1 = createSheep();
+
+  sheep1.x = random(0, width);
+  sheep1.y = random(0, height);
 }
 
 function createSheep() {
   let sheep = {
-    x: ,
-    y: ,
+    x: 250,
+    y: 250,
     size: 50,
     vx: 5,
     vy: 5,
     inPen: false,
   };
   return sheep;
-
-  sheep1.x = random(sheep1.x, 0, width);
-  sheep1.y = random(sheep1.y, 0, height);
 }
 
 
@@ -71,14 +73,10 @@ function draw() {
   background(0);
 
   moveUser();
-
-  checkNearSheep(sheep1);
-
-  checkSheepPen(sheep1);
+  checkContact();
 
   displayUser();
-
-  displaySheep(sheep1);
+  displaySheep();
 }
 
 function moveUser() {
@@ -86,11 +84,22 @@ function moveUser() {
   user.y = mouseY;
 }
 
-function checkNearSheep(sheep) {
-  //disatnce b/w 2 objects.
-  let d = dist(user.x, user.y, sheep1.x, sheep1.y);
-
-  if (d < sheep1.size/2 + user.size/2 + 5) {
-    sheep1.vx = -
+function checkContact() {
+  if (sheep1.x + sheep1.size / 2 > user.x - user.width / 2 && sheep1.x - sheep1.size / 2 < user.x + user.width / 2 && sheep1.y + sheep1.size / 2 > user.y - user.height / 2 && sheep1.y - sheep1.size / 2 < user.y + user.height / 2) {
+    sheep1.x += user.vx;
   }
+}
+
+function displayUser() {
+  fill(255);
+  noStroke();
+  ellipse(user.x, user.y, user.size);
+}
+
+function displaySheep() {
+
+
+  fill(212, 212, 212);
+  noStroke();
+  ellipse(sheep1.x, sheep1.y, sheep1.size);
 }
