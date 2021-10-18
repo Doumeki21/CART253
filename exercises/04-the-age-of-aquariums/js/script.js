@@ -43,7 +43,7 @@ let pen = {
 };
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(1000, 1000);
 
   reset();
 }
@@ -51,8 +51,13 @@ function setup() {
 function reset() {
   sheep1 = createSheep();
 
+  //Sheep at random location
   sheep1.x = random(0, width);
   sheep1.y = random(0, height);
+
+  //Sheep pen at random location.
+  pen.x = random(0, width);
+  pen.y = random(0, height);
 }
 
 function createSheep() {
@@ -62,6 +67,7 @@ function createSheep() {
     size: 50,
     vx: 5,
     vy: 5,
+    speed: 0.5,
     inPen: false,
   };
   return sheep;
@@ -73,10 +79,12 @@ function draw() {
   background(0);
 
   moveUser();
-  checkContact();
+  moveSheep();
+  checkPush();
 
   displayUser();
   displaySheep();
+  displayPen();
 }
 
 function moveUser() {
@@ -84,7 +92,22 @@ function moveUser() {
   user.y = mouseY;
 }
 
-function checkContact() {
+function moveSheep() {
+  sheep1.vx = random(-5, 5) * sheep1.speed;
+  sheep1.vy = random(-5, 5) * sheep1.speed;
+
+
+  sheep1.x = constrain(sheep1.x, 0, 500);
+  sheep1.y = constrain(sheep1.y, 0, 500);
+
+  sheep1.x += sheep1.vx;
+  sheep1.y += sheep1.vy;
+
+
+
+}
+
+function checkPush() {
   if (sheep1.x + sheep1.size / 2 > user.x - user.width / 2 && sheep1.x - sheep1.size / 2 < user.x + user.width / 2 && sheep1.y + sheep1.size / 2 > user.y - user.height / 2 && sheep1.y - sheep1.size / 2 < user.y + user.height / 2) {
     sheep1.x += user.vx;
   }
@@ -97,9 +120,14 @@ function displayUser() {
 }
 
 function displaySheep() {
-
-
-  fill(212, 212, 212);
+  fill(200, 50, 50);
   noStroke();
   ellipse(sheep1.x, sheep1.y, sheep1.size);
+}
+
+function displayPen() {
+  fill(255, 0, 0);
+  noStroke();
+  rectMode(CENTER);
+  rect(pen.x, pen.y, pen.size);
 }
