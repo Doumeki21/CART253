@@ -102,14 +102,12 @@ function moveSheep() {
 
   sheep1.x += sheep1.vx;
   sheep1.y += sheep1.vy;
-
-
-
 }
 
 function checkPush() {
-  if (sheep1.x + sheep1.size / 2 > user.x - user.width / 2 && sheep1.x - sheep1.size / 2 < user.x + user.width / 2 && sheep1.y + sheep1.size / 2 > user.y - user.height / 2 && sheep1.y - sheep1.size / 2 < user.y + user.height / 2) {
+  if (sheep1.x + sheep1.size / 2 === user.x - user.width / 2 || sheep1.x - sheep1.size / 2 === user.x + user.width / 2 || sheep1.y + sheep1.size / 2 === user.y - user.height / 2 || sheep1.y - sheep1.size / 2 === user.y + user.height / 2) {
     sheep1.x += user.vx;
+    sheep1.y += user.vy;
   }
 }
 
