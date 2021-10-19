@@ -29,12 +29,17 @@ let user = {
   positionBeforeY: 0,
 };
 
-//Sheep.
+//Red sheep.
 let redSheeps = [];
 let numRedSheep = 3;
 let amountInRedPen = 0;
 
-//Square sheep pen
+//Blue sheep.
+let blueSheeps = [];
+let numBlueSheep = 3;
+let amountInBluePen = 0;
+
+//Red sheep pen
 let redPen = {
   x: 250,
   y: 250,
@@ -44,23 +49,15 @@ let redPen = {
     g: 0,
     b: 0,
   },
-  begFill: {
-    r: 255,
-    g: 232,
-    b: 230,
-  },
-  startFill: {
-    r: 255,
-    g: 188,
-    b: 181,
-  },
-  midFill: {
-    r: 255,
-    g: 119,
-    b: 105,
-  },
-  endFill: {
-    r: 255,
+};
+
+//Blue sheep pen
+let bluePen = {
+  x: 250,
+  y: 250,
+  size: 100,
+  currentFill: {
+    r: 0,
     g: 0,
     b: 0,
   },
@@ -75,19 +72,26 @@ function setup() {
 }
 
 function reset() {
-  //Sheep at random location
   for (let i = 0; i < numRedSheep; i++) {
-    let redSheep = createSheep(random(0, width), random(0, height), 200, 50, 50);
+    //red sheeps at random locations.
+    let redSheep = createSheep(random(0, width), random(0, height), 0.5, 255, 188, 181);
+    //crete red sheep (variable introduced above code) in redSheeps array!
     redSheeps.push(redSheep);
   }
 
+  for (let i = 0; i < numBlueSheep; i++) {
+    //Blue sheeps at random locations.
+    let blueSheep = createSheep(random(0, width), random(0, height), 0.8, 188, 181, 255);
+    //crete blue sheep (variable introduced above code) in blueSheeps array!
+    blueSheeps.push(blueSheep);
+  }
 
   //Sheep pen at random location.
   redPen.x = random(0, width - redPen.size);
   redPen.y = random(0, height - redPen.size);
 }
 
-function createSheep(x, y, r, g, b) {
+function createSheep(x, y, speed, r, g, b) {
   let sheep = {
     x: x,
     y: y,
@@ -100,7 +104,7 @@ function createSheep(x, y, r, g, b) {
     vx: 5,
     vy: 5,
     //Change speed for different sheeps
-    speed: 0.5,
+    speed: speed,
     isInPen: false,
   };
   return sheep;
@@ -112,8 +116,7 @@ function draw() {
 
   if (state === `title`) {
     title();
-  }
-  else if (state === `game`) {
+  } else if (state === `game`) {
     game();
   }
 }
@@ -139,14 +142,14 @@ function game() {
 
   displayRedPen();
 
-//sheep.length is total of (6) sheeps.
-//redhseeps.length = number of
-for (let i = 0; i < redSheeps.length; i++) {
-  moveSheep(redSheeps[i]);
-  checkPush(redSheeps[i]);
-  checkInRedPen(redSheeps[i]);
-  displaySheep(redSheeps[i]);
-}
+  //sheep.length is total of (6) sheeps.
+  //redhseeps.length = number of
+  for (let i = 0; i < redSheeps.length; i++) {
+    moveSheep(redSheeps[i]);
+    checkPush(redSheeps[i]);
+    checkInRedPen(redSheeps[i]);
+    displaySheep(redSheeps[i]);
+  }
 
   displayUser();
 }
@@ -194,25 +197,7 @@ function checkInRedPen(sheep) {
     }
   }
 
-redPen.currentFill.r = map(amountInRedPen, 0, 3, 100, 255);
-
-  // if (amountInRedPen < 1) {
-  //   redPen.currentFill.r = redPen.begFill.r;
-  //   redPen.currentFill.g = redPen.begFill.g;
-  //   redPen.currentFill.b = redPen.begFill.b;
-  // } else if (amountInRedPen === 1) {
-  //   redPen.currentFill.r = redPen.startFill.r;
-  //   redPen.currentFill.g = redPen.startFill.g;
-  //   redPen.currentFill.b = redPen.startFill.b;
-  // } else if (amountInRedPen === 2) {
-  //   redPen.currentFill.r = redPen.midFill.r;
-  //   redPen.currentFill.g = redPen.midFill.g;
-  //   redPen.currentFill.b = redPen.midFill.b;
-  // } else if (amountInRedPen === 3) {
-  //   redPen.currentFill.r = redPen.endFill.r;
-  //   redPen.currentFill.g = redPen.endFill.g;
-  //   redPen.currentFill.b = redPen.endFill.b;
-  // }
+  redPen.currentFill.r = map(amountInRedPen, 0, 3, 100, 255);
 }
 
 function displayUser() {
