@@ -1,4 +1,3 @@
-
 /**************************************************
 live: arrays
 Olenka Yuen
@@ -18,7 +17,7 @@ let user = {
 let coin = undefined;
 
 function setup() {
-  createCanvas(500 ,500);
+  createCanvas(500, 500);
   noCursor();
   coin = createCoin();
 }
@@ -29,6 +28,7 @@ function createCoin() {
     y: random(0, height),
     size: 50,
     stroke: color(255, 255, 0),
+    collected: false,
   };
   return newCoin;
 }
@@ -37,6 +37,9 @@ function draw() {
   background(0);
 
   handleInput();
+
+  collect(user, coin);
+
   displayUser(user);
   displayCoin(coin);
 }
@@ -44,6 +47,15 @@ function draw() {
 function handleInput() {
   user.x = mouseX;
   user.y = mouseY;
+}
+
+function collect(user, coin) {
+  if (!coin.collected) {
+    let d = dist(user.x, user.y, coin.x, coin.y);
+    if (d < user.size / 2 + coin.size / 2) {
+      coin.collected = true;
+    }
+  }
 }
 
 function displayUser(user) {
@@ -55,9 +67,11 @@ function displayUser(user) {
 }
 
 function displayCoin(coin) {
-  push();
-  noFill();
-  stroke(coin.stroke);
-  ellipse(coin.x, coin.y, coin.size);
-  pop();
+  if (!coin.collected) {
+    push();
+    noFill();
+    stroke(coin.stroke);
+    ellipse(coin.x, coin.y, coin.size);
+    pop();
+  }
 }
