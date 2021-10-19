@@ -86,9 +86,13 @@ function reset() {
     blueSheeps.push(blueSheep);
   }
 
-  //Sheep pen at random location.
+  //Red sheep pen at random location.
   redPen.x = random(0, width - redPen.size);
   redPen.y = random(0, height - redPen.size);
+
+  //Blue sheep pen at random location.
+  bluePen.x = random(0, width - bluePen.size);
+  bluePen.y = random(0, height - bluePen.size);
 }
 
 function createSheep(x, y, speed, r, g, b) {
@@ -141,14 +145,23 @@ function game() {
   moveUser();
 
   displayRedPen();
+  displayBluePen();
 
   //sheep.length is total of (6) sheeps.
-  //redhseeps.length = number of
+  //redhseeps.length = numRedSheep in array
   for (let i = 0; i < redSheeps.length; i++) {
     moveSheep(redSheeps[i]);
     checkPush(redSheeps[i]);
     checkInRedPen(redSheeps[i]);
     displaySheep(redSheeps[i]);
+  }
+
+  //blueSheeps.length = numBlueSheep in array
+  for (let i = 0; i < blueSheeps.length; i++) {
+    moveSheep(blueSheeps[i]);
+    checkPush(blueSheeps[i]);
+    checkInBluePen(blueSheeps[i]);
+    displaySheep(blueSheeps[i]);
   }
 
   displayUser();
@@ -160,6 +173,20 @@ function moveUser() {
 
   user.x = mouseX;
   user.y = mouseY;
+}
+
+function displayRedPen() {
+  fill(redPen.currentFill.r, redPen.currentFill.g, redPen.currentFill.b);
+  noStroke();
+  rectMode(CORNER);
+  rect(redPen.x, redPen.y, redPen.size);
+}
+
+function displayBluePen() {
+  fill(bluePen.currentFill.r, bluePen.currentFill.g, bluePen.currentFill.b);
+  noStroke();
+  rectMode(CORNER);
+  rect(bluePen.x, bluePen.y, bluePen.size);
 }
 
 function moveSheep(sheep) {
@@ -184,26 +211,43 @@ function checkPush(sheep) {
 }
 
 function checkInRedPen(sheep) {
-
+  //If sheep touches inside on any side of the red pen,
   if (sheep.x + sheep.size / 2 > redPen.x - redPen.size / 2 && sheep.x - sheep.size / 2 < redPen.x + redPen.size / 2 && sheep.y + sheep.size / 2 > redPen.y - redPen.size / 2 && sheep.y - sheep.size / 2 < redPen.y + redPen.size / 2) {
-    if (sheep.isInPen === false) {
+    if (!sheep.isInPen) {
+      //-then sheep is confirmed to be in pen and counts up by 1.
       sheep.isInPen = true;
       amountInRedPen++;
     }
   } else {
+    //else if sheep is outside the red pen,
     if (sheep.isInPen === true) {
       sheep.isInPen = false;
+      //then red sheeps counts down by 1.
       amountInRedPen--;
     }
   }
-
+//Red pen fills to a color of bright red as more sheeps (max 3) fills the pen.
   redPen.currentFill.r = map(amountInRedPen, 0, 3, 100, 255);
 }
 
-function displayUser() {
-  fill(255);
-  noStroke();
-  ellipse(user.x, user.y, user.size);
+function checkInBluePen(sheep) {
+  //If sheep touches inside on any side of the blue pen,
+  if (sheep.x + sheep.size / 2 > bluePen.x - bluePen.size / 2 && sheep.x - sheep.size / 2 < bluePen.x + bluePen.size / 2 && sheep.y + sheep.size / 2 > bluePen.y - bluePen.size / 2 && sheep.y - sheep.size / 2 < bluePen.y + bluePen.size / 2) {
+    if (!sheep.isInPen) {
+      //-then sheep is confirmed to be in blue pen and counts up by 1.
+      sheep.isInPen = true;
+      amountInBluePen++;
+    }
+  } else {
+      //else if sheep is outside the blue pen,
+      if (sheep.isInPen === true) {
+        sheep.isInPen = false;
+        //then blue sheeps counts down by 1.
+        amountInBluePen--;
+    }
+  }
+  //Blue pen fills to a color of bright blue as more sheeps (max 3) fills the pen.
+  bluePen.currentFill.b = map(amountInBluePen, 0, 3, 100, 255);
 }
 
 function displaySheep(sheep) {
@@ -214,12 +258,10 @@ function displaySheep(sheep) {
   pop();
 }
 
-function displayRedPen() {
-  fill(redPen.currentFill.r, redPen.currentFill.g, redPen.currentFill.b);
+function displayUser() {
+  fill(255);
   noStroke();
-  rectMode(CORNER);
-  rect(redPen.x, redPen.y, redPen.size);
-  console.log(redPen.x);
+  ellipse(user.x, user.y, user.size);
 }
 
 function mouseClicked() {
