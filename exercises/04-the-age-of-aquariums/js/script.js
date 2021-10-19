@@ -22,9 +22,11 @@ Brief:
 let user = {
   x: 250,
   y: 250,
-  vx: 1,
-  vy: 1,
+  vx: 4,
+  vy: 4,
   size: 50,
+  positionBeforeX: 0,
+  positionBeforeY: 0,
 };
 
 //Sheep.
@@ -43,7 +45,7 @@ let pen = {
 };
 
 function setup() {
-  createCanvas(600, 600);
+  createCanvas(700, 700);
 
   reset();
 }
@@ -82,12 +84,15 @@ function draw() {
   moveSheep();
   checkPush();
 
-  displayUser();
-  displaySheep();
   displayPen();
+  displaySheep();
+  displayUser();
 }
 
 function moveUser() {
+  user.positionBeforeX = user.x;
+  user.positionBeforeY = user.y;
+
   user.x = mouseX;
   user.y = mouseY;
 }
@@ -105,9 +110,12 @@ function moveSheep() {
 }
 
 function checkPush() {
-  if (sheep1.x + sheep1.size / 2 > user.x - user.width / 2 && sheep1.x - sheep1.size / 2 < user.x + user.width / 2 && sheep1.y + sheep1.size / 2 > user.y - user.height / 2 && sheep1.y - sheep1.size / 2 < user.y + user.height / 2) {
-    sheep1.x += user.vx;
-    sheep1.y += user.vy;
+  if (sheep1.x + sheep1.size / 2 > user.x - user.size / 2 && sheep1.x - sheep1.size / 2 < user.x + user.size / 2 && sheep1.y + sheep1.size / 2 > user.y - user.size / 2 && sheep1.y - sheep1.size / 2 < user.y + user.size / 2) {
+      let distUserX = user.x - user.positionBeforeX;
+      let distUserY = user.y - user.positionBeforeY;
+
+    sheep1.x += distUserX;
+    sheep1.y += distUserY;
   }
 }
 
