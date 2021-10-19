@@ -7,7 +7,7 @@ Objectives:
 2. Working with arrays and random selection
 
 Brief:
-* User controlled with mouse/  keyboard.
+- User controlled with mouse/  keyboard.
 * User interact with object (Make them run away.)
 * Change the fish creation (
     Include more parameters so that the fish (or whatever) can be more varied (color? speed? size?)
@@ -37,11 +37,38 @@ let sheep4;
 let sheep5;
 let sheep6;
 
+let sheepInPen = 0;
+
 //Square sheep pen
 let pen = {
   x: 250,
   y: 250,
   size: 100,
+  currentFill: {
+    r: 0,
+    g: 0,
+    b: 0,
+  },
+  begFill: {
+    r: 255,
+    g: 232,
+    b: 230,
+  },
+  startFill: {
+    r: 255,
+    g: 188,
+    b: 181,
+  },
+  midFill: {
+    r: 255,
+    g: 119,
+    b: 105,
+  },
+  endFill: {
+    r: 255,
+    g: 0,
+    b: 0,
+  },
 };
 
 function setup() {
@@ -51,41 +78,59 @@ function setup() {
 }
 
 function reset() {
-  sheep1 = createSheep();
-
   //Sheep at random location
-  sheep1.x = random(0, 500);
-  sheep1.y = random(0, 500);
+  sheep1 = createSheep(random(0, 500), random(0, 500), 200, 50, 50);
+  sheep2 = createSheep(random(0, 500), random(0, 500), 200, 50, 50);
+  sheep3 = createSheep(random(0, 500), random(0, 500), 200, 50, 50);
+
 
   //Sheep pen at random location.
   pen.x = random(0, 500);
   pen.y = random(0, 500);
 }
 
-function createSheep() {
+function createSheep(x, y, r, g, b) {
   let sheep = {
-    x: 250,
-    y: 250,
+    x: x,
+    y: y,
     size: 50,
+    fill: {
+      r: r,
+      g: g,
+      b: b,
+    },
     vx: 5,
     vy: 5,
     speed: 0.5,
-    inPen: false,
+    isInPen: false,
   };
   return sheep;
 }
-
 
 function draw() {
   //Green bg
   background(0);
 
   moveUser();
-  moveSheep();
-  checkPush();
+
+  moveSheep(sheep1);
+  moveSheep(sheep2);
+  moveSheep(sheep3);
+
+  checkPush(sheep1);
+  checkPush(sheep2);
+  checkPush(sheep3);
+
+  checkInRedPen(sheep1);
+  checkInRedPen(sheep2);
+  checkInRedPen(sheep3);
 
   displayPen();
-  displaySheep();
+
+  displaySheep(sheep1);
+  displaySheep(sheep2);
+  displaySheep(sheep3);
+
   displayUser();
 }
 
@@ -97,25 +142,57 @@ function moveUser() {
   user.y = mouseY;
 }
 
-function moveSheep() {
-  sheep1.vx = random(-5, 5) * sheep1.speed;
-  sheep1.vy = random(-5, 5) * sheep1.speed;
+function moveSheep(sheep) {
+  sheep.vx = random(-5, 5) * sheep.speed;
+  sheep.vy = random(-5, 5) * sheep.speed;
 
+  sheep.x = constrain(sheep.x, 0, 500);
+  sheep.y = constrain(sheep.y, 0, 500);
 
-  sheep1.x = constrain(sheep1.x, 0, 500);
-  sheep1.y = constrain(sheep1.y, 0, 500);
-
-  sheep1.x += sheep1.vx;
-  sheep1.y += sheep1.vy;
+  sheep.x += sheep.vx;
+  sheep.y += sheep.vy;
 }
 
-function checkPush() {
-  if (sheep1.x + sheep1.size / 2 > user.x - user.size / 2 && sheep1.x - sheep1.size / 2 < user.x + user.size / 2 && sheep1.y + sheep1.size / 2 > user.y - user.size / 2 && sheep1.y - sheep1.size / 2 < user.y + user.size / 2) {
-      let distUserX = user.x - user.positionBeforeX;
-      let distUserY = user.y - user.positionBeforeY;
+function checkPush(sheep) {
+  if (sheep.x + sheep.size / 2 > user.x - user.size / 2 && sheep.x - sheep.size / 2 < user.x + user.size / 2 && sheep.y + sheep1.size / 2 > user.y - user.size / 2 && sheep.y - sheep.size / 2 < user.y + user.size / 2) {
+    let distUserX = user.x - user.positionBeforeX;
+    let distUserY = user.y - user.positionBeforeY;
 
-    sheep1.x += distUserX;
-    sheep1.y += distUserY;
+    sheep.x += distUserX;
+    sheep.y += distUserY;
+  }
+}
+
+function checkInRedPen(sheep) {
+
+  if (sheep.x + sheep.size / 2 > pen.x - pen.size / 2 && sheep.x - sheep.size / 2 < pen.x + pen.size / 2 && sheep.y + sheep.size / 2 > pen.y - pen.size / 2 && sheep.y - sheep.size / 2 < pen.y + pen.size / 2) {
+    if (sheep.isInPen === false) {
+      sheep.isInPen = true;
+      sheepInPen++;
+    }
+  } else {
+    if (sheep.isInPen === true) {
+      sheep.isInPen = false;
+      sheepInPen--;
+    }
+  }
+
+  if (sheepInPen < 1) {
+    pen.currentFill.r = pen.begFill.r;
+    pen.currentFill.g = pen.begFill.g;
+    pen.currentFill.b = pen.begFill.b;
+  } else if (sheepInPen === 1) {
+    pen.currentFill.r = pen.startFill.r;
+    pen.currentFill.g = pen.startFill.g;
+    pen.currentFill.b = pen.startFill.b;
+  } else if (sheepInPen === 2) {
+    pen.currentFill.r = pen.midFill.r;
+    pen.currentFill.g = pen.midFill.g;
+    pen.currentFill.b = pen.midFill.b;
+  } else if (sheepInPen === 3) {
+    pen.currentFill.r = pen.endFill.r;
+    pen.currentFill.g = pen.endFill.g;
+    pen.currentFill.b = pen.endFill.b;
   }
 }
 
@@ -125,15 +202,16 @@ function displayUser() {
   ellipse(user.x, user.y, user.size);
 }
 
-function displaySheep() {
-  fill(200, 50, 50);
+function displaySheep(sheep) {
+  fill(sheep.fill.r, sheep.fill.g, sheep.fill.b);
   noStroke();
-  ellipse(sheep1.x, sheep1.y, sheep1.size);
+  ellipse(sheep.x, sheep.y, sheep.size);
 }
 
 function displayPen() {
-  fill(255, 0, 0);
+  fill(pen.currentFill.r, pen.currentFill.g, pen.currentFill.b);
   noStroke();
   rectMode(CORNER);
   rect(pen.x, pen.y, pen.size);
+  console.log(pen.x);
 }
