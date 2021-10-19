@@ -1,47 +1,43 @@
 
 /**************************************************
-Wow, the Mona Lisa!
+live: arrays
 Olenka Yuen
 
-A program that attempts to reproduce the Mona Lisa.
 
-Plan/
-x Create a reasonable sized canvas.
-x Fill the background with Lisa's background color.
-. Add detail to the background.
-.Block out the basic shapes (face, body, hair, moutains, water)
+
 **************************************************/
 
 "use strict";
 
-// setup()
-//
-// Description of setup() goes here.
+let user = {
+  x: undefined,
+  y: undefined,
+  size: 100,
+};
+
 function setup() {
-  createCanvas(240, 350);
+  createCanvas(500 ,500);
+  noCursor();
+
+
 }
 
-
-// draw()
-//
-// Description of draw() goes here.
 function draw() {
+  background(0);
 
-  //The background.
-  background(144, 191, 122);
+  handleInput();
+  displayUser();
+}
 
-  //Mona's hair
-  fill(10, 20, 10);
-  ellipse(110, 87.5, 100, 120);
+function handleInput() {
+  user.x = mouseX;
+  user.y = mouseY;
+}
 
-  //Mona's face.
-  fill(222, 182, 93);
-  noStroke();
-  ellipse(120, 87.5, 60, 80);
-
-//Smile
-stroke(0);
-line(110, 100, 120, 105);
-line(120, 105, 140, 100);
-
+function displayUser() {
+  push();
+  noFill()
+  stroke(255, 100, 0);
+  ellipse(user.x, user.y, user.size);
+  pop();
 }
