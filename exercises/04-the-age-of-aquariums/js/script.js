@@ -24,7 +24,7 @@ let user = {
   y: 250,
   vx: 1,
   vy: 1,
-  size: 100,
+  size: 50,
 };
 
 //Sheep.
@@ -39,11 +39,11 @@ let sheep6;
 let pen = {
   x: 250,
   y: 250,
-  size: 150,
+  size: 100,
 };
 
 function setup() {
-  createCanvas(1000, 1000);
+  createCanvas(600, 600);
 
   reset();
 }
@@ -52,12 +52,12 @@ function reset() {
   sheep1 = createSheep();
 
   //Sheep at random location
-  sheep1.x = random(0, width);
-  sheep1.y = random(0, height);
+  sheep1.x = random(0, 500);
+  sheep1.y = random(0, 500);
 
   //Sheep pen at random location.
-  pen.x = random(0, 800);
-  pen.y = random(0, 800);
+  pen.x = random(0, 500);
+  pen.y = random(0, 500);
 }
 
 function createSheep() {
@@ -79,7 +79,7 @@ function draw() {
   background(0);
 
   moveUser();
-  // moveSheep();
+  moveSheep();
   checkPush();
 
   displayUser();
@@ -92,26 +92,23 @@ function moveUser() {
   user.y = mouseY;
 }
 
-// function moveSheep() {
-//   sheep1.vx = random(-5, 5) * sheep1.speed;
-//   sheep1.vy = random(-5, 5) * sheep1.speed;
-//
-//
-//   sheep1.x = constrain(sheep1.x, 0, 500);
-//   sheep1.y = constrain(sheep1.y, 0, 500);
-//
-//   sheep1.x += sheep1.vx;
-//   sheep1.y += sheep1.vy;
-// }
+function moveSheep() {
+  sheep1.vx = random(-5, 5) * sheep1.speed;
+  sheep1.vy = random(-5, 5) * sheep1.speed;
+
+
+  sheep1.x = constrain(sheep1.x, 0, 500);
+  sheep1.y = constrain(sheep1.y, 0, 500);
+
+  sheep1.x += sheep1.vx;
+  sheep1.y += sheep1.vy;
+}
 
 function checkPush() {
   if (sheep1.x + sheep1.size / 2 > user.x - user.width / 2 && sheep1.x - sheep1.size / 2 < user.x + user.width / 2 && sheep1.y + sheep1.size / 2 > user.y - user.height / 2 && sheep1.y - sheep1.size / 2 < user.y + user.height / 2) {
     sheep1.x += user.vx;
     sheep1.y += user.vy;
-    console.log("sheep1.x");
   }
-
-
 }
 
 function displayUser() {
