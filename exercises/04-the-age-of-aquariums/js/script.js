@@ -8,7 +8,7 @@ Objectives:
 
 Brief:
 - User controlled with mouse/  keyboard.
-* User interact with object (Make them run away.)
+- User interact with object (Make them run away.)
 * Change the fish creation (
     Include more parameters so that the fish (or whatever) can be more varied (color? speed? size?)
     Add at least one new property to the fish (or whatever) that changes their behaviour
