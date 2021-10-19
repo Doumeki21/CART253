@@ -14,12 +14,19 @@ let user = {
   size: 100,
 };
 
-let coin = undefined;
+let coins = [];
+let numCoins = 10;
 
 function setup() {
   createCanvas(500, 500);
   noCursor();
-  coin = createCoin();
+
+  //For loop creates 10 coins in the array.
+  for (let i = 0; i < numCoins; i++) {
+    let newCoin = createCoin();
+    //adding newCoin into the coins array!
+    coins.push(newCoin);
+  }
 }
 
 function createCoin() {
@@ -38,10 +45,17 @@ function draw() {
 
   handleInput();
 
-  collect(user, coin);
+  for (let i = 0; i < coins.length; i++) {
+    let coin = coins[i];
+    collect(user, coin[i]);
+  }
 
   displayUser(user);
-  displayCoin(coin);
+
+  for (let i = 0; i < coins.length; i++) {
+    let coin = coins[i];
+    displayCoin(coin);
+  }
 }
 
 function handleInput() {
