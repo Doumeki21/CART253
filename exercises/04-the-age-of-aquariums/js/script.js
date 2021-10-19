@@ -22,8 +22,8 @@ Brief:
 let user = {
   x: 250,
   y: 250,
-  vx: 0,
-  vy: 0,
+  vx: 1,
+  vy: 1,
   size: 100,
 };
 
@@ -56,8 +56,8 @@ function reset() {
   sheep1.y = random(0, height);
 
   //Sheep pen at random location.
-  pen.x = random(0, width);
-  pen.y = random(0, height);
+  pen.x = random(0, 800);
+  pen.y = random(0, 800);
 }
 
 function createSheep() {
@@ -79,7 +79,7 @@ function draw() {
   background(0);
 
   moveUser();
-  moveSheep();
+  // moveSheep();
   checkPush();
 
   displayUser();
@@ -92,23 +92,26 @@ function moveUser() {
   user.y = mouseY;
 }
 
-function moveSheep() {
-  sheep1.vx = random(-5, 5) * sheep1.speed;
-  sheep1.vy = random(-5, 5) * sheep1.speed;
-
-
-  sheep1.x = constrain(sheep1.x, 0, 500);
-  sheep1.y = constrain(sheep1.y, 0, 500);
-
-  sheep1.x += sheep1.vx;
-  sheep1.y += sheep1.vy;
-}
+// function moveSheep() {
+//   sheep1.vx = random(-5, 5) * sheep1.speed;
+//   sheep1.vy = random(-5, 5) * sheep1.speed;
+//
+//
+//   sheep1.x = constrain(sheep1.x, 0, 500);
+//   sheep1.y = constrain(sheep1.y, 0, 500);
+//
+//   sheep1.x += sheep1.vx;
+//   sheep1.y += sheep1.vy;
+// }
 
 function checkPush() {
-  if (sheep1.x + sheep1.size / 2 === user.x - user.width / 2 || sheep1.x - sheep1.size / 2 === user.x + user.width / 2 || sheep1.y + sheep1.size / 2 === user.y - user.height / 2 || sheep1.y - sheep1.size / 2 === user.y + user.height / 2) {
+  if (sheep1.x + sheep1.size / 2 > user.x - user.width / 2 && sheep1.x - sheep1.size / 2 < user.x + user.width / 2 && sheep1.y + sheep1.size / 2 > user.y - user.height / 2 && sheep1.y - sheep1.size / 2 < user.y + user.height / 2) {
     sheep1.x += user.vx;
     sheep1.y += user.vy;
+    console.log("sheep1.x");
   }
+
+
 }
 
 function displayUser() {
@@ -126,6 +129,6 @@ function displaySheep() {
 function displayPen() {
   fill(255, 0, 0);
   noStroke();
-  rectMode(CENTER);
+  rectMode(CORNER);
   rect(pen.x, pen.y, pen.size);
 }
