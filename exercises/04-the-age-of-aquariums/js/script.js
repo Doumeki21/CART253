@@ -31,12 +31,16 @@ let user = {
 
 //Red sheep.
 let redSheeps = [];
+//max 3 red sheeps in array.
 let numRedSheep = 3;
+//track amount of red sheeps.
 let amountInRedPen = 0;
 
 //Green sheep.
 let greenSheeps = [];
+//max 3 green sheeps in array
 let numGreenSheep = 3;
+//Track amount of green sheeps.
 let amountIngreenPen = 0;
 
 //Red sheep pen
@@ -65,7 +69,7 @@ let greenPen = {
 
 //20 white circles representing the timer.
 let timer = {
-  x: 100,
+  x: 50,
   y: 150,
   size: 20,
   fill: 255,
@@ -82,6 +86,10 @@ let state = `title`;
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
+  reset();
+}
+
+function reset() {
   for (let i = 0; i < numRedSheep; i++) {
     //red sheeps at random locations.
     let redSheep = createSheep(random(0, width), random(0, height), 0.5, 255, 188, 181);
@@ -96,15 +104,9 @@ function setup() {
     greenSheeps.push(greenSheep);
   }
 
-  reset();
-}
-
-function reset() {
-
-
   //Red sheep pen at random location.
-  redPen.x = random(0, width - redPen.size);
-  redPen.y = random(0, height - redPen.size);
+  redPen.x = random(0 + redPen.size, width - redPen.size);
+  redPen.y = random(0 + greenPen.size, height - redPen.size);
 
   //Blue sheep pen at random location.
   greenPen.x = random(0, width - greenPen.size);
@@ -142,12 +144,14 @@ function draw() {
   } else if (state === `safe`) {
     safe();
     reset();
+
   } else if (state === `timeUp`) {
     timeUp();
     reset();
   }
 }
 
+//Display title screen
 function title() {
   push();
   textSize(100);
@@ -192,10 +196,11 @@ function game() {
   displayUser();
 }
 
+//Display good ending screen
 function safe() {
   push();
   textSize(100);
-  fill(255, 0, 0);
+  fill(255, 188, 181);
   textAlign(CENTER, CENTER);
   text(`GOOD JOB!`, width / 2, height / 2);
   pop();
@@ -208,10 +213,11 @@ function safe() {
   pop();
 }
 
+//Disply bad ending screen.
 function timeUp() {
   push();
   textSize(100);
-  fill(255, 0, 0);
+  fill(188, 181, 255);
   textAlign(CENTER, CENTER);
   text(`OH NO!`, width / 2, height / 2);
   pop();
@@ -225,13 +231,16 @@ function timeUp() {
 }
 
 function moveUser() {
+  //User position is tracked (to push shep).
   user.positionBeforeX = user.x;
   user.positionBeforeY = user.y;
 
+//User is moved with the mouse.
   user.x = mouseX;
   user.y = mouseY;
 }
 
+//Display red pen.
 function displayRedPen() {
   fill(redPen.currentFill.r, redPen.currentFill.g, redPen.currentFill.b);
   noStroke();
@@ -239,6 +248,7 @@ function displayRedPen() {
   rect(redPen.x, redPen.y, redPen.size);
 }
 
+//Dispaly green pen.
 function displaygreenPen() {
   fill(greenPen.currentFill.r, greenPen.currentFill.g, greenPen.currentFill.b);
   noStroke();
@@ -247,21 +257,23 @@ function displaygreenPen() {
 }
 
 function moveSheep(sheep) {
+  //Sheep jitters around.
   sheep.vx = random(-5, 5) * sheep.speed;
   sheep.vy = random(-5, 5) * sheep.speed;
-
+//Sheep is constrained inside the canvas.
   sheep.x = constrain(sheep.x, 0, width);
   sheep.y = constrain(sheep.y, 0, height);
-
+//Sheep moves.
   sheep.x += sheep.vx;
   sheep.y += sheep.vy;
 }
 
 function checkPush(sheep) {
+  //Checks if user is touching on any side of the sheep.
   if (sheep.x + sheep.size / 2 > user.x - user.size / 2 && sheep.x - sheep.size / 2 < user.x + user.size / 2 && sheep.y + sheep.size / 2 > user.y - user.size / 2 && sheep.y - sheep.size / 2 < user.y + user.size / 2) {
     let distUserX = user.x - user.positionBeforeX;
     let distUserY = user.y - user.positionBeforeY;
-
+//User locations are added to current sheep location.
     sheep.x += distUserX;
     sheep.y += distUserY;
   }
@@ -285,7 +297,6 @@ function checkInRedPen(sheep) {
   }
   //Red pen fills to a color of bright red as more sheeps (max 3) fills the pen.
   redPen.currentFill.r = map(amountInRedPen, 0, 3, 100, 255);
-
 }
 
 function checkIngreenPen(sheep) {
@@ -308,6 +319,7 @@ function checkIngreenPen(sheep) {
   greenPen.currentFill.g = map(amountIngreenPen, 0, 3, 100, 255);
 }
 
+//Red and green sheeps are displayed.
 function displaySheep(sheep) {
   push();
   fill(sheep.fill.r, sheep.fill.g, sheep.fill.b);
@@ -317,13 +329,14 @@ function displaySheep(sheep) {
 }
 
 function checkSafe() {
+  //If both pens are filled, then it's a good ending!
   if (amountInRedPen === 3 && amountIngreenPen === 3) {
     state = `safe`;
   }
 }
 
+//Check if time runs out.
 function checkTimeUp() {
-  //Check if time runs out.
   //outisde the forloop since it's only fading one circle (at a time).
   timer.alpha -= timer.fadeAmount;
   //subtract alpha to fade out.
@@ -342,8 +355,9 @@ function checkTimeUp() {
 
 function displayTimer() {
   let y = timer.y;
+
   for (let i = timer.numCircles; i > 0; i--) {
-    //Default is full color.
+    //Default is at full color.
     let alpha = 255;
     //If current circle is the last one--
     if (i === 1) {
@@ -356,22 +370,21 @@ function displayTimer() {
     fill(255, alpha);
     ellipse(timer.x, y, timer.size);
     pop();
+    //Timer displays vertically.
     y += 40;
   }
 }
 
+//Displays white user circle.
 function displayUser() {
   fill(255);
   noStroke();
   ellipse(user.x, user.y, user.size);
 }
 
+//Mouse click to enter the game from the title screen.
 function mouseClicked() {
   if (state === `title`) {
     state = `game`;
-  } else if (state === `safe`) {
-    state = `title`;
-  } else if (state === `timeUp`) {
-    state = `title`;
   }
 }
