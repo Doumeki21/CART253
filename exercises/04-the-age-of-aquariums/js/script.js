@@ -93,6 +93,14 @@ function setup() {
 }
 
 function reset() {
+  redSheeps = [];
+  greenSheeps = [];
+
+  amountInRedPen = 0;
+  amountIngreenPen = 0;
+
+  timer.numCircles = 20;
+
   for (let i = 0; i < numRedSheep; i++) {
     //red sheeps at random locations.
     let redSheep = createSheep(random(0, width), random(0, height), 0.5, 255, 188, 181);
@@ -115,7 +123,7 @@ function reset() {
   greenPen.x = random(0, width - greenPen.size);
   greenPen.y = random(0, height - greenPen.size);
 
-  timer.numCircles = 20;
+
 }
 
 function createSheep(x, y, speed, r, g, b) {
@@ -147,7 +155,6 @@ function draw() {
   } else if (state === `safe`) {
     safe();
     reset();
-
   } else if (state === `timeUp`) {
     timeUp();
     reset();
@@ -388,6 +395,7 @@ function displayUser() {
 //Mouse click to enter the game from the title screen.
 function mouseClicked() {
   if (state === `title`) {
+    reset();
     state = `game`;
   } else if (state === `safe`) {
     state = `title`;
