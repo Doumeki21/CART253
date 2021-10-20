@@ -2,6 +2,9 @@
 Exercise 04: The Age of Aquariums
 Olenka Yuen
 
+Goal:
+Gather the sheep into their corresponding sheep pen colors by moving your mouse and pushing them. Try to make it on time!
+
 Objectives:
 1. Working with arrays and for-loops
 2. Working with arrays and random selection

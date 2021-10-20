@@ -1,3 +1,3 @@
-# Template p5 project
+# Exercise 04: The Age of Aquariums
 
-This is the README file for the entire project. For more official projects you should write information here about the nature of the project, your name, any special explanations of how the project works, etc.
+Gather the sheep into their corresponding sheep pen colors by moving your mouse and pushing them. Try to make it on time!
