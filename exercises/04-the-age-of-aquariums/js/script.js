@@ -238,7 +238,7 @@ function moveUser() {
   user.positionBeforeX = user.x;
   user.positionBeforeY = user.y;
 
-//User is moved with the mouse.
+  //User is moved with the mouse.
   user.x = mouseX;
   user.y = mouseY;
 }
@@ -263,10 +263,10 @@ function moveSheep(sheep) {
   //Sheep jitters around.
   sheep.vx = random(-5, 5) * sheep.speed;
   sheep.vy = random(-5, 5) * sheep.speed;
-//Sheep is constrained inside the canvas.
+  //Sheep is constrained inside the canvas.
   sheep.x = constrain(sheep.x, 0, width);
   sheep.y = constrain(sheep.y, 0, height);
-//Sheep moves.
+  //Sheep moves.
   sheep.x += sheep.vx;
   sheep.y += sheep.vy;
 }
@@ -276,7 +276,7 @@ function checkPush(sheep) {
   if (sheep.x + sheep.size / 2 > user.x - user.size / 2 && sheep.x - sheep.size / 2 < user.x + user.size / 2 && sheep.y + sheep.size / 2 > user.y - user.size / 2 && sheep.y - sheep.size / 2 < user.y + user.size / 2) {
     let distUserX = user.x - user.positionBeforeX;
     let distUserY = user.y - user.positionBeforeY;
-//User locations are added to current sheep location.
+    //User locations are added to current sheep location.
     sheep.x += distUserX;
     sheep.y += distUserY;
   }
@@ -389,5 +389,9 @@ function displayUser() {
 function mouseClicked() {
   if (state === `title`) {
     state = `game`;
+  } else if (state === `safe`) {
+    state = `title`;
+  } else if (state === `timeUp`) {
+    state = `title`;
   }
 }
