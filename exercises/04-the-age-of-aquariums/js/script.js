@@ -88,17 +88,17 @@ let state = `title`;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-
   reset();
 }
 
 function reset() {
+  //Sheep array resets.
   redSheeps = [];
   greenSheeps = [];
-
+//Pens start counting from 0.
   amountInRedPen = 0;
   amountIngreenPen = 0;
-
+//Timer restarts.
   timer.numCircles = 20;
 
   for (let i = 0; i < numRedSheep; i++) {
@@ -107,7 +107,6 @@ function reset() {
     //crete red sheep (variable introduced above code) in redSheeps array!
     redSheeps.push(redSheep);
   }
-
   for (let i = 0; i < numGreenSheep; i++) {
     //Blue sheeps at random locations.
     let greenSheep = createSheep(random(0, width), random(0, height), 0.8, 188, 255, 181);
@@ -118,14 +117,12 @@ function reset() {
   //Red sheep pen at random location.
   redPen.x = random(0 + redPen.size, width - redPen.size);
   redPen.y = random(0 + greenPen.size, height - redPen.size);
-
   //Blue sheep pen at random location.
   greenPen.x = random(0, width - greenPen.size);
   greenPen.y = random(0, height - greenPen.size);
-
-
 }
 
+//All the variables to create a sheep.
 function createSheep(x, y, speed, r, g, b) {
   let sheep = {
     x: x,
@@ -149,13 +146,17 @@ function draw() {
   background(10);
 
   if (state === `title`) {
+    //Title screen.
     title();
   } else if (state === `game`) {
+    //Game screen.
     game();
   } else if (state === `safe`) {
+    //Good ending.
     safe();
     reset();
   } else if (state === `timeUp`) {
+    //Bad ending.
     timeUp();
     reset();
   }
@@ -221,6 +222,13 @@ function safe() {
   textAlign(CENTER, CENTER);
   text(`THE SHEEPS ARE SAFE INSIDE THEIR PENS`, width / 2, height / 2 + 100);
   pop();
+
+  push();
+  textSize(20);
+  fill(212, 212, 212);
+  textAlign(CENTER, CENTER);
+  text(`CLICK TO CONTINUE`, width / 2, height / 2 + 300);
+  pop();
 }
 
 //Disply bad ending screen.
@@ -237,6 +245,13 @@ function timeUp() {
   fill(212, 212, 212);
   textAlign(CENTER, CENTER);
   text(`YOU DIDN'T COLLECT ALL THE SHEEPS IN THEIR PENS BEFORE NIGHTFALL.`, width / 2, height / 2 + 100);
+  pop();
+
+  push();
+  textSize(20);
+  fill(212, 212, 212);
+  textAlign(CENTER, CENTER);
+  text(`CLICK TO CONTINUE`, width / 2, height / 2 + 300);
   pop();
 }
 
@@ -375,6 +390,7 @@ function displayTimer() {
       alpha = timer.alpha;
     }
 
+//Display timer.
     push();
     noStroke();
     fill(255, alpha);
@@ -392,14 +408,15 @@ function displayUser() {
   ellipse(user.x, user.y, user.size);
 }
 
-//Mouse click to enter the game from the title screen.
 function mouseClicked() {
   if (state === `title`) {
-    reset();
+    //Mouse click to enter the game from the title screen.
     state = `game`;
   } else if (state === `safe`) {
+    //Transition from good ending to title screen.
     state = `title`;
   } else if (state === `timeUp`) {
+    //Transition from bad ending to title screen.
     state = `title`;
   }
 }
