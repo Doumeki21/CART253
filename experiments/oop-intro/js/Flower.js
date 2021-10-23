@@ -35,4 +35,12 @@ class Flower {
     ellipse(this.x, this.y, this.size);
     pop();
   }
+
+  mousePressed() {
+    let d = dist(this.x, this.y , mouseX, mouseY);
+    if (d < this.size/2 + this.petalThickness) {
+      this.stemLength += 5;
+      this.y += -5;
+    }
+  }
 }

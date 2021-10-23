@@ -27,9 +27,9 @@ function setup() {
     let size = random(50, 80);
     let stemLength = random(50, 100);
     let petalColor = {
-      r: random(100,255),
-      g: random(100,255),
-      b: random(100,255),
+      r: random(100, 255),
+      g: random(100, 255),
+      b: random(100, 255),
     };
     //create a new flower
     let flower = new Flower(x, y, size, stemLength, petalColor);
@@ -44,5 +44,12 @@ function draw() {
   for (let i = 0; i < garden.flowers.length; i++) {
     let flower = garden.flowers[i];
     flower.display();
+  }
+}
+
+function mousePressed() {
+  for (let i = 0; i < garden.flowers.length; i++) {
+    let flower = garden.flowers[i];
+    flower.mousePressed();
   }
 }
