@@ -1,10 +1,11 @@
 class Flower {
-  constructor() {
+
+  constructor(x, y, size, stemLength, petalColor) {
     //this = the Flower it's being constructed()
-    this.x = random(0, width);
-    this.y = random(0, height);
-    this.size = 50;
-    this.stemLength = 75;
+    this.x = x;
+    this.y = y;
+    this.size = size;
+    this.stemLength = stemLength;
     this.stemThickness = 10;
     this.petalThickness = 10;
 
@@ -13,11 +14,7 @@ class Flower {
       g: 150,
       b: 50,
     };
-    this.petalColor = {
-      r: 200,
-      g: 50,
-      b: 50,
-    };
+    this.petalColor = petalColor;
     this.centreColor = {
       r: 50,
       g: 0,
