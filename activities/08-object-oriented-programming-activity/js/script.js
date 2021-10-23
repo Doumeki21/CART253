@@ -1,33 +1,31 @@
 /**
-Title of Project
-Author Name
+Activity 08: Object Oriented Programming Activity.
+Olenka Yuen
 
-This is a template. You must fill in the title,
-author, and this description to match your project!
+plan
+1. defined a paddle class
+2. Set up main Programm.
+3.  define a ball class.
+4. Add balls to main program.
+5. Make balls bounce on paddle.
 */
 
 "use strict";
 
-
-/**
-Description of preload
-*/
-function preload() {
-
-}
-
+let paddle;
 
 /**
 Description of setup
 */
 function setup() {
+  createCanvas(windowWidth, windowHeight);
 
+  paddle = new Paddle(300, 20);
 }
 
-
-/**
-Description of draw()
-*/
 function draw() {
+  background(0);
 
+  paddle.move();
+  paddle.display();
 }
