@@ -9,8 +9,15 @@ author, and this description to match your project!
 "use strict";
 
 let garden = {
+  //Array that stores each flower.
   flowers: [],
+  //How many flowers in garden
   numFlowers: 25,
+  //Array of bees.
+  bees: [],
+  //How many bees in garden
+  numBees: 7,
+  //The green grass in the bg.
   grassColor: {
     r: 120,
     g: 180,
@@ -36,6 +43,14 @@ function setup() {
     //add the flower to the array of flowers.
     garden.flowers.push(flower);
   }
+
+  //Create bees.
+  for (let i = 0; i < garden.numBees; i++) {
+    let x = random(0, width);
+    let y = random(0, height);
+    let bee = new Bee (x, y);
+    garden.bees.push(bee);
+  }
 }
 
 function draw() {
@@ -46,6 +61,15 @@ function draw() {
     if (flower.alive) {
       flower.shrink();
       flower.display();
+    }
+  }
+
+  for (let i = 0; i < garden.bees.length; i++) {
+    let bee = garden.bees[i];
+    if (bee.alive) {
+      bee.shrink();
+      bee.move();
+      bee.display();
     }
   }
 }
