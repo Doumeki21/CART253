@@ -12,11 +12,11 @@ let garden = {
   //Array that stores each flower.
   flowers: [],
   //How many flowers in garden
-  numFlowers: 25,
+  numFlowers: 20,
   //Array of bees.
   bees: [],
   //How many bees in garden
-  numBees: 7,
+  numBees: 50,
   //The green grass in the bg.
   grassColor: {
     r: 120,
@@ -48,7 +48,7 @@ function setup() {
   for (let i = 0; i < garden.numBees; i++) {
     let x = random(0, width);
     let y = random(0, height);
-    let bee = new Bee (x, y);
+    let bee = new Bee(x, y);
     garden.bees.push(bee);
   }
 }
@@ -70,6 +70,13 @@ function draw() {
       bee.shrink();
       bee.move();
       bee.display();
+
+      for (let j = 0; j < garden.flowers.length; j++) {
+        let flower = garden.flowers[j];
+        if (flower.alive) {
+          bee.tryToPollinate(flower);
+        }
+      }
     }
   }
 }

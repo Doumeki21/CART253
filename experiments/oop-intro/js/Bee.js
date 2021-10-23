@@ -6,10 +6,12 @@ class Bee {
     this.y = y;
     this.size = 40;
     this.minSize = 10;
+    this.maxSize = 40;
     this.vx = 0;
     this.vy = 0;
     this.speed = 5;
     this.shrinkRate = 0.5;
+    this.growRate = 0.5;
     this.jitteriness = 0.1;
     this.alive = true;
   }
@@ -23,6 +25,19 @@ class Bee {
     }
   }
 
+  tryToPollinate(flower) {
+    let d = dist(this.x, this.y, flower.x, flower.y);
+    if (d < this.size/2 +flower.size/2 + flower.petalThickness) {
+      this.grow();
+      flower.pollinate();
+    }
+  }
+
+  grow() {
+    this.size += this.growRate;
+    this.size = constrain(this.size, this.minSize, this.maxSize);
+  }
+
   move() {
     //check to change direction
     let r = random(0, 1);
@@ -34,7 +49,7 @@ class Bee {
     this.x += this.vx;
     this.y += this.vy;
 //constrained inside canvas
-    this.x = constrain(this.x, 0 width);
+    this.x = constrain(this.x, 0, width);
     this.y = constrain(this.y, 0, height);
   }
 
