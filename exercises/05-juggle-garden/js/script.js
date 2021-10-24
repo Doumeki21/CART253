@@ -1,23 +1,22 @@
 /**
-Activity 08: Object Oriented Programming Activity.
+Exercise 05: Juggle Garden
 Olenka Yuen
 
-plan
-1. defined a paddle class
-2. Set up main Programm.
-3.  define a ball class.
-4. Add balls to main program.
-5. Make balls bounce on paddle.
+Brief:
+1. Add another form of user control (keyboard controlled side-paddle)
+2. Add a new class and objects. (don't touch square?)
+3.  at least 2 endings. (1. timeup = good ed, 2. ball touches outside canvas gameover.)
 */
 
 "use strict";
 
-let gravityForce = 0.0025;
+let gravityForce = 0.00025;
 
-let paddle;
+let paddleBottom;
+let paddleTop;
 
 let balls = [];
-let numBalls = 20;
+let numBalls = 15;
 
 /**
 Description of setup
@@ -25,10 +24,11 @@ Description of setup
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
-  paddle = new Paddle(300, 20);
+  paddleBottom = new PaddleVertical(300, 20, height - 30);
+  paddleTop = new PaddleVertical(300, 20, 30)
 
   for (let i=0; i < numBalls; i++) {
-    let x =random(0, width);
+    let x = random(0, width);
     let y = random(-400, -100);
     let ball = new Ball(x, y);
     //put ball into the balls array
@@ -39,15 +39,19 @@ function setup() {
 function draw() {
   background(0);
 
-  paddle.move();
-  paddle.display();
+  paddleTop.move();
+  paddleTop.display();
+
+  paddleBottom.move();
+  paddleBottom.display();
 
   for (let i=0; i<balls.length; i++) {
     let ball = balls[i];
     if (ball.active) {
       ball.gravity(gravityForce);
       ball.move();
-      ball.bounce(paddle);
+      ball.bounce(paddleTop);
+      ball.bounce(paddleBottom);
       ball.display();
     }
   }
