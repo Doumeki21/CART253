@@ -18,6 +18,8 @@ let paddleTop;
 let balls = [];
 let numBalls = 15;
 
+let squareEmerge = false;
+
 let state = `title`;
 
 /**
