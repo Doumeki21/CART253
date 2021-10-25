@@ -1,10 +1,10 @@
 class Square {
 
-  constructor(x, y) {
+  constructor(x, y, vx, vy) {
     this.x = x;
     this.y = y;
-    this.vx = 0;
-    this.vy = 0;
+    this.vx = vx;
+    this.vy = vy;
     this.ax = 0;
     this.ay = 0;
     this.maxSpeed = 15;
@@ -27,12 +27,15 @@ class Square {
     this.x += this.vx;
     this.y += this.vy;
 
-    if (this.y - this.size/2 > height) {
+    if (setInterval(display, 5000)) {
+      this.active = true;
+    }
+    else if (this.y - this.size/2 > height) {
       this.active = false;
     }
   }
 
-  bounce(paddle) {
+  contact(paddle) {
     //Chheck if abll passes bottom of canvas
     // if (this.y + this.size/2 >= height) {
     if (this.x > paddle.x - paddle.width / 2 &&
@@ -40,12 +43,7 @@ class Square {
       this.y + this.size / 2 > paddle.y - paddle.height / 2 &&
       this.y - this.size / 2 < paddle.y + paddle.height / 2) {
 
-      //bounce
-      let dx = this.x - paddle.x;
-      this.vx += map(dx, -paddle.width/2, paddle.width/2, -2, 2);
-      //reverse velocity
-      this.vy = -this.vy;
-      this.ay = 0;
+      this.active = false;
     }
   }
 

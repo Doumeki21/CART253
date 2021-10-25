@@ -26,7 +26,7 @@ class Ball {
     //Chnaging coordinate posiiton.
     this.x += this.vx;
     this.y += this.vy;
-
+    //If the ball has gone off the canvas, deactivate the ball.
     if (this.y - this.size/2 > height) {
       this.active = false;
     }

@@ -11,20 +11,21 @@ Brief:
 "use strict";
 
 let ballGravityForce = 0.0025;
+let squareGravityForce = 0.0055;
 
 let paddleBottom;
 let paddleTop;
+let paddleLeft;
+let paddleRight;
 
 let balls = [];
 let numBalls = 15;
 
-let squareEmerge = false;
+// let square;
 
 let state = `title`;
 
-/**
-Description of setup
-*/
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
@@ -32,8 +33,13 @@ function setup() {
 }
 
 function reset() {
+
   paddleBottom = new PaddleVertical(300, 20, height - 30);
-  paddleTop = new PaddleVertical(300, 20, 30)
+  paddleTop = new PaddleVertical(300, 20, 30);
+  paddleLeft = new PaddleSide(20, 300, 30);
+  paddleRight = new PaddleSide(20, 300, width - 30);
+
+  // square = new Square(width/2, height/2, random(-5, 5), random(-5, 5));
 
   for (let i = 0; i < numBalls; i++) {
     let x = random(0, width);
@@ -110,11 +116,24 @@ function instructions() {
 }
 
 function game() {
+
   paddleTop.move();
   paddleTop.display();
 
   paddleBottom.move();
   paddleBottom.display();
+
+  paddleLeft.move();
+  paddleLeft.display();
+
+  paddleRight.move();
+  paddleRight.display();
+
+  // square.gravity(squareGravityForce);
+  // square.move();
+  // square.contact(paddleTop);
+  // square.contact(paddleBottom);
+  // square.display();
 
   for (let i = 0; i < balls.length; i++) {
     let ball = balls[i];
@@ -123,6 +142,8 @@ function game() {
       ball.move();
       ball.bounce(paddleTop);
       ball.bounce(paddleBottom);
+      ball.bounce(paddleLeft);
+      ball.bounce(paddleRight);
       ball.display();
     }
   }
