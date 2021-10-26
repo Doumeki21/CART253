@@ -29,21 +29,24 @@ class Square {
 
     // setInterval(this.display, 1000);
 
-    if (this.y - this.size/2 > height) {
+    if (this.y - this.size / 2 > height) {
       this.active = false;
-  }
-
+    }
   }
 
   contact(paddle) {
     //Chheck if abll passes bottom of canvas
     // if (this.y + this.size/2 >= height) {
-    if (this.x > paddle.x - paddle.width / 2 &&
-      this.x < paddle.x + paddle.width / 2 &&
+    if (this.x + this.size/2 > paddle.x - paddle.width / 2 &&
+      this.x - this.size/2 < paddle.x + paddle.width / 2 &&
       this.y + this.size / 2 > paddle.y - paddle.height / 2 &&
       this.y - this.size / 2 < paddle.y + paddle.height / 2) {
 
-      this.active = false;
+      return true;
+    }
+    else {
+      //return = reporting to main js what happened.
+      return false;
     }
   }
 

@@ -18,7 +18,8 @@ let paddleRight;
 let squares = [];
 let randomTimer = 0;
 let framesPassed = 0;
-let squareGravityForce = 0.0055;
+let squareSpeeds = [-5, -4, -3, 3, 4, 5];
+// let squareGravityForce = 0.0055;
 
 let balls = [];
 let numBalls = 15;
@@ -28,6 +29,8 @@ let ballGravityForce = 0.0025;
 
 let state = `title`;
 
+let scoreCount = 0;
+
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -36,6 +39,8 @@ function setup() {
 }
 
 function reset() {
+  balls = [];
+  squares = [];
 
   paddleBottom = new PaddleVertical(300, 20, height - 30);
   paddleTop = new PaddleVertical(300, 20, 30);
@@ -52,9 +57,11 @@ function reset() {
     balls.push(ball);
   }
 
-  let square = new Square(width/2, height/2, random(-5, 5), random(-5, 5));
+  let square = new Square(width / 2, height / 2, random(squareSpeeds), random(squareSpeeds));
   squares.push(square);
-  randomTimer = random(60, 60*5);
+  randomTimer = random(60, 60 * 5);
+
+
 }
 
 function draw() {
@@ -71,8 +78,15 @@ function draw() {
   //game
   else if (state === `game`) {
     game();
+  } else if (state === `badEnd`) {
+    badEnd();
+    reset();
+  } else if (state === `goodEnd`) {
+    goodEnd();
+    reset();
   }
 }
+
 
 function title() {
   //title
@@ -152,22 +166,59 @@ function game() {
   for (let i = 0; i < squares.length; i++) {
     let square = squares[i];
     if (square.active) {
-      square.gravity(squareGravityForce);
+      // square.gravity(squareGravityForce);
       square.move();
-      square.contact(paddleTop);
-      square.contact(paddleBottom);
       square.display();
+      if (square.contact(paddleTop) || square.contact(paddleBottom) || square.contact(paddleLeft) || square.contact(paddleRight)) {
+        state = `badEnd`;
+      }
     }
   }
-//Frames increase by 1.
+  //Frames increase by 1.
   framesPassed++;
 
   if (framesPassed > randomTimer) {
-    let square = new Square(width/2, height/2, random(-5, 5), random(-5, 5));
+    let square = new Square(width / 2, height / 2, random(-5, 5), random(-5, 5));
     squares.push(square);
-    randomTimer = random(60, 60*5);
+    randomTimer = random(60, 60 * 5);
     framesPassed = 0;
   }
+}
+
+function badEnd() {
+  //title
+  push();
+  textSize(100);
+  fill(100, 100, 200);
+  textAlign(CENTER, CENTER);
+  text(`Game Over`, width / 2, height / 2);
+  pop();
+
+  //Next step
+  push();
+  textSize(20);
+  fill(212, 212, 212);
+  textAlign(CENTER, CENTER);
+  text(`CLICK TO CONTINUE`, width / 2, height - 100);
+  pop();
+}
+
+function goodEnd() {
+  //title
+  push();
+  textSize(100);
+  fill(200, 100, 100);
+  textAlign(CENTER, CENTER);
+  text(`YOU HANDLED ALL YOUR TASKS`, width / 2, height / 2);
+  pop();
+
+  //Next step
+  push();
+  textSize(20);
+  fill(212, 212, 212);
+  textAlign(CENTER, CENTER);
+  text(`CLICK TO CONTINUE`, width / 2, height - 100);
+  pop();
 }
 
 function mouseClicked() {
@@ -175,5 +226,7 @@ function mouseClicked() {
     state = `instructions`;
   } else if (state === `instructions`) {
     state = `game`;
+  } else if (state === `badEnd`) {
+    state = `title`;
   }
 }

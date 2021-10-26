@@ -8,7 +8,7 @@ class PaddleSide {
     this.y = 0;
     this.keyW = 87;
     this.keyD = 68;
-    this.speedY = 8;
+    this.speedY = 15;
     this.vy = 0;
   }
 
