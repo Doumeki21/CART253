@@ -35,8 +35,8 @@ class Ball {
   bounce(paddle) {
     //Chheck if abll passes bottom of canvas
     // if (this.y + this.size/2 >= height) {
-    if (this.x > paddle.x - paddle.width / 2 &&
-      this.x < paddle.x + paddle.width / 2 &&
+    if (this.x + this.size/2 > paddle.x - paddle.width / 2 &&
+      this.x - this.size/2  < paddle.x + paddle.width / 2 &&
       this.y + this.size / 2 > paddle.y - paddle.height / 2 &&
       this.y - this.size / 2 < paddle.y + paddle.height / 2) {
 

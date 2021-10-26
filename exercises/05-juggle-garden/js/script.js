@@ -18,6 +18,8 @@ let paddleTop;
 let paddleLeft;
 let paddleRight;
 
+let square;
+
 let balls = [];
 let numBalls = 15;
 
@@ -39,7 +41,9 @@ function reset() {
   paddleLeft = new PaddleSide(20, 300, 30);
   paddleRight = new PaddleSide(20, 300, width - 30);
 
-  // square = new Square(width/2, height/2, random(-5, 5), random(-5, 5));
+  square = new Square(width/2, height/2, random(-5, 5), random(-5, 5));
+
+  setInterval(square.display, 1000);
 
   for (let i = 0; i < numBalls; i++) {
     let x = random(0, width);
@@ -129,11 +133,11 @@ function game() {
   paddleRight.move();
   paddleRight.display();
 
-  // square.gravity(squareGravityForce);
-  // square.move();
-  // square.contact(paddleTop);
-  // square.contact(paddleBottom);
-  // square.display();
+  square.gravity(squareGravityForce);
+  square.move();
+  square.contact(paddleTop);
+  square.contact(paddleBottom);
+  square.display();
 
   for (let i = 0; i < balls.length; i++) {
     let ball = balls[i];

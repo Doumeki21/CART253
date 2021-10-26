@@ -27,12 +27,12 @@ class Square {
     this.x += this.vx;
     this.y += this.vy;
 
-    if (setInterval(display, 5000)) {
-      this.active = true;
-    }
-    else if (this.y - this.size/2 > height) {
+    setInterval(this.display, 1000);
+
+    if (this.y - this.size/2 > height) {
       this.active = false;
-    }
+  }
+
   }
 
   contact(paddle) {

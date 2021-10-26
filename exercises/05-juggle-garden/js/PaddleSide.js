@@ -9,18 +9,20 @@ class PaddleSide {
     this.keyW = 87;
     this.keyD = 68;
     this.speedY = 8;
+    this.vy = 0;
   }
 
   move() {
     if (keyIsDown(this.keyW)) {
-      this.speedY = -this.speedY;
+      this.vy = -this.speedY;
     } else if (keyIsDown(this.keyD)) {
-      this.speedY = this.speedY;
-    } else {
-      this.speedY = 0;
+      this.vy = this.speedY;
+    }
+    else {
+      this.vy = 0;
     }
 
-    this.y += this.speedY;
+    this.y += this.vy;
     this.y = constrain(this.y, 0, height);
   }
 
