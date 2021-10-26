@@ -10,18 +10,19 @@ Brief:
 
 "use strict";
 
-let ballGravityForce = 0.0025;
-let squareGravityForce = 0.0055;
-
 let paddleBottom;
 let paddleTop;
 let paddleLeft;
 let paddleRight;
 
-let square;
+let squares = [];
+let randomTimer = 0;
+let framesPassed = 0;
+let squareGravityForce = 0.0055;
 
 let balls = [];
 let numBalls = 15;
+let ballGravityForce = 0.0025;
 
 // let square;
 
@@ -41,9 +42,7 @@ function reset() {
   paddleLeft = new PaddleSide(20, 300, 30);
   paddleRight = new PaddleSide(20, 300, width - 30);
 
-  square = new Square(width/2, height/2, random(-5, 5), random(-5, 5));
-
-  setInterval(square.display, 1000);
+  // setInterval(square.display, 1000);
 
   for (let i = 0; i < numBalls; i++) {
     let x = random(0, width);
@@ -52,6 +51,10 @@ function reset() {
     //put ball into the balls array
     balls.push(ball);
   }
+
+  let square = new Square(width/2, height/2, random(-5, 5), random(-5, 5));
+  squares.push(square);
+  randomTimer = random(60, 60*5);
 }
 
 function draw() {
@@ -133,12 +136,6 @@ function game() {
   paddleRight.move();
   paddleRight.display();
 
-  square.gravity(squareGravityForce);
-  square.move();
-  square.contact(paddleTop);
-  square.contact(paddleBottom);
-  square.display();
-
   for (let i = 0; i < balls.length; i++) {
     let ball = balls[i];
     if (ball.active) {
@@ -150,6 +147,26 @@ function game() {
       ball.bounce(paddleRight);
       ball.display();
     }
+  }
+
+  for (let i = 0; i < squares.length; i++) {
+    let square = squares[i];
+    if (square.active) {
+      square.gravity(squareGravityForce);
+      square.move();
+      square.contact(paddleTop);
+      square.contact(paddleBottom);
+      square.display();
+    }
+  }
+//Frames increase by 1.
+  framesPassed++;
+
+  if (framesPassed > randomTimer) {
+    let square = new Square(width/2, height/2, random(-5, 5), random(-5, 5));
+    squares.push(square);
+    randomTimer = random(60, 60*5);
+    framesPassed = 0;
   }
 }
 

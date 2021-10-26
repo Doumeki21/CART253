@@ -27,7 +27,7 @@ class Square {
     this.x += this.vx;
     this.y += this.vy;
 
-    setInterval(this.display, 1000);
+    // setInterval(this.display, 1000);
 
     if (this.y - this.size/2 > height) {
       this.active = false;
