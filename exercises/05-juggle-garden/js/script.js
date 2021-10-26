@@ -3,8 +3,8 @@ Exercise 05: Juggle Garden
 Olenka Yuen
 
 Brief:
-1. Add another form of user control (keyboard controlled side-paddle)
-2. Add a new class and objects. (don't touch square?)
+- Add another form of user control (keyboard controlled side-paddle)
+- Add a new class and objects. (don't touch square?)
 3.  at least 2 endings. (1. timeup = good ed, 2. ball touches outside canvas gameover.)
 */
 
@@ -29,7 +29,8 @@ let ballGravityForce = 0.0025;
 
 let state = `title`;
 
-let scoreCount = 0;
+// let scoreCount = 0;
+let timer;
 
 
 function setup() {
@@ -41,6 +42,9 @@ function setup() {
 function reset() {
   balls = [];
   squares = [];
+
+  timer = new Timer(50, 100);
+  timer.numCircles = 10;
 
   paddleBottom = new PaddleVertical(300, 20, height - 30);
   paddleTop = new PaddleVertical(300, 20, 30);
@@ -60,8 +64,6 @@ function reset() {
   let square = new Square(width / 2, height / 2, random(squareSpeeds), random(squareSpeeds));
   squares.push(square);
   randomTimer = random(60, 60 * 5);
-
-
 }
 
 function draw() {
@@ -81,8 +83,8 @@ function draw() {
   } else if (state === `badEnd`) {
     badEnd();
     reset();
-  } else if (state === `goodEnd`) {
-    goodEnd();
+  } else if (state === `ending`) {
+    ending();
     reset();
   }
 }
@@ -150,6 +152,9 @@ function game() {
   paddleRight.move();
   paddleRight.display();
 
+  timer.display();
+  timer.checkTimeUp();
+
   for (let i = 0; i < balls.length; i++) {
     let ball = balls[i];
     if (ball.active) {
@@ -203,7 +208,7 @@ function badEnd() {
   pop();
 }
 
-function goodEnd() {
+function ending() {
   //title
   push();
   textSize(100);
