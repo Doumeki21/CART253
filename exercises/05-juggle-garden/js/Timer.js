@@ -31,22 +31,21 @@ class Timer {
   display() {
     let x = this.x;
 
-  for (let i = this.numCircles; i > 0; i--) {
-    //Default is at full color.
-    let alpha = 255;
-    //If current circle is the last one--
-    if (i === 1) {
-      //then use timer.alpha (which is reducing to 0.)
-      alpha = this.alpha;
+    for (let i = this.numCircles; i > 0; i--) {
+      //Default is at full color.
+      let alpha = 255;
+      //If current circle is the last one--
+      if (i === 1) {
+        //then use timer.alpha (which is reducing to 0.)
+        alpha = this.alpha;
+      }
+      //Timer displays vertically
+      x += 40;
+
+      push();
+      noStroke();
+      fill(255, this.alpha);
+      ellipse(this.x, this.y, this.size);
+      pop();
     }
-    //Timer displays vertically
-    this.x += 40;
-
-    push();
-    noStroke();
-    fill(255, this.alpha);
-    ellipse(this.x, this.y, this.size);
-    pop();
   }
-
-}
