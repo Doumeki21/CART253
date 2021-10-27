@@ -319,13 +319,13 @@ function displayTimer() {
       //then use timer.alpha (which is reducing to 0.)
       alpha = timer.alpha;
     }
-
+  x += 40;
     push();
     noStroke();
     fill(255, alpha);
     ellipse(x, timer.y, timer.size);
     pop();
-    x += 40;
+
   }
 }
 

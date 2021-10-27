@@ -25,11 +25,9 @@ let balls = [];
 let numBalls = 15;
 let ballGravityForce = 0.0025;
 
-// let square;
-
 let state = `title`;
 
-// let scoreCount = 0;
+let scoreCount = 0;
 let timer;
 
 
@@ -152,8 +150,12 @@ function game() {
   paddleRight.move();
   paddleRight.display();
 
-  timer.display();
-  timer.checkTimeUp();
+  if (timer.active) {
+    timer.display();
+    timer.checkTimeUp();
+  } else {
+    state = `ending`;
+  }
 
   for (let i = 0; i < balls.length; i++) {
     let ball = balls[i];
@@ -193,7 +195,7 @@ function game() {
 function badEnd() {
   //title
   push();
-  textSize(100);
+  textSize(70);
   fill(100, 100, 200);
   textAlign(CENTER, CENTER);
   text(`Game Over`, width / 2, height / 2);
@@ -211,7 +213,7 @@ function badEnd() {
 function ending() {
   //title
   push();
-  textSize(100);
+  textSize(70);
   fill(200, 100, 100);
   textAlign(CENTER, CENTER);
   text(`YOU HANDLED ALL YOUR TASKS`, width / 2, height / 2);
@@ -232,6 +234,8 @@ function mouseClicked() {
   } else if (state === `instructions`) {
     state = `game`;
   } else if (state === `badEnd`) {
+    state = `title`;
+  } else if ( state === `ending`) {
     state = `title`;
   }
 }

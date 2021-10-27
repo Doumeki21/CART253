@@ -7,6 +7,7 @@ class Timer {
     this.alpha = 255;
     this.fadeAmount = 4;
     this.numCircles = 10;
+    this.active = true;
   }
 
 
@@ -24,7 +25,7 @@ class Timer {
     }
     //When time runs out = Game over.
     if (this.numCircles === 0) {
-      state = `timeUp`;
+      this.active = false;
     }
   }
 
@@ -44,8 +45,9 @@ class Timer {
 
       push();
       noStroke();
-      fill(255, this.alpha);
-      ellipse(this.x, this.y, this.size);
+      fill(255, alpha);
+      ellipse(x, this.y, this.size);
       pop();
     }
   }
+}
