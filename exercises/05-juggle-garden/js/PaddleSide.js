@@ -12,20 +12,24 @@ class PaddleSide {
     this.vy = 0;
   }
 
+  //Move right and left paddles with W and D keys.
   move() {
     if (keyIsDown(this.keyW)) {
       this.vy = -this.speedY;
     } else if (keyIsDown(this.keyD)) {
       this.vy = this.speedY;
     }
+    //Side paddles stop moving when nothing is pressed.
     else {
       this.vy = 0;
     }
-
+    //Side paddles changes position.
     this.y += this.vy;
+    //Side paddles are constrained within canvas.
     this.y = constrain(this.y, 0, height);
   }
 
+  //Display white paddles.
   display() {
     push();
     fill(255, 255, 255);

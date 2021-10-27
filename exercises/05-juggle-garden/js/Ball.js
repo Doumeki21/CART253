@@ -12,10 +12,12 @@ class Ball {
     this.active = true;
   }
 
+  //Ball goes down.
   gravity(force) {
     this.ay += force;
   }
 
+  //Ball moves.
   move() {
     //accelerates
     this.vx += this.ax;
@@ -23,32 +25,33 @@ class Ball {
     //constraining the ball at reasonable speed
     this.vx = constrain(this.vx, -this.maxSpeed, this.maxSpeed);
     this.vy = constrain(this.vy, -this.maxSpeed, this.maxSpeed);
-    //Chnaging coordinate posiiton.
+    //Changing position.
     this.x += this.vx;
     this.y += this.vy;
     //If the ball has gone off the canvas, deactivate the ball.
-    if (this.y - this.size/2 > height) {
+    if (this.y - this.size / 2 > height) {
       this.active = false;
     }
   }
 
+  //Ball bounces off paddles.
   bounce(paddle) {
-    //Chheck if abll passes bottom of canvas
-    // if (this.y + this.size/2 >= height) {
-    if (this.x + this.size/2 > paddle.x - paddle.width / 2 &&
-      this.x - this.size/2  < paddle.x + paddle.width / 2 &&
+    //Check if ball passes bottom of canvas
+    if (this.x + this.size / 2 > paddle.x - paddle.width / 2 &&
+      this.x - this.size / 2 < paddle.x + paddle.width / 2 &&
       this.y + this.size / 2 > paddle.y - paddle.height / 2 &&
       this.y - this.size / 2 < paddle.y + paddle.height / 2) {
 
       //bounce
       let dx = this.x - paddle.x;
-      this.vx += map(dx, -paddle.width/2, paddle.width/2, -2, 2);
+      this.vx += map(dx, -paddle.width / 2, paddle.width / 2, -2, 2);
       //reverse velocity
       this.vy = -this.vy;
       this.ay = 0;
     }
   }
 
+  //Display red ball.
   display() {
     push();
     fill(255, 50, 50);
