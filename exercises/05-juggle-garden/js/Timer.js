@@ -23,7 +23,7 @@ class Timer {
       //and reset alpha to 255 so next one fades.
       this.alpha = 255;
     }
-    //When time runs out = Game over.
+    //When time runs out, Timer is not active (ending).
     if (this.numCircles === 0) {
       this.active = false;
     }
@@ -43,6 +43,7 @@ class Timer {
       //Timer displays vertically
       x += 40;
 
+      //Display white circles fading out.
       push();
       noStroke();
       fill(255, alpha);

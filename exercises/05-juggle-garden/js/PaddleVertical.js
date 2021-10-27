@@ -8,10 +8,12 @@ class PaddleVertical {
     this.y = y;
   }
 
+  //Top and bottom paddles move right/ left using mouse.
   move() {
     this.x = mouseX;
   }
 
+  //Display white paddles.
   display() {
     push();
     fill(255, 255, 255);

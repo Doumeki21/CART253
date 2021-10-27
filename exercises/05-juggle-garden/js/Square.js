@@ -12,10 +12,7 @@ class Square {
     this.active = true;
   }
 
-  gravity(force) {
-    this.ay += force;
-  }
-
+  //Square moves.
   move() {
     //accelerates
     this.vx += this.ax;
@@ -23,36 +20,33 @@ class Square {
     //constraining the ball at reasonable speed
     this.vx = constrain(this.vx, -this.maxSpeed, this.maxSpeed);
     this.vy = constrain(this.vy, -this.maxSpeed, this.maxSpeed);
-    //Chnaging coordinate posiiton.
+    //Changing position.
     this.x += this.vx;
     this.y += this.vy;
-
-    // setInterval(this.display, 1000);
-
+    //If the square has gone off the canvas, deactivate the square.
     if (this.y - this.size / 2 > height) {
       this.active = false;
     }
   }
 
+
   contact(paddle) {
-    //Chheck if abll passes bottom of canvas
-    // if (this.y + this.size/2 >= height) {
-    if (this.x + this.size/2 > paddle.x - paddle.width / 2 &&
-      this.x - this.size/2 < paddle.x + paddle.width / 2 &&
+    //Check if square hits any side of the paddles.
+    if (this.x + this.size / 2 > paddle.x - paddle.width / 2 &&
+      this.x - this.size / 2 < paddle.x + paddle.width / 2 &&
       this.y + this.size / 2 > paddle.y - paddle.height / 2 &&
       this.y - this.size / 2 < paddle.y + paddle.height / 2) {
-
-      return true;
-    }
-    else {
       //return = reporting to main js what happened.
+      return true;
+    } else {
       return false;
     }
   }
 
+  //Display blue square.
   display() {
     push();
-    fill(50, 50, 255);
+    fill(96, 138, 232);
     stroke(0);
     rectMode(CENTER);
     rect(this.x, this.y, this.size);

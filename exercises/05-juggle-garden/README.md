@@ -1,3 +1,3 @@
-# Template p5 project
+# Exercise 05: Juggle Garden
 
-This is the README file for the entire project. For more official projects you should write information here about the nature of the project, your name, any special explanations of how the project works, etc.
+Goal: Stay on task by containing the red balls on screen. Survive the time (aka. deadline) by avoiding the blue squares before time runs out! Use the mouse, "W", and "D" keys to control the paddles.

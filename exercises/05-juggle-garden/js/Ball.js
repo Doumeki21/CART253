@@ -12,7 +12,7 @@ class Ball {
     this.active = true;
   }
 
-  //Ball goes down.
+  //Ball goes down due to gravity.
   gravity(force) {
     this.ay += force;
   }
@@ -34,9 +34,9 @@ class Ball {
     }
   }
 
-  //Ball bounces off paddles.
+
   bounce(paddle) {
-    //Check if ball passes bottom of canvas
+    //Check if Ball bounces off on any side of the paddles.
     if (this.x + this.size / 2 > paddle.x - paddle.width / 2 &&
       this.x - this.size / 2 < paddle.x + paddle.width / 2 &&
       this.y + this.size / 2 > paddle.y - paddle.height / 2 &&

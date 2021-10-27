@@ -2,10 +2,12 @@
 Exercise 05: Juggle Garden
 Olenka Yuen
 
+Goal: Stay on task by containing the red balls on screen. Survive the time (aka. deadline) by avoiding the blue squares before time runs out! Use the mouse, "W", and "D" keys to control the paddles.
+
 Brief:
 - Add another form of user control (keyboard controlled side-paddle)
 - Add a new class and objects. (don't touch square?)
-- At least 2 endings. (1. timeup = good ed, 2. ball touches outside canvas gameover.)
+- At least 2 endings. (1. timeup = good ed, 2. square touches paddles = game over.)
 */
 
 "use strict";
