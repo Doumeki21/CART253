@@ -15,10 +15,16 @@ PLAN:
 
 "use strict";
 
-let state = `title`;
+let state = `simulation`;
+
+let pedestrian;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+
+  let x = width/2;
+  let y = height;
+  pedestrian = new Pedestrian(x, y);
 }
 
 function draw() {
@@ -43,6 +49,9 @@ function title() {
 }
 
 function simulation() {
+  pedestrian.handleInput();
+  pedestrian.move();
+  pedestrian.display();
 
 }
 
