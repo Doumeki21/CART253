@@ -26,10 +26,6 @@ let numMotorcycles = 5;
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
-  let x = width / 2;
-  let y = height;
-  pedestrian = new Pedestrian(x, y);
-
   for (let i = 0; i < numCars; i++) {
     let x = random(0, width);
     let y = random(0, height);
@@ -64,6 +60,14 @@ function setup() {
       vehicle.vx = vehicle.speed;
     }
   }
+
+  reset();
+}
+
+function reset() {
+  let x = width / 2;
+  let y = height;
+  pedestrian = new Pedestrian(x, y);
 }
 
 function draw() {
@@ -77,26 +81,40 @@ function draw() {
   }
   else if (state === `success`) {
     success();
+    reset();
   }
   else if (state === `dead`) {
     dead();
+    reset();
   }
 }
 
 function title() {
-  displayText(`PEDESTRIAN PALAVER`);
+  displayText(`PEDESTRIAN PALAVER!`);
 }
 
 function simulation() {
+  //User actions
   pedestrian.handleInput();
   pedestrian.move();
   pedestrian.display();
 
+  //All vehicles actions
   for (let i = 0; i < vehicles.length; i++) {
     let vehicle = vehicles[i];
     vehicle.move();
     vehicle.wrap();
     vehicle.display();
+
+    pedestrian.checkHit(vehicle);
+  }
+
+  if (!pedestrian.alive) {
+    state = `dead`;
+  }
+
+  if (pedestrian.y < 0) {
+    state = `success`;
   }
 }
 
@@ -120,5 +138,11 @@ function displayText(string) {
 function keyPressed() {
   if (state === `title`) {
     state = `simulation`;
+  }
+  else if (state === `dead`) {
+    state = `title`;
+  }
+  else if (state === `success`) {
+    sate = `title`;
   }
 }
