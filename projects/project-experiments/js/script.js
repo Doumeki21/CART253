@@ -68,16 +68,13 @@ function setup() {
   for (let i = 0; i < numTargets; i++) {
      target.x = random(0, 360);
      target.y = random(0, 360);
+     //Add constrain???
     targets.push(target);
   }
 }
 
 function draw() {
   background(0);
-
-  let hr = hour();
-  let min = minute();
-  let sec = second();
 
 //White stroke
   strokeWeight(20);
@@ -96,8 +93,13 @@ function draw() {
   noStroke();
   ellipse(target.x, target.y, target.size);
 
-  // fill(255);
-  // noStroke();
-  // textSize(32);
-  // text(hr + `:` + min + `:` + sec, 10, 200);
+// //CLOCK
+//   let hr = hour();
+//   let min = minute();
+//   let sec = second();
+//
+//   fill(255);
+//   noStroke();
+//   textSize(32);
+//   text(hr + `:` + min + `:` + sec, 10, 200);
 }
