@@ -5,6 +5,7 @@ let circles = [];
 function setup() {
   createCanvas(800, 800);
 
+//introduce array?
   for (let i = 0; i < 50; i++) {
     let circle = {
       x: random(width),
@@ -28,6 +29,7 @@ function setup() {
     }
   }
 
+//Draw circle in array
   for (let i = 0; i < circles.length; i++) {
     fill(200, 50, 50, 200);
     noStroke();
