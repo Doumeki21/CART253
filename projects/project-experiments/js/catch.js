@@ -17,7 +17,8 @@ let user = {
   x: undefined,
   y: undefined,
   width: 50,
-  height: 30,
+  initialHeight: 30,
+  currentHeight: undefined,
 }
 
 let ball = {
@@ -28,11 +29,17 @@ let ball = {
   active: true,
 }
 
+let goal = {
+  x: 0,
+  y: 50,
+}
+
 function setup() {
   createCanvas(800, 800);
 
   user.x = width / 2;
   user.y = height;
+  user.currentHeight = user.initialHeight;
 
   barBase.x = width - 30;
   barBase.y = height - 50;
@@ -54,27 +61,28 @@ function draw() {
 
   //Ball goes down
   ball.y += ball.vy;
+  //user is moved with mouse.
+  user.x = mouseX;
 
 
   //user grows taller// check all 4 sides
-  if (ball.x + ball.size / 2 > user.x - user.width / 2 && ball.x - ball.size / 2 < user.x + user.width && ball.y + ball.size / 2 > user.y - user.height / 2 && ball.y - ball.size / 2 < user.y + user.height / 2) {
-    user.height += ball.size * 3;
+  if (ball.x + ball.size / 2 > user.x - user.width / 2 && ball.x - ball.size / 2 < user.x + user.width && ball.y + ball.size / 2 > user.y - user.currentHeight / 2 && ball.y - ball.size / 2 < user.y + user.currentHeight / 2) {
+    user.currentHeight += ball.size * 3;
     ball.active = false;
   }
 
-//Ball disappears when it goes over the bottom edge.
+  //Ball disappears when it goes over the bottom edge.
   if (ball.y > height) {
     ball.active = false;
   }
-//Ball regenerates after it disappears.
+  //Ball regenerates after it disappears.
   if (!ball.active) {
     resetBall();
   }
 
-if (user.y - user.height/2 < 50 ) {
-  //VARIABLE user.initialheight
-  user.height = 30;
-}
+  if (user.y - user.currentHeight / 2 < goal.y) {
+    user.currentHeight = user.initialHeight;
+  }
 
   //target
   push();
@@ -84,24 +92,19 @@ if (user.y - user.height/2 < 50 ) {
   pop();
 
   //User
-  user.x = mouseX;
   push();
   fill(255);
   noStroke();
   rectMode(CENTER);
-  rect(user.x, user.y, user.width, user.height);
+  rect(user.x, user.y, user.width, user.currentHeight);
   pop();
-
-//MAKE LINE VARIABLE
-  line(0, 50, width, 50);
-  stroke(0, 255, 0);
 
   //meter
   push();
   noStroke();
-  fill(212, 212, 212);
+  fill(200, 50, 50);
   rectMode(CENTER);
-  rect(barBase.x, barBase.y - barBase.height/2, barBase.width, barBase.height);
+  rect(barBase.x, barBase.y - barBase.height / 2, barBase.width, barBase.height);
   pop();
 
   //progressBar
@@ -109,8 +112,10 @@ if (user.y - user.height/2 < 50 ) {
   noStroke();
   fill(0, 255, 0);
   rectMode(CENTER);
-  rect(progressBar.x, progressBar.y - progressBar.height/2, progressBar.width, progressBar.height);
+  rect(progressBar.x, progressBar.y - progressBar.height / 2, progressBar.width, progressBar.height);
   pop();
 
-
+  //Goal
+  line(goal.x, goal.y, width, goal.y);
+  stroke(0, 255, 0);
 }
