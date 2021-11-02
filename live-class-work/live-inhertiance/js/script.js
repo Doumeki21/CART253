@@ -19,8 +19,8 @@ let state = `simulation`;
 
 let pedestrian;
 let vehicles = [];
-let numCars = 10;
-let numTrucks = 10;
+let numCars = 5;
+let numTrucks = 2;
 let numMotorcycles = 5;
 
 function setup() {
