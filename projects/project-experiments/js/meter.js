@@ -59,6 +59,13 @@ let meter = {
   size: 300,
 }
 
+let meterBar = {
+  x: 300,
+  y: 300,
+  width: 300,
+  height: 300,
+}
+
 let target = {
   size: 50,
   angle: undefined,
@@ -84,8 +91,8 @@ function draw() {
   //red stroke/ meterBar
   strokeWeight(10);
   stroke(255, 100, 100);
-  let end = map(mouseX, 0, width, 0, 360);
-  arc(300, 300, 300, 300, 0, end);
+  let mouseEnd = map(mouseX, 0, width, 0, 360);
+  arc(meterBar.x, meterBar.y, meterBar.width, meterBar.height, 0, mouseEnd);
 
   //target
   push();
@@ -95,6 +102,10 @@ function draw() {
   rotate(target.angle);
   ellipse(meter.size / 2, 0, target.size);
   pop();
+
+  if (mouseEnd === target.x) {
+    target.angle = random(0, 360);
+  }
 
   // //CLOCK
   //   let hr = hour();
