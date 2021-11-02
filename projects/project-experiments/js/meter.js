@@ -53,53 +53,56 @@ Advice
 //   }
 // }
 
-let targets = [];
-let numTargets = 1;
-let target = {
-  x: 0,
-  y: 0,
-  size: 50,
+let meter = {
+  x: 300,
+  y: 300,
+  size: 300,
 }
+
+let target = {
+  size: 50,
+  angle: undefined,
+};
 
 function setup() {
   createCanvas(600, 600);
   angleMode(DEGREES);
 
-  for (let i = 0; i < numTargets; i++) {
-     target.x = random(0, 360);
-     target.y = random(0, 360);
-     //Add constrain???
-    targets.push(target);
-  }
+  //or random(0, TWO_PI);
+  target.angle = random(0, 360);
 }
 
 function draw() {
   background(0);
 
-//White stroke
+  //White stroke
   strokeWeight(20);
   stroke(255);
   noFill()
-  ellipse(300, 300, 300);
+  ellipse(meter.x, meter.y, meter.size);
 
-//red stroke
+  //red stroke/ meterBar
   strokeWeight(10);
   stroke(255, 100, 100);
   let end = map(mouseX, 0, width, 0, 360);
   arc(300, 300, 300, 300, 0, end);
 
-//target
-  fill(0, 255, 0);
+  //target
+  push();
+  fill(0, 255, 0, 155);
   noStroke();
-  ellipse(target.x, target.y, target.size);
+  translate(meter.x, meter.y);
+  rotate(target.angle);
+  ellipse(meter.size / 2, 0, target.size);
+  pop();
 
-// //CLOCK
-//   let hr = hour();
-//   let min = minute();
-//   let sec = second();
-//
-//   fill(255);
-//   noStroke();
-//   textSize(32);
-//   text(hr + `:` + min + `:` + sec, 10, 200);
+  // //CLOCK
+  //   let hr = hour();
+  //   let min = minute();
+  //   let sec = second();
+  //
+  //   fill(255);
+  //   noStroke();
+  //   textSize(32);
+  //   text(hr + `:` + min + `:` + sec, 10, 200);
 }
