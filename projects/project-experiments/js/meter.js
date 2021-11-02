@@ -98,12 +98,15 @@ function draw() {
   push();
   fill(0, 255, 0, 155);
   noStroke();
+  //translate the initital point to the center of the meter.
   translate(meter.x, meter.y);
+  //rotate function goes around a default/ origin (which s usually top left corner or 0,0) point.
   rotate(target.angle);
+  //target draws on the radius of the meter.
   ellipse(meter.size / 2, 0, target.size);
   pop();
 
-  if (mouseEnd === target.x) {
+  if (mouseEnd > target.angle - 10 && mouseEnd < target.angle + 10) {
     target.angle = random(0, 360);
   }
 
