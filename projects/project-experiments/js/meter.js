@@ -80,7 +80,7 @@ function setup() {
 }
 
 function draw() {
-  background(0);
+  background(0, 0, 70);
 
   //White stroke
   strokeWeight(20);
@@ -89,14 +89,16 @@ function draw() {
   ellipse(meter.x, meter.y, meter.size);
 
   //red stroke/ meterBar
+  push();
   strokeWeight(10);
-  stroke(255, 100, 100);
+  stroke(255, 0, 43);
   let mouseEnd = map(mouseX, 0, width, 0, 360);
   arc(meterBar.x, meterBar.y, meterBar.width, meterBar.height, 0, mouseEnd);
+  pop();
 
   //target
   push();
-  fill(0, 255, 0, 155);
+  fill(255, 0, 43, 155);
   noStroke();
   //translate the initital point to the center of the meter.
   translate(meter.x, meter.y);
@@ -109,6 +111,15 @@ function draw() {
   if (mouseEnd > target.angle - 10 && mouseEnd < target.angle + 10) {
     target.angle = random(0, 360);
   }
+
+  //text
+  push()
+  noStroke();
+  fill(255);
+  textSize(30);
+  textAlign(CENTER);
+  text(`<< MOVE >>`, width/2, height - 30);
+  pop();
 
   // //CLOCK
   //   let hr = hour();

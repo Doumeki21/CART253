@@ -2,14 +2,14 @@
 let barBase = {
   x: undefined,
   y: undefined,
-  width: 20,
-  height: 100,
+  width: 40,
+  height: 200,
 }
 
 let progressBar = {
   x: undefined,
   y: undefined,
-  width: 20,
+  width: 30,
   height: 20,
 }
 
@@ -35,7 +35,7 @@ let goal = {
 }
 
 function setup() {
-  createCanvas(800, 800);
+  createCanvas(windowWidth, windowHeight);
 
   user.x = width / 2;
   user.y = height;
@@ -57,7 +57,7 @@ function resetBall() {
 }
 
 function draw() {
-  background(0);
+  background(0, 0, 50);
 
   //Ball goes down
   ball.y += ball.vy;
@@ -79,21 +79,21 @@ function draw() {
   if (!ball.active) {
     resetBall();
   }
-
+//When user touches goal
   if (user.y - user.currentHeight / 2 < goal.y) {
     user.currentHeight = user.initialHeight;
   }
 
   //target
   push();
-  fill(255);
+  fill(64, 123, 167);
   noStroke();
   ellipse(ball.x, ball.y, ball.size);
   pop();
 
   //User
   push();
-  fill(255);
+  fill(253, 255, 255);
   noStroke();
   rectMode(CENTER);
   rect(user.x, user.y, user.width, user.currentHeight);
@@ -102,7 +102,7 @@ function draw() {
   //meter
   push();
   noStroke();
-  fill(200, 50, 50);
+  fill(128, 0, 22);
   rectMode(CENTER);
   rect(barBase.x, barBase.y - barBase.height / 2, barBase.width, barBase.height);
   pop();
@@ -110,12 +110,14 @@ function draw() {
   //progressBar
   push();
   noStroke();
-  fill(0, 255, 0);
+  fill(255, 0, 43);
   rectMode(CENTER);
   rect(progressBar.x, progressBar.y - progressBar.height / 2, progressBar.width, progressBar.height);
   pop();
 
   //Goal
+  stroke(255);
+  strokeWeight(2);
   line(goal.x, goal.y, width, goal.y);
-  stroke(0, 255, 0);
+
 }
