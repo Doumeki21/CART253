@@ -45,10 +45,41 @@ let fillProgressBar = {
 //Timer starts at 10 seconds.
 let timer = 10;
 
+//White rectangle
+let user = {
+  x: undefined,
+  y: undefined,
+  width: 50,
+  initialHeight: 30,
+  currentHeight: undefined,
+}
+
+//Falling balls
+let ball = {
+  x: undefined,
+  y: 0,
+  vy: 8,
+  size: 50,
+  active: true,
+}
+
+//Pass the line!
+let goal = {
+  x: 0,
+  y: 50,
+}
+
 let state = `title`;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+
+  reset();
+}
+
+function reset() {
+  timer = 10;
+  fillProgressBar.height = 10;
 
   //Placing the meter at the center of the window.
   meter.x = width / 2;
@@ -65,6 +96,11 @@ function setup() {
 
   fillProgressBar.x = width - 30;
   fillProgressBar.y = height - 50;
+
+  //White rectangle at bottom of screen.
+  user.x = width / 2;
+  user.y = height;
+  user.currentHeight = user.initialHeight;
 }
 
 function draw() {
@@ -72,10 +108,12 @@ function draw() {
 
   if (state === `title`) {
     title();
+    reset();
   } else if (state === `stressGame`) {
     stressGame();
-  }
-  else if (state === `gameOver`) {
+  } else if (state === `finalGame`) {
+    finalGame();
+  } else if (state === `gameOver`) {
     gameOver()
   }
 }
@@ -87,7 +125,7 @@ function title() {
   fill(255);
   textSize(50);
   textAlign(CENTER);
-  text(`UNDER PRESSURE`, width / 2, height/2);
+  text(`UNDER PRESSURE`, width / 2, height / 2);
   pop();
 
   push()
@@ -95,7 +133,7 @@ function title() {
   fill(255);
   textSize(30);
   textAlign(CENTER);
-  text(`CLICK ANYWHERE TO CONTINUE`, width / 2, height/2 + 100);
+  text(`CLICK ANYWHERE TO CONTINUE`, width / 2, height / 2 + 100);
   pop();
 }
 
@@ -135,9 +173,10 @@ function stressGame() {
     fillProgressBar.height += 15;
   }
 
-  //If progressBar fills to max height, then bar restarts.
+  //If progressBar fills to max height,
   if (fillProgressBar.height >= progressBar.height) {
-    fillProgressBar.height = 10;
+    //then game switches to next game.
+    finalGame();
   }
 
   //count in seconds
@@ -185,13 +224,51 @@ function stressGame() {
   pop();
 }
 
+//NOTE: for the final, insert bg sound (rain, ambulance siren, heart beat machine) and dialogue/ narration.
+
+function finalGame() {
+  //Ball goes down
+  ball.y += ball.vy;
+  //user is moved with mouse.
+  user.x = mouseX;
+
+  //Check if ball touches the user
+  if (ball.x + ball.size / 2 > user.x - user.width / 2 && ball.x - ball.size / 2 < user.x + user.width && ball.y + ball.size / 2 > user.y - user.currentHeight / 2 && ball.y - ball.size / 2 < user.y + user.currentHeight / 2) {
+    //user grows taller
+    user.currentHeight += ball.size * 3;
+    ball.active = false;
+  }
+
+  //Ball disappears when it goes over the bottom edge.
+  if (ball.y > height) {
+    ball.active = false;
+  }
+  //Ball regenerates at top of screen after it disappears.
+  if (!ball.active) {
+    resetBall();
+  }
+//When user touches goal line,
+  if (user.y - user.currentHeight / 2 < goal.y) {
+    //Game ends
+    state = `end`;
+  }
+}
+
+function resetBall() {
+  ball.x = random(5, width - 30);
+  ball.y = 0;
+  ball.active = true;
+}
+
 function gameOver() {
+  background(63, 55, 201);
+
   push()
   noStroke();
   fill(255);
   textSize(50);
   textAlign(CENTER);
-  text(`GAME OVER`, width / 2, height/2);
+  text(`GAME OVER`, width / 2, height / 2);
   pop();
 
   push()
@@ -199,7 +276,7 @@ function gameOver() {
   fill(255);
   textSize(30);
   textAlign(CENTER);
-  text(`YOU JUST DIDN'T MAKE IT ON TIME!`, width / 2, height/2 + 100);
+  text(`YOU JUST DIDN'T MAKE IT ON TIME.`, width / 2, height / 2 + 100);
   pop();
 }
 
