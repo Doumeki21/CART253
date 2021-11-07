@@ -39,18 +39,19 @@ function setup() {
 }
 
 function draw() {
-  background(0, 0, 70);
+  background(58, 12, 163);
 
-  //White stroke
+  //Draw white stroke
   strokeWeight(20);
   stroke(255);
   noFill()
   ellipse(meter.x, meter.y, meter.size);
 
-  //red stroke/ the fillMeter
+  //Draw red stroke/ the fillMeter
   push();
   strokeWeight(10);
   stroke(247, 37, 133);
+  //Followed by moving the mouse side-to-side.
   let mouseEnd = map(mouseX, 0, width, 0, 360);
   arc(fillMeter.x, fillMeter.y, fillMeter.width, fillMeter.height, 0, mouseEnd);
   pop();
@@ -67,7 +68,7 @@ function draw() {
   //target draws on the radius of the meter.
   ellipse(meter.size / 2, 0, target.size);
   pop();
-
+  //If mouse touches the target, target changes position.
   if (mouseEnd > target.angle - 10 && mouseEnd < target.angle + 10) {
     target.angle = random(0, 360);
   }
