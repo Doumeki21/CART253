@@ -113,6 +113,10 @@ function draw() {
     stressGame();
   } else if (state === `finalGame`) {
     finalGame();
+  } else if (state === `end`) {
+    end();
+  } else if (state === `quote`) {
+    quote();
   } else if (state === `gameOver`) {
     gameOver()
   }
@@ -260,6 +264,36 @@ function resetBall() {
   ball.active = true;
 }
 
+function end() {
+  push()
+  noStroke();
+  fill(255);
+  textSize(50);
+  textAlign(CENTER);
+  text(`END`, width / 2, height / 2);
+  pop();
+
+  push()
+  noStroke();
+  fill(255);
+  textSize(30);
+  textAlign(CENTER);
+  text(`Life is more than being successful. \n Take your time.\n Find your happiness.`, width / 2, height / 2 + 100);
+  pop();
+
+  //Make an on-click dialogue// message here for the final!
+}
+
+function quote() {
+  push()
+  noStroke();
+  fill(255);
+  textSize(50);
+  textAlign(CENTER);
+  text(`"Success is not final, failure is not fatal. \n -Winston Churchill"`, width / 2, height / 2);
+  pop();
+}
+
 function gameOver() {
   background(63, 55, 201);
 
@@ -283,6 +317,10 @@ function gameOver() {
 function mouseClicked() {
   if (state === `title`) {
     state = `stressGame`;
+  } else if (state === `end`) {
+    state = `quote`;
+  } else if (state === `quote`) {
+    state = `title`;
   } else if (state === `gameOver`) {
     state = `title`;
   }
