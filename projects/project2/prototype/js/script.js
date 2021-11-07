@@ -14,7 +14,6 @@ let meter = {
   y: undefined,
   size: 300,
 }
-
 //Red stroke
 let fillMeter = {
   x: undefined,
@@ -22,8 +21,7 @@ let fillMeter = {
   width: 300,
   height: 300,
 }
-
-//reappearing cirlce on the white stroke.
+//reappearing blue cirlce on the white stroke.
 let target = {
   size: 50,
   angle: undefined,
@@ -36,7 +34,6 @@ let progressBar = {
   width: 40,
   height: 200,
 }
-
 //Progress bar fill.
 let fillProgressBar = {
   x: undefined,
@@ -45,14 +42,17 @@ let fillProgressBar = {
   height: 10,
 }
 
+//Timer starts at 10 seconds.
+let timer = 10;
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
   //Placing the meter at the center of the window.
-  meter.x = width/2;
-  meter.y = height/2;
-  fillMeter.x = width/2;
-  fillMeter.y = height/2;
+  meter.x = width / 2;
+  meter.y = height / 2;
+  fillMeter.x = width / 2;
+  fillMeter.y = height / 2;
 
   //Target appears anywhere on the white stroke.
   angleMode(DEGREES);
@@ -102,9 +102,17 @@ function draw() {
     fillProgressBar.height += 10;
   }
 
+  //If progressBar fills to max height, then bar restarts.
   if (fillProgressBar.height === progressBar.height) {
     fillProgressBar.height = 10;
   }
+
+//When timer hits 0, timer stays at 0.
+  if (timer <= 0) {
+    timer = 0;
+  }
+  //count in seconds
+  timer -= 1/60;
 
   //instructions text
   push()
@@ -130,5 +138,15 @@ function draw() {
   fill(255, 0, 43);
   rectMode(CENTER);
   rect(fillProgressBar.x, fillProgressBar.y - fillProgressBar.height / 2, fillProgressBar.width, fillProgressBar.height);
+  pop();
+
+  //Draw timer.
+  push();
+  noStroke();
+  fill(255);
+  textSize(60);
+  textAlign(CENTER, CENTER);
+  //Round timer to a whole number.
+  text(round(timer), 200, 200);
   pop();
 }
