@@ -8,12 +8,14 @@ author, and this description to match your project!
 
 "use strict";
 
+//white stroke
 let meter = {
   x: 300,
   y: 300,
   size: 300,
 }
 
+//Red stroke
 let fillMeter = {
   x: 300,
   y: 300,
@@ -21,49 +23,44 @@ let fillMeter = {
   height: 300,
 }
 
+//reappearing cirlce on the white stroke.
 let target = {
   size: 50,
   angle: undefined,
 };
 
-/**
-Description of setup
-*/
+
 function setup() {
   createCanvas(600, 600);
   angleMode(DEGREES);
 
-  //or random(0, TWO_PI);
-    target.angle = random(0, 360);
+  //Target appears anywhere on the white stroke.
+  target.angle = random(0, 360);
 }
 
-
-/**
-Description of draw()
-*/
 function draw() {
   background(0, 0, 70);
 
-//White stroke
-strokeWeight(20);
-stroke(255);
-noFill()
-ellipse(meter.x, meter.y, meter.size);
+  //White stroke
+  strokeWeight(20);
+  stroke(255);
+  noFill()
+  ellipse(meter.x, meter.y, meter.size);
 
-//red stroke/ fillMeter
-push();
-strokeWeight(10);
-stroke(255, 0, 43);
-let mouseEnd = map(mouseX, 0, width, 0, 360);
-arc(fillMeter.x, fillMeter.y, fillMeter.width, fillMeter.height, 0, mouseEnd);
-pop();
+  //red stroke/ the fillMeter
+  push();
+  strokeWeight(10);
+  stroke(247, 37, 133);
+  let mouseEnd = map(mouseX, 0, width, 0, 360);
+  arc(fillMeter.x, fillMeter.y, fillMeter.width, fillMeter.height, 0, mouseEnd);
+  pop();
 
-//target
-push();
-fill(255, 0, 43, 155);
-noStroke();
+  //target
+  push();
+  fill(76, 201, 240, 155);
+  noStroke();
 
-//translate the initital point to the center of the meter.
+  //translate the initital point to the center of the meter.
   translate(meter.x, meter.y);
   //rotate function goes around a default/ origin (which s usually top left corner or 0,0) point.
   rotate(target.angle);
@@ -74,4 +71,13 @@ noStroke();
   if (mouseEnd > target.angle - 10 && mouseEnd < target.angle + 10) {
     target.angle = random(0, 360);
   }
+
+  //instructions text
+  push()
+  noStroke();
+  fill(255);
+  textSize(30);
+  textAlign(CENTER);
+  text(`<< MOVE >>`, width / 2, height - 30);
+  pop();
 }
