@@ -21,7 +21,10 @@ let fillMeter = {
   height: 300,
 }
 
-
+let target = {
+  size: 50,
+  angle: undefined,
+};
 
 /**
 Description of setup
@@ -30,6 +33,8 @@ function setup() {
   createCanvas(600, 600);
   angleMode(DEGREES);
 
+  //or random(0, TWO_PI);
+    target.angle = random(0, 360);
 }
 
 
@@ -53,5 +58,20 @@ let mouseEnd = map(mouseX, 0, width, 0, 360);
 arc(fillMeter.x, fillMeter.y, fillMeter.width, fillMeter.height, 0, mouseEnd);
 pop();
 
+//target
+push();
+fill(255, 0, 43, 155);
+noStroke();
 
+//translate the initital point to the center of the meter.
+  translate(meter.x, meter.y);
+  //rotate function goes around a default/ origin (which s usually top left corner or 0,0) point.
+  rotate(target.angle);
+  //target draws on the radius of the meter.
+  ellipse(meter.size / 2, 0, target.size);
+  pop();
+
+  if (mouseEnd > target.angle - 10 && mouseEnd < target.angle + 10) {
+    target.angle = random(0, 360);
+  }
 }
