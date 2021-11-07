@@ -108,7 +108,6 @@ function draw() {
 
   if (state === `title`) {
     title();
-    reset();
   } else if (state === `stressGame`) {
     stressGame();
   } else if (state === `finalGame`) {
@@ -117,13 +116,14 @@ function draw() {
     end();
   } else if (state === `quote`) {
     quote();
+    reset();
   } else if (state === `gameOver`) {
     gameOver()
+    reset();
   }
 }
 
 function title() {
-
   push()
   noStroke();
   fill(255);
@@ -177,18 +177,17 @@ function stressGame() {
     fillProgressBar.height += 15;
   }
 
-  //If progressBar fills to max height,
-  if (fillProgressBar.height >= progressBar.height) {
-    //then game switches to next game.
-    finalGame();
-  }
-
   //count in seconds
   timer -= 1 / 60;
-  //When timer hits 0, timer stays at 0.
+  //If timer hits 0 = Game ends.
   if (timer <= 0) {
     timer = 0;
     state = `gameOver`;
+  }
+  //Else if progressBar fills to max height,
+  else if (fillProgressBar.height >= progressBar.height) {
+    //then game switches to next game.
+    state = `finalGame`;
   }
 
   //instructions text
