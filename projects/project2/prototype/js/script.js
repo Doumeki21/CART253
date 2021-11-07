@@ -45,6 +45,8 @@ let fillProgressBar = {
 //Timer starts at 10 seconds.
 let timer = 10;
 
+let state = `title`;
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
@@ -68,6 +70,36 @@ function setup() {
 function draw() {
   background(58, 12, 163);
 
+  if (state === `title`) {
+    title();
+  } else if (state === `stressGame`) {
+    stressGame();
+  }
+  else if (state === `gameOver`) {
+    gameOver()
+  }
+}
+
+function title() {
+
+  push()
+  noStroke();
+  fill(255);
+  textSize(50);
+  textAlign(CENTER);
+  text(`UNDER PRESSURE`, width / 2, height/2);
+  pop();
+
+  push()
+  noStroke();
+  fill(255);
+  textSize(30);
+  textAlign(CENTER);
+  text(`CLICK ANYWHERE TO CONTINUE`, width / 2, height/2 + 100);
+  pop();
+}
+
+function stressGame() {
   //Draw white stroke
   strokeWeight(20);
   stroke(255);
@@ -94,25 +126,27 @@ function draw() {
   //target draws on the radius of the meter.
   ellipse(meter.size / 2, 0, target.size);
   pop();
+
   //If the red meter touches the target,
   if (mouseEnd > target.angle - 10 && mouseEnd < target.angle + 10) {
     // target changes position
     target.angle = random(0, 360);
     //progressBar fills.
-    fillProgressBar.height += 10;
+    fillProgressBar.height += 15;
   }
 
   //If progressBar fills to max height, then bar restarts.
-  if (fillProgressBar.height === progressBar.height) {
+  if (fillProgressBar.height >= progressBar.height) {
     fillProgressBar.height = 10;
   }
 
-//When timer hits 0, timer stays at 0.
+  //count in seconds
+  timer -= 1 / 60;
+  //When timer hits 0, timer stays at 0.
   if (timer <= 0) {
     timer = 0;
+    state = `gameOver`;
   }
-  //count in seconds
-  timer -= 1/60;
 
   //instructions text
   push()
@@ -146,7 +180,33 @@ function draw() {
   fill(255);
   textSize(60);
   textAlign(CENTER, CENTER);
-  //Round timer to a whole number.
+  //Round timer to nearest whole number.
   text(round(timer), 200, 200);
   pop();
+}
+
+function gameOver() {
+  push()
+  noStroke();
+  fill(255);
+  textSize(50);
+  textAlign(CENTER);
+  text(`GAME OVER`, width / 2, height/2);
+  pop();
+
+  push()
+  noStroke();
+  fill(255);
+  textSize(30);
+  textAlign(CENTER);
+  text(`YOU JUST DIDN'T MAKE IT ON TIME!`, width / 2, height/2 + 100);
+  pop();
+}
+
+function mouseClicked() {
+  if (state === `title`) {
+    state = `stressGame`;
+  } else if (state === `gameOver`) {
+    state = `title`;
+  }
 }
