@@ -227,7 +227,7 @@ function stressGame() {
   pop();
 }
 
-//NOTE: for the final, insert bg sound (rain, ambulance siren, heart beat machine) and dialogue/ narration.
+//NOTE: for the final, insert bg sound (rain, ambulance siren, heart beat machine) and dialogue/ narration here!
 
 function finalGame() {
   //Ball goes down
