@@ -2,8 +2,7 @@
 Project 2: prototype
 Olenka Yuen
 
-This is a template. You must fill in the title,
-author, and this description to match your project!
+An anthology of games that serves as a life lesson for individuals who overwork themselves.
 */
 
 "use strict";
@@ -141,6 +140,8 @@ function title() {
   pop();
 }
 
+//Add another screen. "In honor of thyself." / "In honor of the self."
+
 function stressGame() {
   //Draw white stroke
   strokeWeight(20);
@@ -230,31 +231,51 @@ function stressGame() {
 //NOTE: for the final, insert bg sound (rain, ambulance siren, heart beat machine) and dialogue/ narration here!
 
 function finalGame() {
-  //Ball goes down
+  //Target goes down
   ball.y += ball.vy;
   //user is moved with mouse.
   user.x = mouseX;
 
-  //Check if ball touches the user
+  //Check if Target touches the user
   if (ball.x + ball.size / 2 > user.x - user.width / 2 && ball.x - ball.size / 2 < user.x + user.width && ball.y + ball.size / 2 > user.y - user.currentHeight / 2 && ball.y - ball.size / 2 < user.y + user.currentHeight / 2) {
     //user grows taller
     user.currentHeight += ball.size * 3;
     ball.active = false;
   }
 
-  //Ball disappears when it goes over the bottom edge.
+  //Target disappears when it goes over the bottom edge.
   if (ball.y > height) {
     ball.active = false;
   }
-  //Ball regenerates at top of screen after it disappears.
+  //Target regenerates at top of screen after it disappears.
   if (!ball.active) {
     resetBall();
   }
-//When user touches goal line,
+  //When user touches goal line,
   if (user.y - user.currentHeight / 2 < goal.y) {
     //Game ends
     state = `end`;
   }
+
+  //Draw target
+  push();
+  fill(64, 123, 167);
+  noStroke();
+  ellipse(ball.x, ball.y, ball.size);
+  pop();
+
+  //Draw user
+  push();
+  fill(253, 255, 255);
+  noStroke();
+  rectMode(CENTER);
+  rect(user.x, user.y, user.width, user.currentHeight);
+  pop();
+
+  //Draw goal
+  stroke(255);
+  strokeWeight(2);
+  line(goal.x, goal.y, width, goal.y);
 }
 
 function resetBall() {
@@ -289,7 +310,7 @@ function quote() {
   fill(255);
   textSize(50);
   textAlign(CENTER);
-  text(`"Success is not final, failure is not fatal. \n -Winston Churchill"`, width / 2, height / 2);
+  text(`"Success is not final, failure is not fatal." \n -Winston Churchill`, width / 2, height / 2);
   pop();
 }
 
