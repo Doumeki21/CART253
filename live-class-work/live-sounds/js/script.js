@@ -1,33 +1,43 @@
 /**
-Title of Project
+live: sounds
 Author Name
 
-This is a template. You must fill in the title,
-author, and this description to match your project!
+- sounds of triangle, specific notes
+-tips and tricks creating sounds.
+- pausing simulation
 */
 
 "use strict";
 
+let barkSFX = undefined;
+let currentRate = 1;
+let rateChange = 0.1;
 
 /**
 Description of preload
 */
 function preload() {
-
+  barkSFX = loadSound(`assets/sounds/bark.wav`);
 }
 
-
-/**
-Description of setup
-*/
 function setup() {
-
+createCanvas(500, 500);
 }
 
-
-/**
-Description of draw()
-*/
 function draw() {
+background(0);
+}
 
+function mousePressed() {
+  barkSFX.rate(currentRate);
+  barkSFX.play(0);
+}
+
+function keyPressed() {
+  if (keyCode === UP_ARROW) {
+      currentRate += rateChange;
+  }
+  if (keyCode === DOWN_ARROW) {
+    currentRate -= rateChange;
+  }
 }
