@@ -1,3 +1,3 @@
-# Exercise: I Like to Move it!
+# Exercise 06: Make Some Noise
 
-Experiment with the movement of shapes, varying colors as well as some mouse movement. 
+Producing a prototype for the sound aspect of the final project.
