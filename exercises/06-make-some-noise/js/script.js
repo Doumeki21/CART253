@@ -99,7 +99,7 @@ function draw() {
     text(`YOU DID IT!`, 100, 100);
     pop();
   }
-  else if (progressBar.y - progressBar.currentHeight/2 <= 0) {
+  if (progressBar.y - progressBar.currentHeight/2 < 0) {
     push();
     fill(64, 123, 167);
     strokeWeight(30);
