@@ -31,6 +31,7 @@ let progressBar = {
   width: 10,
   minHeight: 20,
   maxHeight: 200,
+  edgeHeight: undefined,
   currentHeight: undefined,
 };
 
@@ -41,7 +42,9 @@ let meter = {
   height: 200,
 };
 
-function preLoad() {
+let scoreCanChange = false;
+
+function preload() {
   barkSFX = loadSound(`assets/sounds/bark.wav`);
 }
 
@@ -59,26 +62,50 @@ function setup() {
   progressBar.x = 30;
   progressBar.y = height - 50;
 
+  progressBar.edgeHeight = 0;
   progressBar.currentHeight = progressBar.minHeight;
 }
 
 function draw() {
   background(255, 200, 200);
-  // let newRate = map(progressBar.currentHeight, progressBar.minHeight, progressBar.maxHeight, 1, 10);
-  // barkSFX.rate(newRate);
+  let newRate = map(progressBar.currentHeight, progressBar.minHeight, progressBar.maxHeight, 1, 8);
+  barkSFX.rate(newRate);
 
   ball.x = mouseX;
   ball.y = mouseY;
 
   //Check ball inside hoop
-  if (ball.x + ball.size / 2 > hoop.x -   hoop.width / 2 &&
-    ball.x - ball.width / 2 < hoop.x + hoop.width / 2 &&
-    ball.y + ball.size / 2 > hoop.y - hoop.height / 2 &&
-    ball.y - ball.size / 2 > hoop.y + hoop.height / 2) {
-    //score point
-    console.log(progressBar.currentHeight);
-    progressBar.currentHeight += 20;
-    // barkSFX.play();
+  if (ball.x + ball.size / 2 > hoop.x &&
+    ball.x - ball.size / 2 < hoop.x &&
+    ball.y + ball.size / 2 > hoop.y &&
+    ball.y - ball.size / 2 < hoop.y) {
+    //score point!
+    if (scoreCanChange === true) {
+      progressBar.currentHeight += 20;
+      barkSFX.play();
+      scoreCanChange = false;
+    }
+  }
+  else {
+    scoreCanChange = true;
+  }
+
+//Check bar increase.
+  if (progressBar.currentHeight >= progressBar.maxHeight) {
+    push();
+    fill(64, 123, 167);
+    strokeWeight(30);
+    textSize(30);
+    text(`YOU DID IT!`, 100, 100);
+    pop();
+  }
+  else if (progressBar.y - progressBar.currentHeight/2 <= 0) {
+    push();
+    fill(64, 123, 167);
+    strokeWeight(30);
+    textSize(30);
+    text(`OUT OF THIS WORLD!`, 100, 100);
+    pop();
   }
 
   //ball
