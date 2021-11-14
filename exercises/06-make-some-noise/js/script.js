@@ -10,6 +10,8 @@ Goal:
 
 **************************************************/
 
+let barkSFX;
+
 let ball = {
   x: undefined,
   y: undefined,
@@ -39,12 +41,17 @@ let meter = {
   height: 200,
 };
 
+function preLoad() {
+  barkSFX = loadSound(`assets/sounds/bark.wav`);
+}
+
 function setup() {
   createCanvas(600, 600);
+  userStartAudio();
   angleMode(DEGREES);
 
   hoop.x = width - 100;
-  hoop.y = height/2 - 100;
+  hoop.y = height / 2 - 100;
 
   meter.x = 30;
   meter.y = height - 50;
@@ -57,14 +64,21 @@ function setup() {
 
 function draw() {
   background(255, 200, 200);
+  // let newRate = map(progressBar.currentHeight, progressBar.minHeight, progressBar.maxHeight, 1, 10);
+  // barkSFX.rate(newRate);
 
   ball.x = mouseX;
   ball.y = mouseY;
 
-//Check ball inside hoop
-  if (ball.x + ball.size/2 > hoop.x - hoop.size/2 && ball.x - ball.size/2 < hoop.x + hoop.size/2 && ball.y + ball.size/2 > hoop.y - hoop.size/2 && ball.y - ball.size/2 > hoop.y + hoop.size/2) {
+  //Check ball inside hoop
+  if (ball.x + ball.size / 2 > hoop.x -   hoop.width / 2 &&
+    ball.x - ball.width / 2 < hoop.x + hoop.width / 2 &&
+    ball.y + ball.size / 2 > hoop.y - hoop.height / 2 &&
+    ball.y - ball.size / 2 > hoop.y + hoop.height / 2) {
     //score point
+    console.log(progressBar.currentHeight);
     progressBar.currentHeight += 20;
+    // barkSFX.play();
   }
 
   //ball
@@ -81,7 +95,7 @@ function draw() {
   stroke(255, 200);
   arc(hoop.x, hoop.y, hoop.width, hoop.height, 0, 360);
   pop();
-  
+
   //meter
   push();
   noStroke();
@@ -97,6 +111,4 @@ function draw() {
   rectMode(CENTER);
   rect(progressBar.x, progressBar.y - progressBar.currentHeight / 2, progressBar.width, progressBar.currentHeight);
   pop();
-
-
 }
