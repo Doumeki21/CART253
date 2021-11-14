@@ -38,13 +38,14 @@ author, and this description to match your project!
 
 let oscillator;
 let angle = 0;
+let t = 0;
 
 function setup() {
   createCanvas(600, 600);
   userStartAudio();
 
   oscillator = new p5.Oscillator(200, `sine`);
-  oscillator.amp(1.0);
+  oscillator.amp(0.2);
 }
 
 function draw() {
@@ -58,12 +59,16 @@ function draw() {
 //   let newAmp = map(mouseX, 0, width, 0, 1);
 //   oscillator.amp(newAmp);
 
-//Alien sound?
-let sinAngle = sin(angle); //tan(angle) is like backwards, jumping quick high to low?
-let newFreq = map(sinAngle, -1, 1, 0, 2000); //440, 800
+// //Alien sound?
+// let sinAngle = sin(angle); //tan(angle) is like backwards, jumping quick high to low?
+// let newFreq = map(sinAngle, -1, 1, 440, 800); //440, 800 or 0, 2000
+
+let noiseValue = noise(t);
+let newFreq = map(noiseValue, 0, 1, 440, 800);
 oscillator.freq(newFreq);
 
-angle += 0.2; //0.2
+t += 0.1;
+// angle += 0.2; //0.2
 
 //fast alien sounds?
 let r = random(0,1);
