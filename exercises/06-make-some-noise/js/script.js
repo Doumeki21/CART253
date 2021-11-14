@@ -10,34 +10,49 @@ Goal:
 
 **************************************************/
 
-let meter = {
+let ball = {
   x: undefined,
   y: undefined,
-  width: 20,
-  height: 200,
-}
+  size: 75,
+};
+
+let hoop = {
+  x: undefined,
+  y: undefined,
+  width: 110,
+  height: 50,
+};
 
 let progressBar = {
   x: undefined,
   y: undefined,
   width: 10,
-  height: 20,
-}
+  minHeight: 20,
+  maxHeight: 200,
+  currentHeight: undefined,
+};
 
-let ball = {
+let meter = {
   x: undefined,
   y: undefined,
-  size: 75,
-}
+  width: 20,
+  height: 200,
+};
 
 function setup() {
   createCanvas(600, 600);
+  angleMode(DEGREES);
+
+  hoop.x = width - 100;
+  hoop.y = height/2 - 100;
 
   meter.x = 30;
   meter.y = height - 50;
 
   progressBar.x = 30;
   progressBar.y = height - 50;
+
+  progressBar.currentHeight = progressBar.minHeight;
 }
 
 function draw() {
@@ -46,6 +61,12 @@ function draw() {
   ball.x = mouseX;
   ball.y = mouseY;
 
+//Check ball inside hoop
+  if (ball.x + ball.size/2 > hoop.x - hoop.size/2 && ball.x - ball.size/2 < hoop.x + hoop.size/2 && ball.y + ball.size/2 > hoop.y - hoop.size/2 && ball.y - ball.size/2 > hoop.y + hoop.size/2) {
+    //score point
+    progressBar.currentHeight += 20;
+  }
+
   //ball
   push();
   fill(64, 123, 167);
@@ -53,6 +74,14 @@ function draw() {
   ellipse(ball.x, ball.y, ball.size);
   pop();
 
+  //hoop
+  push();
+  noFill();
+  strokeWeight(5);
+  stroke(255, 200);
+  arc(hoop.x, hoop.y, hoop.width, hoop.height, 0, 360);
+  pop();
+  
   //meter
   push();
   noStroke();
@@ -64,8 +93,10 @@ function draw() {
   //progressBar
   push();
   noStroke();
-  fill(255, 150, 150);
+  fill(224, 100, 100);
   rectMode(CENTER);
-  rect(progressBar.x, progressBar.y - progressBar.height / 2, progressBar.width, progressBar.height);
+  rect(progressBar.x, progressBar.y - progressBar.currentHeight / 2, progressBar.width, progressBar.currentHeight);
   pop();
+
+
 }
