@@ -3,6 +3,7 @@
 let redCircle = {
   x: undefined,
   y: undefined,
+  isBeingDragged: false,
   size: 80,
   fill: {
     r: 255,
@@ -14,6 +15,7 @@ let redCircle = {
 let greenCircle = {
   x: undefined,
   y: undefined,
+  isBeingDragged: false,
   size: 80,
   fill: {
     r: 0,
@@ -25,6 +27,7 @@ let greenCircle = {
 let redSquare = {
   x: undefined,
   y: undefined,
+  isBeingDragged: false,
   size: 80,
   fill: {
     r: 255,
@@ -36,6 +39,7 @@ let redSquare = {
 let greenSquare = {
   x: undefined,
   y: undefined,
+  isBeingDragged: false,
   size: 80,
   fill: {
     r: 0,
