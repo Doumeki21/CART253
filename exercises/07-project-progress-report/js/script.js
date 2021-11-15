@@ -33,12 +33,13 @@ let progressBar = {
   width: 40,
   height: 200,
 }
-//Progress bar fill.
+//Filling of the Progress bar.
 let fillProgressBar = {
   x: undefined,
   y: undefined,
   width: 30,
-  height: 10,
+  minHeight: 10,
+  currentHeight: undefined,
 }
 
 //Timer starts at 10 seconds.
@@ -68,19 +69,37 @@ let goal = {
   y: 50,
 }
 
+//different screen modes (ex. changing games, ending scene, etc)
 let state = `title`;
 
+//Background sounds
+let sirenSound;
+let heartbeatSound;
+//Sound effects
+let progressSFX;
+let selectSFX;
+
+//Load the sounds into the code.
+function preload() {
+  sirenSound = loadSound(`assets/sounds/ambulance-siren.mp3`);
+  heartbeatSound = loadSound(`assets/sounds/heart-rate.mp3`);
+  progressSFX = loadSound(`assets/sounds/progress.wav`);
+  selectSFX = loadSound(`assets/sounds/select.wav`);
+}
+
+//Set initial states of elements
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
   reset();
 }
 
+//Reset elements to initial positions after the last scene or page load.
 function reset() {
   timer = 10;
-  fillProgressBar.height = 10;
+  fillProgressBar.currentHeight = fillProgressBar.minHeight;
 
-  //Placing the meter at the center of the window.
+  //Placing the circular meter at the center of the window.
   meter.x = width / 2;
   meter.y = height / 2;
   fillMeter.x = width / 2;
@@ -90,10 +109,11 @@ function reset() {
   angleMode(DEGREES);
   target.angle = random(0, 360);
 
-  progressBar.x = width - 30;
+//Progress bar located near the bottom left of the screen.
+  progressBar.x = 200;
   progressBar.y = height - 50;
 
-  fillProgressBar.x = width - 30;
+  fillProgressBar.x = 200;
   fillProgressBar.y = height - 50;
 
   //White rectangle at bottom of screen.
@@ -143,6 +163,9 @@ function title() {
 //Add another screen. "In honor of thyself." / "In honor of the self."
 
 function stressGame() {
+  let newRate = map(fillProgressBar.currentHeight, fillProgressBar.minHeight, progressBar.height, 1, 5);
+  progressSFX.rate(newRate);
+
   //Draw white stroke
   strokeWeight(20);
   stroke(255);
@@ -175,7 +198,9 @@ function stressGame() {
     // target changes position
     target.angle = random(0, 360);
     //progressBar fills.
-    fillProgressBar.height += 15;
+    fillProgressBar.currentHeight += 15;
+    selectSFX.play();
+    progressSFX.play();
   }
 
   //count in seconds
@@ -186,7 +211,7 @@ function stressGame() {
     state = `gameOver`;
   }
   //Else if progressBar fills to max height,
-  else if (fillProgressBar.height >= progressBar.height) {
+  else if (fillProgressBar.currentHeight >= progressBar.height) {
     //then game switches to next game.
     state = `finalGame`;
   }
@@ -214,7 +239,7 @@ function stressGame() {
   noStroke();
   fill(255, 0, 43);
   rectMode(CENTER);
-  rect(fillProgressBar.x, fillProgressBar.y - fillProgressBar.height / 2, fillProgressBar.width, fillProgressBar.height);
+  rect(fillProgressBar.x, fillProgressBar.y - fillProgressBar.currentHeight / 2, fillProgressBar.width, fillProgressBar.currentHeight);
   pop();
 
   //Draw timer.
@@ -241,6 +266,7 @@ function finalGame() {
     //user grows taller
     user.currentHeight += ball.size * 3;
     ball.active = false;
+    selectSFX.play();
   }
 
   //Target disappears when it goes over the bottom edge.
