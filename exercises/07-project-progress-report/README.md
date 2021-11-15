@@ -1,4 +1,4 @@
-# Project 2: Prototype
+# Exercise 07: Progress Report
 
 An anthology of games that serves as a life lesson for individuals who overwork themselves.
 
@@ -11,3 +11,7 @@ Code references:
 Other references:
 
 - Quote https://www.brainyquote.com/quotes/winston_churchill_124653
+
+- Sound effects https://sfbgames.itch.io/chiptone
+- Ambulance siren https://www.youtube.com/watch?v=s5bwBS27A1g
+- Heart rate monitor https://www.youtube.com/watch?v=QjEyjmNkN3k
