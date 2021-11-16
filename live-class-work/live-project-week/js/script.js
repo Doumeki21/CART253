@@ -9,10 +9,18 @@ Author Name
 "use strict";
 
 let planet = {
-  x:-100,
-  y:-100,
+  x: 0,
+  y: 0,
   size: 100,
   angle: 0,
+};
+
+let moon = {
+  x: 100,
+  y: 0,
+  size: 25,
+  angle: 0,
+  orbitAngle: 0,
 };
 
 function preload() {
@@ -35,5 +43,16 @@ function draw() {
   box(planet.size);
   pop();
 
+  push();
+  translate(planet.x, planet.y);
+  rotateY(radians(moon.orbitAngle));
+  noStroke();
+  fill(100);
+  translate(moon.x, moon.y);
+  ellipse(moon.x, moon.y, moon.size);
+  pop();
+
   planet.angle += 1;
+  moon.angle += 3;
+  moon.orbitAngleangle += 5;
 }
