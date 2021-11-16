@@ -58,6 +58,10 @@ let tasks = [`redCircle`, `redSquare`, `greenCircle`, `greenSquare`];
 let maxTask = 2;
 let yourTask = `Your task`;
 
+// At the top somewhere
+let currentTasks = [];
+
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
@@ -82,9 +86,21 @@ function reset() {
 function draw() {
   background(0);
 
-  for (let i = 0; i < maxTask; i++) {
-    yourTask = random(tasks)
+  // for (let i = 0; i < maxTask; i++) {
+  //   yourTask = random(tasks)
+  // }
+
+  // And then when you're selecting them
+  let firstTask = random(tasks);
+  currentTasks.push(firstTask); // Choose one random task
+  let secondTask = random(tasks); // Choose a second random task
+  // Check if the second task is the same as the first and re-choose until it's not
+  while (secondTask === firstTask) {
+    secondTask = random(tasks); // Choose a different random task
   }
+  curentTasks.push(secondTask);
+  // Now you have an array called currentTasks with two different random tasks in it
+
 
   //TITLE
   push();
