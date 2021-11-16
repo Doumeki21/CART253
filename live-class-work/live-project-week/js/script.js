@@ -8,30 +8,31 @@ Author Name
 
 "use strict";
 
-let planet = {
-  x: 0,
-  y: 0,
-  size: 100,
-  angle: 0,
-};
-
-let moon = {
-  x: 100,
-  y: 0,
-  size: 25,
-  angle: 0,
-  orbitAngle: 0,
-};
-
-function preload() {
-
-}
+let layerDeep = [];
+let layerMiddle = [];
+let layerNear = [];
 
 function setup() {
-  createCanvas(500, 500, WEBGL);
+  createCanvas(500, 500);
   //in WEBGL, coordinates 0,0 start at center of canvas!
 
+  let x = 0;
+  let y = 0;
+  for (let i = 0; i <30; i++) {
+    layerDeep.push(createBuidling(x, y, color(200)));
+    layerMiddle.push(createBuidling(x, y, color(200)));
+  }
+}
 
+function createBuidling(x, y, color) {
+  let building = {
+    x: x,
+    y: y,
+    width: 50,
+    height: random(100, 200),
+    color: color,
+  };
+  return building;
 }
 
 function draw() {
