@@ -8,6 +8,7 @@ let field = {
 
 let taskShape = undefined;
 let shapes = [];
+// let countTask = 1;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -61,14 +62,6 @@ function draw() {
     shape.drag();
     shape.objectInsideField();
   }
-
-  // for (let i = 0; i < shapes.length; i++) {
-  //   let shape = shapes[i];
-  //
-  //
-  // }
-
-
 
   //Display task
   fill(255);
