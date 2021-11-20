@@ -29,8 +29,8 @@ function reset() {
 
   shapes[3] = new Shape(field.x + field.size / 2 + 100, height / 2 + 250, color(0, 255, 0), `square`, `jade four-sided polygon`);
 
-//Generate taskShape
-taskShape = random(shapes);
+  //Generate taskShape
+  taskShape = random(shapes);
 }
 
 function draw() {
@@ -62,11 +62,24 @@ function draw() {
     shape.objectInsideField();
   }
 
+  for (let i = 0; i < shapes.length; i++) {
+    let shape = shapes[i];
+
+    if (shape.x - shape.size / 2 < field.x + field.size / 2 &&
+      shape.x + shape.size / 2 > field.x - field.size / 2 &&
+      shape.y - shape.size / 2 < field.y + field.size / 2 &&
+      shape.y + shape.size / 2 > field.y - field.size / 2) {
+      console.log(`yes`);
+    }
+  }
+
+
+
   //Display task
   fill(255);
   textSize(30);
   textAlign(CENTER);
-  text(`Place the ${taskShape.name} in the box.`, width/2, field.y - field.size/2 - 30);
+  text(`Place the ${taskShape.name} in the box.`, width / 2, field.y - field.size / 2 - 30);
 }
 
 function mousePressed() {
