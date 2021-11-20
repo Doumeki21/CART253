@@ -62,16 +62,11 @@ function draw() {
     shape.objectInsideField();
   }
 
-  for (let i = 0; i < shapes.length; i++) {
-    let shape = shapes[i];
-
-    if (shape.x - shape.size / 2 < field.x + field.size / 2 &&
-      shape.x + shape.size / 2 > field.x - field.size / 2 &&
-      shape.y - shape.size / 2 < field.y + field.size / 2 &&
-      shape.y + shape.size / 2 > field.y - field.size / 2) {
-      console.log(`yes`);
-    }
-  }
+  // for (let i = 0; i < shapes.length; i++) {
+  //   let shape = shapes[i];
+  //
+  //
+  // }
 
 
 
@@ -98,6 +93,16 @@ function mouseReleased() {
 
     if (shape.isBeingDragged) {
       shape.isBeingDragged = false;
+    }
+
+    if (shape.x < field.x + field.size / 2 &&
+      shape.x > field.x - field.size / 2 &&
+      shape.y < field.y + field.size / 2 &&
+      shape.y > field.y - field.size / 2) {
+
+      if (taskShape === shape) {
+        reset();
+      }
     }
   }
 }
