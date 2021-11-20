@@ -21,26 +21,28 @@ function reset() {
   field.x = width / 2;
   field.y = height / 2 + 50;
 
-  shapes[0] = new Shape(field.x + field.size / 2 + 100, height / 2 - 140, color(255, 0, 0), `circle`);
+  shapes[0] = new Shape(field.x + field.size / 2 + 100, height / 2 - 140, color(255, 0, 0), `circle`, `ruby infinite-sided polygon`);
 
-  shapes[1] = new Shape(field.x + field.size / 2 + 100, height / 2 - 10, color(0, 255, 0), `circle`);
+  shapes[1] = new Shape(field.x + field.size / 2 + 100, height / 2 - 10, color(0, 255, 0), `circle`, `lime infinite-sided polygon`);
 
-  shapes[2] = new Shape(field.x + field.size / 2 + 100, height / 2 + 120, color(255, 0, 0), `square`);
+  shapes[2] = new Shape(field.x + field.size / 2 + 100, height / 2 + 120, color(255, 0, 0), `square`, `vermillion four-sided polygon`);
 
-  shapes[3] = new Shape(field.x + field.size / 2 + 100, height / 2 + 250, color(0, 255, 0), `square`);
+  shapes[3] = new Shape(field.x + field.size / 2 + 100, height / 2 + 250, color(0, 255, 0), `square`, `jade four-sided polygon`);
 
+//Generate taskShape
+taskShape = random(shapes);
 }
 
 function draw() {
   background(0);
 
   //TITLE
-  push();
-  textSize(100);
-  fill(255);
-  textAlign(CENTER, CENTER);
-  text(`TASK`, width / 2, 100);
-  pop();
+  // push();
+  // textSize(60);
+  // fill(255);
+  // textAlign(CENTER, CENTER);
+  // text(`TASK`, width / 2, 70);
+  // pop();
 
   //field
   push();
@@ -59,6 +61,12 @@ function draw() {
     shape.drag();
     shape.objectInsideField();
   }
+
+  //Display task
+  fill(255);
+  textSize(30);
+  textAlign(CENTER);
+  text(`Place the ${taskShape.name} in the box.`, width/2, field.y - field.size/2 - 30);
 }
 
 function mousePressed() {
