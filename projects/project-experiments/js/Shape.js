@@ -1,11 +1,12 @@
 class Shape {
-  constructor(x, y, shapeColor, shapeType) {
+  constructor(x, y, shapeColor, shapeType, shapeName) {
     this.x = x;
     this.y = y;
     this.size = 80;
     this.color = shapeColor;
     this.shapeType = shapeType;
     this.isBeingDragged = false;
+    this.name = shapeName;
   }
 
   mouseInsideObject() {
