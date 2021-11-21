@@ -1,5 +1,5 @@
 /**
-Project 2: prototype
+Project 2: Final Project
 Olenka Yuen
 
 An anthology of games that serves as a life lesson for individuals who overwork themselves.
