@@ -7,67 +7,6 @@ An anthology of games that serves as a life lesson for individuals who overwork 
 
 "use strict";
 
-// //white stroke
-// let meter = {
-//   x: undefined,
-//   y: undefined,
-//   size: 300,
-// }
-// //Red stroke
-// let fillMeter = {
-//   x: undefined,
-//   y: undefined,
-//   width: 300,
-//   height: 300,
-// }
-// //reappearing blue cirlce on the white stroke.
-// let target = {
-//   size: 50,
-//   angle: undefined,
-// };
-
-// //The base of the progress bar.
-// let progressBar = {
-//   x: undefined,
-//   y: undefined,
-//   width: 40,
-//   height: 200,
-// }
-// //Progress bar fill.
-// let fillProgressBar = {
-//   x: undefined,
-//   y: undefined,
-//   width: 30,
-//   height: 10,
-// }
-
-// //Timer starts at 10 seconds.
-// let timer = 10;
-
-// //White rectangle
-// let user = {
-//   x: undefined,
-//   y: undefined,
-//   width: 50,
-//   initialHeight: 30,
-//   currentHeight: undefined,
-// }
-//
-// //Falling balls
-// let ball = {
-//   x: undefined,
-//   y: 0,
-//   vy: 8,
-//   size: 50,
-//   active: true,
-// }
-//
-// //Pass the line!
-// let goal = {
-//   x: 0,
-//   y: 50,
-// }
-
 let currentState;
 
 function setup() {
@@ -79,31 +18,6 @@ function setup() {
 function reset() {
 
   currentState = new Title();
-
-
-  // timer = 10;
-  // fillProgressBar.height = 10;
-  //
-  // //Placing the meter at the center of the window.
-  // meter.x = width / 2;
-  // meter.y = height / 2;
-  // fillMeter.x = width / 2;
-  // fillMeter.y = height / 2;
-
-  // //Target appears anywhere on the white stroke.
-  // angleMode(DEGREES);
-  // target.angle = random(0, 360);
-
-  // progressBar.x = width - 30;
-  // progressBar.y = height - 50;
-  //
-  // fillProgressBar.x = width - 30;
-  // fillProgressBar.y = height - 50;
-
-  // //White rectangle at bottom of screen.
-  // user.x = width / 2;
-  // user.y = height;
-  // user.currentHeight = user.initialHeight;
 }
 
 function draw() {

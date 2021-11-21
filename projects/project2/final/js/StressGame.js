@@ -64,7 +64,6 @@ class StressGame extends GameState {
       //progressBar fills.
       this.fillProgressBar.height += 15;
       this.targetReset();
-      console.log(this.fillProgressBar.height);
     }
   }
 
