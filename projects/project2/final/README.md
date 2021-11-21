@@ -1,4 +1,4 @@
-# Project 2: Prototype
+# Project 2: Final Project
 
 An anthology of games that serves as a life lesson for individuals who overwork themselves.
 
