@@ -4,17 +4,17 @@ class FinalGame extends GameState {
 
     //White rectangle
     this.user = {
-      x: undefined,
-      y: undefined,
+      x: width/2,
+      y: height,
       width: 50,
       initialHeight: 30,
-      currentHeight: undefined,
+      currentHeight: 30,
     };
     //Falling balls
     this.ball = {
       x: undefined,
       y: 0,
-      vy: 8,
+      vy: 13,
       size: 50,
       active: true,
     };
@@ -77,10 +77,7 @@ checkEnd() {
   }
 
   displayUser() {
-    //White rectangle at bottom of screen.
-    this.user.x = width / 2;
-    this.user.y = height;
-    this.user.currentHeight = this.user.initialHeight;
+    // this.user.currentHeight = this.user.initialHeight;
 
     //Draw user
     push();

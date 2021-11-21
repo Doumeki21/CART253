@@ -3,15 +3,15 @@ class GameState extends State {
     super();
     //The base of the progress bar.
     this.progressBar = {
-      x: undefined,
-      y: undefined,
+      x: width - 30,
+      y: height - 50,
       width: 40,
       height: 200,
     };
     //Progress bar fill.
     this.fillProgressBar = {
-      x: undefined,
-      y: undefined,
+      x: width - 30,
+      y: height - 50,
       width: 30,
       height: 10,
     };
@@ -51,11 +51,11 @@ class GameState extends State {
   }
 
   displayProgress() {
-    this.progressBar.x = width - 30;
-    this.progressBar.y = height - 50;
-
-    this.fillProgressBar.x = width - 30;
-    this.fillProgressBar.y = height - 50;
+    // this.progressBar.x = width - 30;
+    // this.progressBar.y = height - 50;
+    //
+    // this.fillProgressBar.x = width - 30;
+    // this.fillProgressBar.y = height - 50;
 
     //Draw progressBar
     push();
