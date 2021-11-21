@@ -31,7 +31,7 @@ class GameState {
     //If timer hits 0 = Game ends.
     if (this.timer <= 0) {
       this.timer = 0;
-      currentState = new GameOver;
+      currentState = new GameOver();
     }
   }
 

@@ -1,19 +1,16 @@
-class Title extends State{
+class Quote extends State{
   constructor() {
     super();
 
-    this.titleString = `UNDER PRESSURE`;
-    this.subtitleString = `CLICK ANYWHERE TO CONTINUE`;
+    this.titleString = `"Success is not final, failure is not fatal." \n -Winston Churchill`;
   }
 
   draw() {
-    super.draw();
-
     background(58, 12, 163);
-    this.displayTitle();
+    this.displayQuote();
   }
 
-  displayTitle() {
+  displayQuote() {
     push()
     noStroke();
     fill(255);
@@ -34,6 +31,6 @@ class Title extends State{
   mouseClicked() {
     super.mouseClicked();
 
-    currentState = new StressGame();
+    currentState = new Title();
   }
 }

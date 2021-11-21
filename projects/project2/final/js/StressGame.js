@@ -37,7 +37,7 @@ class StressGame extends GameState {
     // if progressBar fills to max height,
     if (fillProgressBar.height >= progressBar.height) {
       //then game switches to next game.
-      currentState = new FinalGame;
+      currentState = new FinalGame();
     }
   }
 
@@ -80,5 +80,16 @@ class StressGame extends GameState {
     rotate(this.target.angle);
     //target draws on the radius of the meter.
     ellipse(this.meter.size / 2, 0, this.target.size);
+    pop();
+  }
+
+  displayInstructions() {
+    //instructions text
+    push()
+    noStroke();
+    fill(255);
+    textSize(30);
+    textAlign(CENTER);
+    text(`<< MOVE >>`, width / 2, height - 30);
     pop();
   }

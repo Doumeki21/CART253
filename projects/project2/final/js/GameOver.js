@@ -1,19 +1,17 @@
-class Title extends State{
+class GameOver extends State {
   constructor() {
     super();
 
-    this.titleString = `UNDER PRESSURE`;
-    this.subtitleString = `CLICK ANYWHERE TO CONTINUE`;
+    this.titleString = `GAME OVER`;
+    this.subtitleString = `YOU JUST DIDN'T MAKE IT ON TIME.`;
   }
 
   draw() {
-    super.draw();
-
-    background(58, 12, 163);
-    this.displayTitle();
+    background(63, 55, 201);
+    this.displayGameOver();
   }
 
-  displayTitle() {
+  displayGameOver() {
     push()
     noStroke();
     fill(255);
@@ -21,7 +19,7 @@ class Title extends State{
     textAlign(CENTER);
     text(this.titleString, width / 2, height / 2);
     pop();
-
+  
     push()
     noStroke();
     fill(255);
@@ -29,11 +27,5 @@ class Title extends State{
     textAlign(CENTER);
     text(this.subtitleString, width / 2, height / 2 + 100);
     pop();
-  }
-
-  mouseClicked() {
-    super.mouseClicked();
-
-    currentState = new StressGame();
   }
 }

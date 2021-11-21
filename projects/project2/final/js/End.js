@@ -1,19 +1,19 @@
-class Title extends State{
+class End extends State {
   constructor() {
     super();
 
-    this.titleString = `UNDER PRESSURE`;
-    this.subtitleString = `CLICK ANYWHERE TO CONTINUE`;
+    this.titleString = `END`;
+    this.subtitleString = `Life is more than being successful. \n Take your time.\n Find your happiness.`;
   }
 
   draw() {
-    super.draw();
+    super();
 
     background(58, 12, 163);
-    this.displayTitle();
+    this.displayEnd();
   }
 
-  displayTitle() {
+  displayEnd() {
     push()
     noStroke();
     fill(255);
@@ -34,6 +34,6 @@ class Title extends State{
   mouseClicked() {
     super.mouseClicked();
 
-    currentState = new StressGame();
+    currentState = new Quote();
   }
 }
