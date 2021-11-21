@@ -20,9 +20,22 @@ class StressGame extends GameState {
       size: 50,
       angle: undefined,
     };
+    this.initialize = false;
+  }
+
+
+  targetReset() {
+    this.target.angle = random(0, 360);
   }
 
   draw() {
+    if (!this.initialize) {
+      // Initialize the angle
+      this.targetReset();
+      this.initialize = true;
+    }
+
+    super.draw();
     this.checkPass();
     this.checkHitTarget();
 
@@ -40,6 +53,9 @@ class StressGame extends GameState {
   }
 
   checkHitTarget() {
+    //Target appears anywhere on the white stroke.
+    angleMode(DEGREES);
+
     let mouseEnd = map(mouseX, 0, width, 0, 360);
     //If the red meter touches the target,
     if (mouseEnd > this.target.angle - 10 && mouseEnd < this.target.angle + 10) {
@@ -47,10 +63,21 @@ class StressGame extends GameState {
       this.target.angle = random(0, 360);
       //progressBar fills.
       this.fillProgressBar.height += 15;
+      this.targetReset();
+      console.log(this.fillProgressBar.height);
     }
   }
 
   displayMeter() {
+
+    // this.fillProgressBar.height = 10;
+
+    //Placing the meter at the center of the window.
+    this.meter.x = width / 2;
+    this.meter.y = height / 2;
+    this.fillMeter.x = width / 2;
+    this.fillMeter.y = height / 2;
+
     //Draw white stroke
     strokeWeight(20);
     stroke(255);

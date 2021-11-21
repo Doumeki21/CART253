@@ -41,9 +41,9 @@ class FinalGame extends GameState {
     this.ball.y += this.ball.vy;
     //user is moved with mouse.
     this.user.x = mouseX;
-
+console.log(this.user.x);
     //Check if Target touches the user
-    if (checkContact()) {
+    if (this.checkContact()) {
       //user grows taller
       this.user.currentHeight += this.ball.size * 3;
       this.ball.active = false;
@@ -57,7 +57,7 @@ checkEnd() {
   }
   //Target regenerates at top of screen after it disappears.
   if (!this.ball.active) {
-    resetBall();
+    this.resetBall();
   }
   //When user touches goal line,
   if (this.user.y - this.user.currentHeight / 2 < this.goal.y) {
@@ -67,22 +67,27 @@ checkEnd() {
 }
 
    resetBall() {
-    ball.x = random(5, width - 30);
-    ball.y = 0;
-    ball.active = true;
+    this.ball.x = random(5, width - 30);
+    this.ball.y = 0;
+    this.ball.active = true;
   }
 
   checkContact() {
-    return ball.x + ball.size / 2 > user.x - user.width / 2 && ball.x - ball.size / 2 < user.x + user.width && ball.y + ball.size / 2 > user.y - user.currentHeight / 2 && ball.y - ball.size / 2 < user.y + user.currentHeight / 2;
+    return this.ball.x + this.ball.size / 2 > this.user.x - this.user.width / 2 && this.ball.x - this.ball.size / 2 < this.user.x + this.user.width && this.ball.y + this.ball.size / 2 > this.user.y - this.user.currentHeight / 2 && this.ball.y - this.ball.size / 2 < this.user.y + this.user.currentHeight / 2;
   }
 
   displayUser() {
+    //White rectangle at bottom of screen.
+    this.user.x = width / 2;
+    this.user.y = height;
+    this.user.currentHeight = this.user.initialHeight;
+
     //Draw user
     push();
     fill(253, 255, 255);
     noStroke();
     rectMode(CENTER);
-    rect(user.x, user.y, user.width, user.currentHeight);
+    rect(this.user.x, this.user.y, this.user.width, this.user.currentHeight);
     pop();
   }
 
@@ -91,7 +96,7 @@ checkEnd() {
     push();
     fill(64, 123, 167);
     noStroke();
-    ellipse(ball.x, ball.y, ball.size);
+    ellipse(this.ball.x, this.ball.y, this.ball.size);
     pop();
   }
 
@@ -99,6 +104,6 @@ checkEnd() {
     //Draw goal
     stroke(255);
     strokeWeight(2);
-    line(goal.x, goal.y, width, goal.y);
+    line(this.goal.x, this.goal.y, width, this.goal.y);
   }
 }

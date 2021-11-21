@@ -78,7 +78,7 @@ function setup() {
 
 function reset() {
 
-  currentState = new StressGame();
+  currentState = new Title();
 
 
   // timer = 10;
@@ -89,17 +89,17 @@ function reset() {
   // meter.y = height / 2;
   // fillMeter.x = width / 2;
   // fillMeter.y = height / 2;
-  //
+
   // //Target appears anywhere on the white stroke.
   // angleMode(DEGREES);
   // target.angle = random(0, 360);
-  //
+
   // progressBar.x = width - 30;
   // progressBar.y = height - 50;
   //
   // fillProgressBar.x = width - 30;
   // fillProgressBar.y = height - 50;
-  //
+
   // //White rectangle at bottom of screen.
   // user.x = width / 2;
   // user.y = height;

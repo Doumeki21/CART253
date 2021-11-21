@@ -20,8 +20,8 @@ class GameState extends State {
   }
 
   draw() {
-    background(58, 12, 163);
     super.draw();
+    background(58, 12, 163);
 
     this.checkTimer();
     this.displayTimer();
@@ -51,6 +51,12 @@ class GameState extends State {
   }
 
   displayProgress() {
+    this.progressBar.x = width - 30;
+    this.progressBar.y = height - 50;
+
+    this.fillProgressBar.x = width - 30;
+    this.fillProgressBar.y = height - 50;
+
     //Draw progressBar
     push();
     noStroke();
