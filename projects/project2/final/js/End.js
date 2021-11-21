@@ -1,39 +1,56 @@
 class End extends State {
   constructor() {
     super();
-    
-    this.titleString = `END`;
-    this.subtitleString = `Life is more than being successful. \n Take your time.\n Find your happiness.`;
+
+    this.continue = `Click`;
+
+    this.endString = [
+      `END`,
+      `Life is more than being successful.`,
+      `Take your time.`,
+      `Find your happiness.`
+    ];
+
+    this.currentIndex = 0;
   }
 
   draw() {
     super.draw();
 
     background(58, 12, 163);
+    this.displayClick();
     this.displayEnd();
   }
 
-  displayEnd() {
+  displayClick() {
     push()
     noStroke();
     fill(255);
     textSize(50);
     textAlign(CENTER);
-    text(this.titleString, width / 2, height / 2);
+    text(this.continue, width - 300, height - 200);
     pop();
+  }
+
+  displayEnd() {
 
     push()
     noStroke();
     fill(255);
-    textSize(30);
+    textSize(50);
     textAlign(CENTER);
-    text(this.subtitleString, width / 2, height / 2 + 100);
+    text(this.endString[this.currentIndex], width / 2, height / 2);
     pop();
   }
 
   mouseClicked() {
     super.mouseClicked();
 
-    currentState = new Quote();
+    if (this.currentIndex < this.endString.length) {
+      this.currentIndex ++;
+    }
+    else if (this.currentIndex === this.endString.length) {
+      currentState = new Quote();
+    }
   }
 }

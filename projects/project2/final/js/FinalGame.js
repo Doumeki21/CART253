@@ -18,11 +18,11 @@ class FinalGame extends GameState {
       size: 50,
       active: true,
     };
-    //Pass the line!
-    this.goal = {
-      x: 0,
-      y: 50,
-    };
+    // //Pass the line!
+    // this.goal = {
+    //   x: 0,
+    //   y: 50,
+    // };
   }
 
   draw() {
@@ -33,7 +33,7 @@ class FinalGame extends GameState {
 
     this.displayUser();
     this.displayBall();
-    this.displayGoal();
+    // this.displayGoal();
   }
 
   checkGrowth() {
@@ -41,11 +41,12 @@ class FinalGame extends GameState {
     this.ball.y += this.ball.vy;
     //user is moved with mouse.
     this.user.x = mouseX;
-console.log(this.user.x);
     //Check if Target touches the user
     if (this.checkContact()) {
       //user grows taller
       this.user.currentHeight += this.ball.size * 3;
+      //progressBar fills.
+      this.fillProgressBar.height += 15;
       this.ball.active = false;
     }
   }
@@ -59,9 +60,15 @@ checkEnd() {
   if (!this.ball.active) {
     this.resetBall();
   }
-  //When user touches goal line,
-  if (this.user.y - this.user.currentHeight / 2 < this.goal.y) {
-    //Game ends
+  // //When user touches goal line,
+  // if (this.user.y - this.user.currentHeight / 2 < this.goal.y) {
+  //   //Game ends
+  //   currentState = new End();
+  // }
+
+  // if progressBar fills to max height,
+  if (this.fillProgressBar.height >= this.progressBar.height) {
+    //then game switches to next game.
     currentState = new End();
   }
 }
@@ -97,10 +104,10 @@ checkEnd() {
     pop();
   }
 
-  displayGoal() {
-    //Draw goal
-    stroke(255);
-    strokeWeight(2);
-    line(this.goal.x, this.goal.y, width, this.goal.y);
-  }
+  // displayGoal() {
+  //   //Draw goal
+  //   stroke(255);
+  //   strokeWeight(2);
+  //   line(this.goal.x, this.goal.y, width, this.goal.y);
+  // }
 }
