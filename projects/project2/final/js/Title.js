@@ -34,6 +34,7 @@ class Title extends State{
   mouseClicked() {
     super.mouseClicked();
 
+
     currentState = new StressGame();
   }
 }

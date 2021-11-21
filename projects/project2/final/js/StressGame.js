@@ -23,8 +23,6 @@ class StressGame extends GameState {
   }
 
   draw() {
-    super.draw();
-
     this.checkPass();
     this.checkHitTarget();
 
@@ -35,7 +33,7 @@ class StressGame extends GameState {
 
   checkPass() {
     // if progressBar fills to max height,
-    if (fillProgressBar.height >= progressBar.height) {
+    if (this.fillProgressBar.height >= this.progressBar.height) {
       //then game switches to next game.
       currentState = new FinalGame();
     }
@@ -44,11 +42,11 @@ class StressGame extends GameState {
   checkHitTarget() {
     let mouseEnd = map(mouseX, 0, width, 0, 360);
     //If the red meter touches the target,
-    if (mouseEnd > target.angle - 10 && mouseEnd < target.angle + 10) {
+    if (mouseEnd > this.target.angle - 10 && mouseEnd < this.target.angle + 10) {
       // target changes position
-      target.angle = random(0, 360);
+      this.target.angle = random(0, 360);
       //progressBar fills.
-      fillProgressBar.height += 15;
+      this.fillProgressBar.height += 15;
     }
   }
 
@@ -65,7 +63,7 @@ class StressGame extends GameState {
     stroke(247, 37, 133);
     //Red stroke follows by moving the mouse side-to-side.
     let mouseEnd = map(mouseX, 0, width, 0, 360);
-    arc(fillMeter.x, fillMeter.y, fillMeter.width, fillMeter.height, 0, mouseEnd);
+    arc(this.fillMeter.x, this.fillMeter.y, this.fillMeter.width, this.fillMeter.height, 0, mouseEnd);
     pop();
   }
 
@@ -93,3 +91,4 @@ class StressGame extends GameState {
     text(`<< MOVE >>`, width / 2, height - 30);
     pop();
   }
+}

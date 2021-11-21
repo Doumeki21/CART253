@@ -6,6 +6,8 @@ class Quote extends State{
   }
 
   draw() {
+    super.draw();
+
     background(58, 12, 163);
     this.displayQuote();
   }

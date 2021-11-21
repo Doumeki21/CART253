@@ -1,5 +1,6 @@
-class GameState {
+class GameState extends State {
   constructor() {
+    super();
     //The base of the progress bar.
     this.progressBar = {
       x: undefined,
@@ -19,6 +20,8 @@ class GameState {
   }
 
   draw() {
+    background(58, 12, 163);
+    super.draw();
 
     this.checkTimer();
     this.displayTimer();

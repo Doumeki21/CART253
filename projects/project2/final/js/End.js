@@ -1,13 +1,13 @@
 class End extends State {
   constructor() {
     super();
-
+    
     this.titleString = `END`;
     this.subtitleString = `Life is more than being successful. \n Take your time.\n Find your happiness.`;
   }
 
   draw() {
-    super();
+    super.draw();
 
     background(58, 12, 163);
     this.displayEnd();
