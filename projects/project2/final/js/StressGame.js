@@ -47,7 +47,7 @@ class StressGame extends GameState {
     // if progressBar fills to max height,
     if (this.fillProgressBar.height >= this.progressBar.height) {
       //then game switches to next game.
-      currentState = new FinalGame();
+      currentState = new DragDropGame();
     }
   }
 
