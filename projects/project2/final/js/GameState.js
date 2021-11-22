@@ -20,6 +20,9 @@ class GameState extends State {
   }
 
   draw() {
+    let newRate = map(this.fillProgressBar.currentHeight, this.fillProgressBar.minHeight, this.progressBar.height, 1, 5);
+    progressSFX.rate(newRate);
+
     super.draw();
     background(58, 12, 163);
 

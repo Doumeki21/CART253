@@ -47,7 +47,7 @@ class StressGame extends GameState {
     // if progressBar fills to max height,
     if (this.fillProgressBar.height >= this.progressBar.height) {
       //then game switches to next game.
-      currentState = new DragDropGame();
+      currentState = new FinalGame();
     }
   }
 
@@ -62,6 +62,8 @@ class StressGame extends GameState {
       this.target.angle = random(0, 360);
       //progressBar fills.
       this.fillProgressBar.height += 15;
+      selectSFX.play();
+      progressSFX.play();
       this.targetReset();
     }
   }

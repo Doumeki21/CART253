@@ -9,6 +9,21 @@ An anthology of games that serves as a life lesson for individuals who overwork 
 
 let currentState;
 
+//Background sounds
+let sirenSound;
+let heartbeatSound;
+//Sound effects
+let progressSFX;
+let selectSFX;
+
+//Load the sounds into the code.
+function preload() {
+  sirenSound = loadSound(`assets/sounds/ambulance-siren.mp3`);
+  heartbeatSound = loadSound(`assets/sounds/heart-rate.mp3`);
+  progressSFX = loadSound(`assets/sounds/progress.wav`);
+  selectSFX = loadSound(`assets/sounds/select.wav`);
+}
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
