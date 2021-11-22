@@ -23,7 +23,6 @@ class StressGame extends GameState {
     this.initialize = false;
   }
 
-
   targetReset() {
     this.target.angle = random(0, 360);
   }
