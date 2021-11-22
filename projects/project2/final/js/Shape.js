@@ -1,5 +1,7 @@
 class Shape extends DragDropGame {
   constructor(x, y, shapeColor, shapeType, shapeName) {
+    super();
+
     this.x = x;
     this.y = y;
     this.size = 80;
@@ -39,7 +41,9 @@ class Shape extends DragDropGame {
     }
   }
 
-  display() {
+  draw() {
+    super.draw();
+
     push();
     fill(this.color);
     stroke(255);

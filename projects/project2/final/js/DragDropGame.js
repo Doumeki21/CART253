@@ -1,5 +1,7 @@
 class DragDropGame extends GameState {
   constructor() {
+    super();
+
     this.field = {
       x: width / 2,
       y: height / 2 + 50,
@@ -23,6 +25,7 @@ class DragDropGame extends GameState {
   }
 
   draw() {
+    super.draw();
     this.checkPass();
 
     // Shapes
@@ -36,6 +39,8 @@ class DragDropGame extends GameState {
       this.displayField();
       this.displayTask();
     }
+// console.log(shape.display);
+// Shape isn't defined!!
   }
 
   checkPass() {
