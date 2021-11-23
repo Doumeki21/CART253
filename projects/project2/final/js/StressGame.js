@@ -62,8 +62,8 @@ class StressGame extends GameState {
       this.target.angle = random(0, 360);
       //progressBar fills.
       this.fillProgressBar.height += 15;
-      // selectSFX.play();
-      // progressSFX.play();
+      selectSFX.play();
+      progressSFX.play();
       this.targetReset();
     }
   }
@@ -79,15 +79,18 @@ class StressGame extends GameState {
     this.fillMeter.y = height / 2;
 
     //Draw white stroke
+    push();
     strokeWeight(20);
     stroke(255);
     noFill()
     ellipse(this.meter.x, this.meter.y, this.meter.size);
+    pop();
 
     //Draw red stroke
     push();
     strokeWeight(10);
     stroke(247, 37, 133);
+    noFill();
     //Red stroke follows by moving the mouse side-to-side.
     let mouseEnd = map(mouseX, 0, width, 0, 360);
     arc(this.fillMeter.x, this.fillMeter.y, this.fillMeter.width, this.fillMeter.height, 0, mouseEnd);

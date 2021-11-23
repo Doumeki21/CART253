@@ -1,7 +1,5 @@
 class Shape {
   constructor(x, y, shapeColor, shapeType, shapeName) {
-    super();
-
     this.x = x;
     this.y = y;
     this.size = 80;
@@ -12,6 +10,7 @@ class Shape {
   }
 
   mouseInsideObject() {
+    console.log(`hey`);
     //Get dist b/w mouse and shape
     let d = dist(mouseX, mouseY, this.x, this.y);
     if (d < this.size / 2) {
@@ -21,7 +20,7 @@ class Shape {
     }
   }
 
-  objectInsideField() {
+  objectInsideField(field) {
     //Get dist b/w object and field
     let d = dist(this.x, this.y, field.x, field.y);
     if (d < field.size / 2) {
@@ -32,6 +31,7 @@ class Shape {
   }
 
   drag() {
+    // console.log(`hey`);
     if (this.isBeingDragged) {
       //Drag object
       this.x = mouseX + this.offsetX;
@@ -42,8 +42,6 @@ class Shape {
   }
 
   draw() {
-    super.draw();
-
     push();
     fill(this.color);
     stroke(255);

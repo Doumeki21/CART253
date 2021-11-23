@@ -11,8 +11,6 @@ class DragDropGame extends GameState {
     this.shapes = [];
 
     this.taskReset();
-
-
   }
 
   taskReset() {
@@ -32,24 +30,16 @@ class DragDropGame extends GameState {
     super.draw();
 
     this.checkPass();
-
-    // console.log(this.shapes);
+    this.displayField();
+    this.displayTask();
 
     // Shapes
     for (let i = 0; i < this.shapes.length; i++) {
       let shape = this.shapes[i];
 
-      console.log(`draw`);
       shape.draw();
-      // shape.mouseInsideObject();
-      // shape.drag();
-      // shape.objectInsideField();
-      //
-      // this.displayField();
-      // this.displayTask();
+      shape.drag();
     }
-// console.log(shape.display);
-// Shape isn't defined!!
   }
 
   checkPass() {
@@ -67,16 +57,18 @@ class DragDropGame extends GameState {
     stroke(212);
     noFill();
     rectMode(CENTER);
-    rect(field.x, field.y, field.size);
+    rect(this.field.x, this.field.y, this.field.size);
     pop();
   }
 
   displayTask() {
     //Display task
+    push();
     fill(255);
     textSize(30);
     textAlign(CENTER);
-    text(`Place the ${taskShape.name} in the box.`, width / 2, field.y - field.size / 2 - 30);
+    text(`Place the ${this.taskShape.name} in the box.`, width / 2, this.field.y - this.field.size / 2 - 30);
+    pop();
   }
 
   mousePressed() {
@@ -102,7 +94,7 @@ class DragDropGame extends GameState {
         shape.y < this.field.y + this.field.size / 2 &&
         shape.y > this.field.y - this.field.size / 2) {
 
-        if (taskShape === shape) {
+        if (this.taskShape === shape) {
           //progressBar fills.
           this.fillProgressBar.height += 15;
           this.taskReset();
