@@ -38,10 +38,6 @@ function reset() {
   currentState = new Title();
 }
 
-// function mousePressed() {
-//   barSFX.play();
-// }
-
 function draw() {
   currentState.draw();
 

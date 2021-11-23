@@ -70,8 +70,6 @@ class StressGame extends GameState {
 
   displayMeter() {
 
-    // this.fillProgressBar.height = 10;
-
     //Placing the meter at the center of the window.
     this.meter.x = width / 2;
     this.meter.y = height / 2;
