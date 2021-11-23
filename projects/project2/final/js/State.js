@@ -8,7 +8,7 @@ class State {
   }
 
   mouseClicked() {
-
+    selectSFX.play();
   }
 
 //Add the last 2 functions to prevent error msgs.
