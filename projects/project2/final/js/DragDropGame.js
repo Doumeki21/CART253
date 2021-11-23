@@ -9,6 +9,10 @@ class DragDropGame extends GameState {
     };
     this.taskShape = undefined;
     this.shapes = [];
+
+    this.taskReset();
+
+
   }
 
   taskReset() {
@@ -26,18 +30,23 @@ class DragDropGame extends GameState {
 
   draw() {
     super.draw();
+
     this.checkPass();
+
+    // console.log(this.shapes);
 
     // Shapes
     for (let i = 0; i < this.shapes.length; i++) {
       let shape = this.shapes[i];
-      shape.display();
-      shape.mouseInsideObject();
-      shape.drag();
-      shape.objectInsideField();
 
-      this.displayField();
-      this.displayTask();
+      console.log(`draw`);
+      shape.draw();
+      // shape.mouseInsideObject();
+      // shape.drag();
+      // shape.objectInsideField();
+      //
+      // this.displayField();
+      // this.displayTask();
     }
 // console.log(shape.display);
 // Shape isn't defined!!
@@ -72,7 +81,7 @@ class DragDropGame extends GameState {
 
   mousePressed() {
     for (let i = 0; i < this.shapes.length; i++) {
-      let shape = shapes[i];
+      let shape = this.shapes[i];
 
       if (shape.mouseInsideObject()) {
         shape.isBeingDragged = true;
@@ -96,7 +105,7 @@ class DragDropGame extends GameState {
         if (taskShape === shape) {
           //progressBar fills.
           this.fillProgressBar.height += 15;
-          taskReset();
+          this.taskReset();
         }
       }
     }

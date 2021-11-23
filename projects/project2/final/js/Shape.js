@@ -1,4 +1,4 @@
-class Shape extends DragDropGame {
+class Shape {
   constructor(x, y, shapeColor, shapeType, shapeName) {
     super();
 

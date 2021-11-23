@@ -47,8 +47,8 @@ class FinalGame extends GameState {
       this.user.currentHeight += this.ball.size * 3;
       //progressBar fills.
       this.fillProgressBar.height += 15;
-      selectSFX.play();
-      progressSFX.play();
+      // selectSFX.play();
+      // progressSFX.play();
       this.ball.active = false;
     }
   }

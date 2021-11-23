@@ -13,18 +13,21 @@ let currentState;
 let sirenSound;
 let heartbeatSound;
 //Sound effects
-let progressSFX;
+let barSFX;
 let selectSFX;
 
 //Load the sounds into the code.
 function preload() {
   sirenSound = loadSound(`assets/sounds/ambulance-siren.mp3`);
   heartbeatSound = loadSound(`assets/sounds/heart-rate.mp3`);
-  progressSFX = loadSound(`assets/sounds/progress.wav`);
+  barSFX = loadSound(`assets/sounds/progress.wav`);
   selectSFX = loadSound(`assets/sounds/select.wav`);
 }
 
 function setup() {
+
+  // userStartAudio();
+
   createCanvas(windowWidth, windowHeight);
 
   reset();
@@ -32,8 +35,12 @@ function setup() {
 
 function reset() {
 
-  currentState = new Title();
+  currentState = new DragDropGame();
 }
+
+// function mousePressed() {
+//   barSFX.play();
+// }
 
 function draw() {
   currentState.draw();
