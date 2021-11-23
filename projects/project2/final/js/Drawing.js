@@ -1,13 +1,13 @@
 class Drawing extends State {
   constructor() {
     super();
-    
+
     this.keyD = 68;
     this.textbox = {
-      x: width - 300,
+      x: width - 200,
       y: height - 200,
-      width: 300,
-      height: 150,
+      width: 310,
+      height: 120,
     }
   }
 
@@ -33,16 +33,18 @@ class Drawing extends State {
   displayText() {
     //instructions
     push();
+    noStroke();
     textSize(50);
     textAlign(CENTER);
-    fill(0);
+    fill(255);
     text(`Draw what you love`, width / 2, 200);
     pop();
 
     push();
+    noStroke();
     textSize(30);
     textAlign(CENTER);
-    fill(0);
+    fill(255);
     text(`Press D to clear canvas.`, width / 2, 250);
     pop();
 
@@ -57,7 +59,7 @@ class Drawing extends State {
     push();
     textSize(30);
     textAlign(CENTER);
-    text(`Click here once \nYou're done!`, width - 300, height - 200);
+    text(`Click here once \nYou're done!`, width - 200, height - 200);
     pop();
   }
 
