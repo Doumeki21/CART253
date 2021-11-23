@@ -1,5 +1,7 @@
-class Drawing {
+class Drawing extends State {
   constructor() {
+    super();
+    
     this.keyD = 68;
     this.textbox = {
       x: width - 300,
@@ -13,14 +15,16 @@ class Drawing {
     //Draw a line
     if (mouseIsPressed) {
       push();
+      stroke(255);
       strokeWeight(2);
       // stroke(212, 50, 50);
       line(pmouseX, pmouseY, mouseX, mouseY)
       pop();
     }
     //Clear canvas
-    if (keyIsDown(keyD)) {
+    if (keyIsDown(this.keyD)) {
       clear();
+      background(99, 28, 156);
     }
 
     this.displayText();
@@ -46,7 +50,7 @@ class Drawing {
     push();
     rectMode(CENTER);
     fill(212);
-    rect(textbox.x, textbox.y, textbox.width, textbox.height);
+    rect(this.textbox.x, this.textbox.y, this.textbox.width, this.textbox.height);
     pop();
 
     //proceed text
@@ -58,11 +62,11 @@ class Drawing {
   }
 
   mousePressed() {
-    if (mouseX > textbox.x - textbox.width / 2 &&
-      mouseX < textbox.x + textbox.width / 2 &&
-      mouseY > textbox.y - textbox.height / 2 &&
-      mouseY < textbox.y + textbox.height / 2) {
-      state = `final`;
+    if (mouseX > this.textbox.x - this.textbox.width / 2 &&
+      mouseX < this.textbox.x + this.textbox.width / 2 &&
+      mouseY > this.textbox.y - this.textbox.height / 2 &&
+      mouseY < this.textbox.y + this.textbox.height / 2) {
+      currentState = new Quote;
     }
   }
 }

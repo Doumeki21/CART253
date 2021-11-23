@@ -2,15 +2,13 @@ class End extends State {
   constructor() {
     super();
 
-    this.continue = `Click`;
-
     this.endString = [
-      `END`,
       `Life is more than being successful.`,
       `Take your time.`,
       `Find your happiness.`
     ];
 
+    this.continue = `Click`;
     this.currentIndex = 0;
   }
 
@@ -50,7 +48,7 @@ class End extends State {
       this.currentIndex ++;
     }
     else if (this.currentIndex === this.endString.length) {
-      currentState = new Quote();
+      currentState = new Drawing();
     }
   }
 }

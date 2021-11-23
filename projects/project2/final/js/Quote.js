@@ -3,6 +3,7 @@ class Quote extends State{
     super();
 
     this.quoteString = [
+      ``,
       `Remember...`,
       `"Success is not final, failure is not fatal." \n -Winston Churchill`,
       `END`
@@ -50,10 +51,10 @@ class Quote extends State{
   mouseClicked() {
     super.mouseClicked();
 
-    if (this.currentIndex < this.quoteString.length) {
+    // if (this.currentIndex < this.quoteString.length - 1) {
       this.currentIndex ++;
-    }
-    else if (this.currentIndex === this.quoteString.length) {
+    // }
+     if (this.currentIndex === this.quoteString.length) {
       currentState = new Title();
     }
   }

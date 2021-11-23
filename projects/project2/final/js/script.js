@@ -35,7 +35,7 @@ function setup() {
 
 function reset() {
 
-  currentState = new Title();
+  currentState = new End();
 }
 
 function draw() {
