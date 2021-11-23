@@ -17,7 +17,7 @@ class End extends State {
   draw() {
     super.draw();
 
-    background(58, 12, 163);
+    background(99, 28, 156);
     this.displayClick();
     this.displayEnd();
   }

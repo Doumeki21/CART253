@@ -96,7 +96,7 @@ class DragDropGame extends GameState {
 
         if (this.taskShape === shape) {
           //progressBar fills.
-          this.fillProgressBar.height += 50;
+          this.fillProgressBar.height += 45;
           selectSFX.play();
           progressSFX.play();
           this.taskReset();
