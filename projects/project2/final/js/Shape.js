@@ -10,7 +10,6 @@ class Shape {
   }
 
   mouseInsideObject() {
-    console.log(`hey`);
     //Get dist b/w mouse and shape
     let d = dist(mouseX, mouseY, this.x, this.y);
     if (d < this.size / 2) {

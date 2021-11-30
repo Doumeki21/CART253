@@ -1,3 +1,5 @@
+//Game: Drag and drop the corresponding shapes (indicated above the square frame) into the square frame.
+
 class DragDropGame extends GameState {
   constructor() {
     super();
