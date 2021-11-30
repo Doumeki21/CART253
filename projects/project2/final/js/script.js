@@ -7,14 +7,18 @@ An anthology of games that serves as a life lesson for individuals who overwork 
 
 "use strict";
 
-let currentState;
-
 //Background sounds
 let sirenSound;
 let heartbeatSound;
 //Sound effects
 let progressSFX;
 let selectSFX;
+
+let currentState;
+
+//let games = [DragDropGame, StressGame, FinalGame]; //randomize 6 times, cannot be the same game before and after, after 6 games = new Blackout();
+let games = [`dragDropGame`, `stressGame`, `finalGame`];
+let gamesPlayed = 0; //Track games
 
 //Load the sounds into the code.
 function preload() {
@@ -29,13 +33,40 @@ function setup() {
   // userStartAudio();
 
   createCanvas(windowWidth, windowHeight);
-
   reset();
 }
 
-function reset() {
+function nextGame() {
 
-  currentState = new End();
+  if (gamesPlayed < 3) {
+    let game = random(games);
+    // while(game !== currentState) {
+    //   game = random(games);
+    // }
+    console.log(game, gamesPlayed);
+    while(game === currentState.gameName) {
+      game = random(games);
+    }
+    gamesPlayed++;
+    console.log(gamesPlayed);
+
+    if (game === `stressGame`) {
+      currentState = new StressGame();
+    } else if (game === `finalGame`) {
+      currentState = new FinalGame();
+    } else if (game === `dragDropGame`) {
+      currentState = new DragDropGame();
+    }
+  }
+  else {
+    currentState = new End();
+  }
+}
+
+function reset() {
+  gamesPlayed = 0;
+
+  currentState = new Title();
 }
 
 function draw() {

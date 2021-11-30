@@ -9,16 +9,18 @@ class Drawing extends State {
       width: 310,
       height: 120,
     }
+    background(99, 28, 156);
   }
 
   draw() {
+
     //Draw a line
     if (mouseIsPressed) {
       push();
       stroke(255);
       strokeWeight(2);
       // stroke(212, 50, 50);
-      line(pmouseX, pmouseY, mouseX, mouseY)
+      line(pmouseX, pmouseY, mouseX, mouseY);
       pop();
     }
     //Clear canvas
@@ -28,6 +30,12 @@ class Drawing extends State {
     }
 
     this.displayText();
+  }
+
+  mouseClicked() {
+    super.mouseClicked();
+
+    selectSFX.stop();
   }
 
   displayText() {

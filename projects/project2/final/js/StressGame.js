@@ -1,3 +1,5 @@
+//Game: Move the mouse from left to right to hit the target using the meter.
+
 class StressGame extends GameState {
   constructor() {
     super();
@@ -21,6 +23,7 @@ class StressGame extends GameState {
       angle: undefined,
     };
     this.initialize = false;
+    this.gameName = `stressGame`;
   }
 
   targetReset() {
@@ -47,7 +50,7 @@ class StressGame extends GameState {
     // if progressBar fills to max height,
     if (this.fillProgressBar.height >= this.progressBar.height) {
       //then game switches to next game.
-      currentState = new DragDropGame();
+      nextGame();
     }
   }
 

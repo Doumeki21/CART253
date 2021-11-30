@@ -55,6 +55,7 @@ class Quote extends State{
       this.currentIndex ++;
     // }
      if (this.currentIndex === this.quoteString.length) {
+       reset();
       currentState = new Title();
     }
   }

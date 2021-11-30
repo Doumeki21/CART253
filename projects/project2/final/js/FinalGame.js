@@ -23,6 +23,7 @@ class FinalGame extends GameState {
     //   x: 0,
     //   y: 50,
     // };
+    this.gameName = `finalGame`;
   }
 
   draw() {
@@ -71,7 +72,7 @@ checkEnd() {
   // if progressBar fills to max height,
   if (this.fillProgressBar.height >= this.progressBar.height) {
     //then game switches to next game.
-    currentState = new End();
+    nextGame();
   }
 }
 
