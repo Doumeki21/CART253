@@ -38,7 +38,7 @@ function setup() {
 
 function nextGame() {
 
-  if (gamesPlayed < 3) {
+  if (gamesPlayed < 1) {
     let game = random(games);
     // while(game !== currentState) {
     //   game = random(games);

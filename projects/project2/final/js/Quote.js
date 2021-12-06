@@ -5,7 +5,7 @@ class Quote extends State{
     this.quoteString = [
       ``,
       `Remember...`,
-      `"Success is not final, failure is not fatal." \n -Winston Churchill`,
+      `“Success is not final, failure is not fatal” \n -Winston Churchill`,
       `END`
     ];
     this.continue = `Click`;
@@ -38,22 +38,14 @@ class Quote extends State{
     textAlign(CENTER);
     text(this.quoteString[this.currentIndex], width / 2, height / 2);
     pop();
-
-    // push()
-    // noStroke();
-    // fill(255);
-    // textSize(30);
-    // textAlign(CENTER);
-    // text(this.subtitleString, width / 2, height / 2 + 100);
-    // pop();
   }
 
   mouseClicked() {
     super.mouseClicked();
 
-    // if (this.currentIndex < this.quoteString.length - 1) {
+    // The string/ dialogue proceeds to the next line after every click,
       this.currentIndex ++;
-    // }
+      //when it reaches the final line, game code resets and return to title screen.
      if (this.currentIndex === this.quoteString.length) {
        reset();
       currentState = new Title();

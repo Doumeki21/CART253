@@ -34,6 +34,7 @@ class GameOver extends State {
   mouseClicked() {
     super.mouseClicked();
 
+    reset();
     currentState = new Title();
   }
 }

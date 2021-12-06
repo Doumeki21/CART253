@@ -43,17 +43,25 @@ class Drawing extends State {
     push();
     noStroke();
     textSize(50);
-    textAlign(CENTER);
+    // textAlign(CENTER);
     fill(255);
-    text(`Draw what you love`, width / 2, 200);
+    text(`Draw what you love`, 100, 200);
     pop();
 
     push();
     noStroke();
     textSize(30);
-    textAlign(CENTER);
+    // textAlign(CENTER);
     fill(255);
-    text(`Press D to clear canvas.`, width / 2, 250);
+    text(`Press D to clear canvas.`, 100, 250);
+    pop();
+
+    push();
+    noStroke();
+    textSize(20);
+    // textAlign(CENTER);
+    fill(255);
+    text(`Share the drawing with your friends!`, 100, 300);
     pop();
 
     //TEXTbOX

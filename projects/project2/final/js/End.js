@@ -5,8 +5,8 @@ class End extends State {
     super();
 
     this.endString = [
-      `Life is more than being successful.`,
-      `Take your time.`,
+      `Stop chasing after time.`,
+      `There are things better in life than “success”.`,
       `Find your happiness.`
     ];
 
