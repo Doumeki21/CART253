@@ -1,4 +1,4 @@
-//Dialogue: This state is triggered after the 6 random games. Player proceeds to the next line by clicking anywhere on the screen.
+//Event: This state is triggered after the 6 random games. Player proceeds to the next line of dialogue by clicking anywhere on the screen.
 
 //Calling all properties to perform this event.
 //Extends: includes sound effect of mouse clicked from the State class.
