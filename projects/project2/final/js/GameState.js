@@ -1,3 +1,6 @@
+//The Parent state that contains Gameover, FinalGame, and StressGame...
+
+//Calling all properties which all games have.
 class GameState extends State {
   constructor() {
     super();
@@ -15,34 +18,40 @@ class GameState extends State {
       width: 30,
       height: 10,
     };
-    //Timer starts at 10 seconds.
+    //A timer that starts from 10 seconds.
     this.timer = 10;
   }
 
+  //Perform the program.
   draw() {
+    //The pitch of the progress bar raises each time as it fills to the max.
     let newRate = map(this.fillProgressBar.height, this.fillProgressBar.height, this.progressBar.height, 1, 5);
     progressSFX.rate(newRate);
 
     super.draw();
+    //A saturated purple background.
     background(58, 12, 163);
-
+    //Check if time is up.
     this.checkTimer();
+    //Dsiplay the timer and progress bar.
     this.displayTimer();
     this.displayProgress();
   }
 
+  //Check if time is up.
   checkTimer() {
     //count in seconds
     this.timer -= 1 / 60;
-    //If timer hits 0 = Game ends.
+    //If timer hits 0,
     if (this.timer <= 0) {
       this.timer = 0;
+      //Game ends.
       currentState = new GameOver();
     }
   }
 
+  //Display the timer. (Just numbers.)
   displayTimer() {
-    //Draw timer.
     push();
     noStroke();
     fill(255);
@@ -53,14 +62,9 @@ class GameState extends State {
     pop();
   }
 
+  //Display the progress bar.
   displayProgress() {
-    // this.progressBar.x = width - 30;
-    // this.progressBar.y = height - 50;
-    //
-    // this.fillProgressBar.x = width - 30;
-    // this.fillProgressBar.y = height - 50;
-
-    //Draw progressBar
+    //Display the base.
     push();
     noStroke();
     fill(128, 0, 22);
@@ -69,7 +73,7 @@ class GameState extends State {
     rect(this.progressBar.x, this.progressBar.y - this.progressBar.height / 2, this.progressBar.width, this.progressBar.height);
     pop();
 
-    //Draw fillProgressBar
+    //Display the fill
     push();
     noStroke();
     fill(255, 0, 43);
