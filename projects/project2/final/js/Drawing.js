@@ -19,6 +19,7 @@ class Drawing extends State {
   }
 
   //perform the drawing simulation.
+  //The draw function is referenced from The Coding Train video (link in README.md)//
   draw() {
     //Once mouse is pressed,
     if (mouseIsPressed) {
