@@ -1,6 +1,7 @@
 # Project 2: Final Project
 
 [Play the game here!](https://doumeki21.github.io/CART253/projects/project2/final/)
+
 An anthology of games that serves as a life lesson for individuals who overwork themselves.
 
 Code references:
