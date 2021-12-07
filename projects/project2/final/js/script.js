@@ -74,16 +74,17 @@ function draw() {
   currentState.draw();
 }
 
-//Click to proceed and make SFX in a dialogue state.
+//Click to proceed and make sound after click in a dialogue state.
 function mouseClicked() {
   currentState.mouseClicked();
 }
 
-//
+//Press on mouse to draw or drag. (Used in Drawing and DragDropGame)
 function mousePressed() {
   currentState.mousePressed();
 }
 
+//Release the mouse button to let go of a object (used in DragDropGame)
 function mouseReleased() {
   currentState.mouseReleased();
 }
