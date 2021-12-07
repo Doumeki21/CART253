@@ -1,7 +1,7 @@
 # Project 2: Final Project
 
-An anthology of games that serves as a life lesson for individuals who overwork themselves.
 [Play the game here!](https://doumeki21.github.io/CART253/projects/project2/final/)
+An anthology of games that serves as a life lesson for individuals who overwork themselves.
 
 Code references:
 
@@ -31,4 +31,4 @@ After a round of 7 games, the player would find themselves facing a black screen
 BIGGEST ACCOMPLISHMENTS
 
 From this project, I was able to explore the use of strings and classes more in-depth. Other than using classes for object-oriented programming, I also used it as a tool to organize my states into games and regular events. By creating 2 parent classes, I can use the “chain of inheritance” method to link the appropriate events into their parent classes.
-Furthermore, I was able to randomize the games by listing the classes as strings inside an array and linking the strings with their class names. That way, I was able to group specific classes (aka. the games) into an array that tracks the maximum number of games to randomize before breaking out of the loop.
+Furthermore, I was able to randomize the games by listing the classes as strings inside an array and linking the strings with their class names. That way, I was able to group specific classes into an array that tracks the maximum number of games to randomize before breaking out of the loop. Thus I am able to play a series of random games.
