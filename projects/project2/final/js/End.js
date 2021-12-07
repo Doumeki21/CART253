@@ -68,7 +68,7 @@ class End extends State {
     pop();
   }
 
-  //Display the strings of dialogue.
+  //Display the string of dialogue.
   displayEnd() {
     push()
     noStroke();
@@ -79,7 +79,7 @@ class End extends State {
     pop();
   }
 
-  //Click to proceed to the next string.
+  //Click to proceed.
   mouseClicked() {
     super.mouseClicked();
     //If the current line of dialogue is not the last line,

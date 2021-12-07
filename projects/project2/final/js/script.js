@@ -13,9 +13,7 @@ let heartbeatSound;
 //Sound effects
 let progressSFX;
 let selectSFX;
-
 let currentState; //used to switch between events in the program.
-
 //The games listed in the array are randomized 7 times. They cannot be the same game consecutively, after 6 games = new End();
 let games = [`dragDropGame`, `stressGame`, `finalGame`];
 let gamesPlayed = 0; //Track games
@@ -34,9 +32,9 @@ function setup() {
   reset();
 }
 
-//Check how many games played.
+//Check how many games have been played.
 function nextGame() {
-  //if a total of games are less than 7,
+  //if a total of games played are less than 7,
   if (gamesPlayed < 6) {
     //Keep randomizing the games listed in array.
     let game = random(games);
@@ -45,7 +43,7 @@ function nextGame() {
     }
     //Add the game by 1 in the counter (until it reaches 6).
     gamesPlayed++;
-    //defined the name of the games by their strings listed in the array.
+    //define the name of the games by their strings listed in the array.
     if (game === `stressGame`) {
       currentState = new StressGame();
     } else if (game === `finalGame`) {
@@ -54,21 +52,21 @@ function nextGame() {
       currentState = new DragDropGame();
     }
   }
-  //Trigger a dialogue state after the last game.
+  //Else trigger a dialogue state after the last game.
   else {
     currentState = new End();
   }
 }
 
-//function resets all elements back to the starting point once called.
+//Resets all elements back to the starting point once called.
 function reset() {
-  //play 7 games again.
+  //Replay 7 games again.
   gamesPlayed = 0;
   //return to the title screen.
   currentState = new Title();
 }
 
-//Peform the program
+//Perform the program.
 function draw() {
   //perform whichever state is called currently in draw().
   currentState.draw();
@@ -84,7 +82,7 @@ function mousePressed() {
   currentState.mousePressed();
 }
 
-//Release the mouse button to let go of a object (used in DragDropGame)
+//Release the mouse button to let go of an object (used in DragDropGame)
 function mouseReleased() {
   currentState.mouseReleased();
 }
