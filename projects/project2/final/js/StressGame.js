@@ -1,51 +1,60 @@
-//Game: Move the mouse from left to right to hit the target using the meter.
+//Game: Hover the mouse from left to right to hit the target using the meter.
 
+//Calling all properties to perform the game.
+//Extends: includes progress bar and timer.
 class StressGame extends GameState {
   constructor() {
     super();
-
-    //white stroke
+    //white stroke for the base of the meter.
     this.meter = {
       x: undefined,
       y: undefined,
       size: 300,
     };
-    //Red stroke
+    //Red stroke that the player controls.
     this.fillMeter = {
       x: undefined,
       y: undefined,
       width: 300,
       height: 300,
     };
-    //reappearing blue cirlce on the white stroke.
+    //Reappearing blue cirlce on the white stroke.
     this.target = {
       size: 50,
       angle: undefined,
     };
+    //Used to check whether target should initialize new position.
     this.initialize = false;
+    //Identify the game as a string to be called in the array of the main script.
     this.gameName = `stressGame`;
   }
 
+  //Target resets at a random angle on the meter.
   targetReset() {
     this.target.angle = random(0, 360);
   }
 
+  //Perform the game.
   draw() {
+    super.draw();
+    //If the target isn't initialized to a new position,
     if (!this.initialize) {
-      // Initialize the angle
+      // then Initialize a new angle
       this.targetReset();
       this.initialize = true;
     }
 
-    super.draw();
+    //Check when to proceed to next game.
     this.checkPass();
+    //Check when the player touches the target with the meter.
     this.checkHitTarget();
-
+    //Display all visuals within this game.
     this.displayMeter();
     this.displayTarget();
     this.displayInstructions();
   }
 
+  //Check when to proceed to next game.
   checkPass() {
     // if progressBar fills to max height,
     if (this.fillProgressBar.height >= this.progressBar.height) {
@@ -54,10 +63,10 @@ class StressGame extends GameState {
     }
   }
 
+  //Check when the player touches the target with the meter.
   checkHitTarget() {
-    //Target appears anywhere on the white stroke.
     angleMode(DEGREES);
-
+    //Target appears anywhere on the white line.
     let mouseEnd = map(mouseX, 0, width, 0, 360);
     //If the red meter touches the target,
     if (mouseEnd > this.target.angle - 10 && mouseEnd < this.target.angle + 10) {
@@ -65,14 +74,16 @@ class StressGame extends GameState {
       this.target.angle = random(0, 360);
       //progressBar fills.
       this.fillProgressBar.height += 15;
+      //Play sound effects.
       selectSFX.play();
       progressSFX.play();
+      //Target resets to a new location.
       this.targetReset();
     }
   }
 
+  //Display the meter
   displayMeter() {
-
     //Placing the meter at the center of the window.
     this.meter.x = width / 2;
     this.meter.y = height / 2;
@@ -98,8 +109,8 @@ class StressGame extends GameState {
     pop();
   }
 
+  //Display target
   displayTarget() {
-    //Draw target
     push();
     fill(76, 201, 240, 155);
     noStroke();
@@ -112,8 +123,8 @@ class StressGame extends GameState {
     pop();
   }
 
+  //Display instructions
   displayInstructions() {
-    //instructions text
     push()
     noStroke();
     fill(255);

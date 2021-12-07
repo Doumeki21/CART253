@@ -74,7 +74,7 @@ class DragDropGame extends GameState {
     pop();
   }
 
-//Display the task.
+  //Display the task.
   displayTask() {
     push();
     fill(255);

@@ -2,7 +2,7 @@
 
 //Calling all properties to perform this event.
 //Extends: includes sound effect of mouse clicked from the State class.
-class Quote extends State{
+class Quote extends State {
   constructor() {
     super();
     //A string of dialogue and quote stored in an array.
@@ -54,11 +54,11 @@ class Quote extends State{
   mouseClicked() {
     super.mouseClicked();
     // The string/ dialogue proceeds to the next line after every click,
-      this.currentIndex ++;
-      //when it reaches the final line,
-     if (this.currentIndex === this.quoteString.length) {
-       //the program resets and return to title screen.
-       reset();
+    this.currentIndex++;
+    //when it reaches the final line,
+    if (this.currentIndex === this.quoteString.length) {
+      //the program resets and return to title screen.
+      reset();
       currentState = new Title();
     }
   }

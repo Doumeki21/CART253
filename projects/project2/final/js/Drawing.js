@@ -1,6 +1,6 @@
 //Simulation: A relaxing and reflective drawing simulation. (Take a screenshot and share with your friends!)
 
-//Calling all properties to perform the game.
+//Calling all properties to perform the simuation.
 //Extends: includes mousePressed and mouseReleased functions to work.
 class Drawing extends State {
   constructor() {
@@ -14,7 +14,7 @@ class Drawing extends State {
       width: 310,
       height: 120,
     }
-    //Lighter magenta background color than the previous event. 
+    //Lighter magenta background color than the previous event.
     background(99, 28, 156);
   }
 
@@ -83,7 +83,7 @@ class Drawing extends State {
     pop();
   }
 
-//Check if program proceeds to the next event.
+  //Check if program proceeds to the next event.
   mousePressed() {
     //If mouse is clicked inside the lower right button,
     if (mouseX > this.textbox.x - this.textbox.width / 2 &&
