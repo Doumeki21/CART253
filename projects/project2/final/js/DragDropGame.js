@@ -15,7 +15,7 @@ class DragDropGame extends GameState {
     this.taskShape = undefined;
     //Array to store all possible shapes.
     this.shapes = [];
-    //Identify the game as a string to be called in the array in the main script.
+    //Identify the game as a string to be called in the array of the main script.
     this.gameName = `dragDropGame`;
     this.taskReset();
   }
@@ -38,7 +38,7 @@ class DragDropGame extends GameState {
   draw() {
     //display the timer and progress bar from GameState
     super.draw();
-    //Check when task is completed.
+    //Check when to proceed to next game.
     this.checkPass();
     //display the task field and task.
     this.displayField();
@@ -54,7 +54,7 @@ class DragDropGame extends GameState {
     }
   }
 
-  //Check when task is completed.
+  //Check when task is completed = proceed to next game.
   checkPass() {
     // if progressBar fills to max height,
     if (this.fillProgressBar.height >= this.progressBar.height) {
