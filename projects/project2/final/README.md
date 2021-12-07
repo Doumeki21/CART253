@@ -1,21 +1,22 @@
 # Project 2: Final Project
 
 An anthology of games that serves as a life lesson for individuals who overwork themselves.
+[Play the game here!](https://doumeki21.github.io/CART253/projects/project2/final/)
 
 Code references:
 
--   Pippins's help with displacing a target on an arch. <https://editor.p5js.org/pippinbarr/sketches/ljWb1XRTF>
--   Inspiration for a drag and drop game <https://editor.p5js.org/pippinbarr/sketches/IPfsT9qw4>  
-- Pippin's reference on structuring states into OOP https://github.com/pippinbarr/cart253-2020/tree/master/examples/structure/oop-states
-- Draw a line on canvas https://www.youtube.com/watch?v=OIfEHD3KqCg
+-   [Pippins's help with displacing a target on an arch.](https://editor.p5js.org/pippinbarr/sketches/ljWb1XRTF)
+-   [Inspiration for a drag and drop game](https://editor.p5js.org/pippinbarr/sketches/IPfsT9qw4)  
+- [Pippin's reference on structuring states into OOP](https://github.com/pippinbarr/cart253-2020/tree/master/examples/structure/oop-states)
+- [Draw a line on canvas](https://www.youtube.com/watch?v=OIfEHD3KqCg)
 - Also, thank the teacher (Pippin Barr) and TA (Sharon Ku) for all the support along the way!
 
 Other references:
 
-- Quote https://www.brainyquote.com/quotes/winston_churchill_124653
-- Generated sound effects https://sfbgames.itch.io/chiptone
-- Heart rate monitor SFX https://www.youtube.com/watch?v=QjEyjmNkN3k&t=34s
-- Ambulance siren SFX https://www.youtube.com/watch?v=s5bwBS27A1g&t=3s
+- [Quote](https://www.brainyquote.com/quotes/winston_churchill_124653)
+- [Generated sound effects](https://sfbgames.itch.io/chiptone)
+- [Heart rate monitor SFX](https://www.youtube.com/watch?v=QjEyjmNkN3k&t=34s)
+- [Ambulance siren SFX](https://www.youtube.com/watch?v=s5bwBS27A1g&t=3s)
 
 SUMMARY
 
