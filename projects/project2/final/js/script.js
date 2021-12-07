@@ -40,7 +40,7 @@ function nextGame() {
   if (gamesPlayed < 6) {
     //Keep randomizing the games listed in array.
     let game = random(games);
-    while(game === currentState.gameName) {
+    while (game === currentState.gameName) {
       game = random(games);
     }
     //Add the game by 1 in the counter (until it reaches 6).

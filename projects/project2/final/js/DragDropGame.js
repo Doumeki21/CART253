@@ -1,21 +1,25 @@
-//Game: Drag and drop the corresponding shapes (indicated above the square frame) into the square frame.
+//Game: Drag and drop the shapes into the square frame.
 
 class DragDropGame extends GameState {
+  //Calling all properties to perform the game.
   constructor() {
     super();
-
+    //The task field/ square frame.
     this.field = {
       x: width / 2,
       y: height / 2 + 50,
       size: 500,
     };
+    //property that tracks the randomized shape.
     this.taskShape = undefined;
+    //Array to store all possible shapes.
     this.shapes = [];
-
-    this.taskReset();
+    //Identify the game as a string to be called in the array in the main script.
     this.gameName = `dragDropGame`;
+    this.taskReset();
   }
 
+  //resets all shapes to their initial positions when function is called.
   taskReset() {
     this.shapes[0] = new Shape(this.field.x + this.field.size / 2 + 100, height / 2 - 140, color(255, 0, 0), `circle`, `ruby infinite-sided polygon`);
 
@@ -25,26 +29,31 @@ class DragDropGame extends GameState {
 
     this.shapes[3] = new Shape(this.field.x + this.field.size / 2 + 100, height / 2 + 250, color(0, 255, 0), `square`, `jade four-sided polygon`);
 
-    //Generate taskShape
+    //Generate a taskShape.
     this.taskShape = random(this.shapes);
   }
 
+  //perform the program.
   draw() {
+    //display the timer and progress bar from GameState
     super.draw();
-
+    //Check when task is completed.
     this.checkPass();
+    //display the task field and task.
     this.displayField();
     this.displayTask();
 
-    // Shapes
+    //For every shape in the array,
     for (let i = 0; i < this.shapes.length; i++) {
       let shape = this.shapes[i];
-
+      //display the shape.
       shape.draw();
+      //Shape is draggable.
       shape.drag();
     }
   }
 
+  //Check when task is completed.
   checkPass() {
     // if progressBar fills to max height,
     if (this.fillProgressBar.height >= this.progressBar.height) {
@@ -53,8 +62,8 @@ class DragDropGame extends GameState {
     }
   }
 
+  //Display the task field.
   displayField() {
-    //field
     push();
     strokeWeight(5);
     stroke(212);
@@ -64,8 +73,8 @@ class DragDropGame extends GameState {
     pop();
   }
 
+//Display the task.
   displayTask() {
-    //Display task
     push();
     fill(255);
     textSize(30);
@@ -74,34 +83,40 @@ class DragDropGame extends GameState {
     pop();
   }
 
+  //Drag shape once mouse is pressed.
   mousePressed() {
+    //For every shape in the array,
     for (let i = 0; i < this.shapes.length; i++) {
       let shape = this.shapes[i];
-
+      //if the cursor is inside the shape, then the shape is draggable.
       if (shape.mouseInsideObject()) {
         shape.isBeingDragged = true;
       }
     }
   }
 
+  //Shapes do not follow the mouse once it's released.
   mouseReleased() {
+    //for every shape in the array,
     for (let i = 0; i < this.shapes.length; i++) {
       let shape = this.shapes[i];
-
+      //Shapes don't follow cursor anymore once released.
       if (shape.isBeingDragged) {
         shape.isBeingDragged = false;
       }
-
+      //If the shape is released inside the task field,
       if (shape.x < this.field.x + this.field.size / 2 &&
         shape.x > this.field.x - this.field.size / 2 &&
         shape.y < this.field.y + this.field.size / 2 &&
         shape.y > this.field.y - this.field.size / 2) {
-
+        //-and if that same shape matches the one that was asked for,
         if (this.taskShape === shape) {
-          //progressBar fills.
+          //then the progressBar fills.
           this.fillProgressBar.height += 45;
+          //Sound plays for the click and progress bar fill.
           selectSFX.play();
           progressSFX.play();
+          //The shapes return to their initial positions.
           this.taskReset();
         }
       }
