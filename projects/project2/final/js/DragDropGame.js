@@ -1,7 +1,8 @@
 //Game: Drag and drop the shapes into the square frame.
 
+//Calling all properties to perform the game.
+//Extends: includes progress bar and timer.
 class DragDropGame extends GameState {
-  //Calling all properties to perform the game.
   constructor() {
     super();
     //The task field/ square frame.
